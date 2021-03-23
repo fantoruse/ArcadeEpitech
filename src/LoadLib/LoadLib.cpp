@@ -7,16 +7,22 @@
 
 #include "LoadLib.hpp"
 #include <dlfcn.h>
-#include <stdio.h>
 #include "Error/Error.hpp"
 
-LoadLib::LoadingLib(char *file) {
-    void *OpenFile = dlopen(file, RTLD_NOW);
+extern "C" {
+int entryPoint() {
+    void strcat();
+}
+}
+
+void LoadLib::LoadingLib(std::string files) {
+    void *OpenFile = dlopen(files.c_str(), RTLD_NOW);
     void *findFunc = nullptr;
 
     if (!OpenFile)
-        throw Error("Fail to Load Lib");
-    findFunc = dlsym(OpenFile, "symbol");
+        throw Error(dlerror());
+    findFunc = dlsym(OpenFile, "strcat");
     if (!findFunc)
-        throw Error("Fail to find symbol");
+        throw Error(dlerror());
+    return findFunc;
 }

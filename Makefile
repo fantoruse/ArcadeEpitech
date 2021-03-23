@@ -25,7 +25,7 @@ CXX	=	g++
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-	$(CXX) -o $(NAME) $(OBJ)
+	$(CXX) -o $(NAME) $(OBJ) -ldl
 
 clean:
 	$(RM) $(OBJ) *.gcda *.gcno unit_tests
