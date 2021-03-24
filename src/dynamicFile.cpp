@@ -15,7 +15,7 @@ DynamicFile::~DynamicFile() {}
 
 void DynamicFile::VerifyArg(char *argv) const {
     std::string arguments;
-    std::string AllLibs = "arcade_ndk++.so arcade_aalib.so arcade_libcaca.so "
+    const std::string AllLibs = "arcade_ndk++.so arcade_aalib.so arcade_libcaca.so "
                           "arcade_allegro5.so arcade_xlib.so arcade_gtk+.so "
                           "arcade_sfml.so arcade_irrlicht.so arcade_opengl.so "
                           "arcade_vulkan.so arcade_qt5.so ";
@@ -28,5 +28,5 @@ void DynamicFile::VerifyArg(char *argv) const {
     else
         arguments.erase(0, 4);
     if (AllLibs.find(arguments) == std::string::npos)
-        throw Error("Ce ne sont pas les bonnes librairies ou ce n'est pas compatible");
+        throw Error("Ce ne sont pas les bonnes bibliotheque ou ce n'est pas compatible");
 }
