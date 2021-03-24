@@ -8,21 +8,11 @@
 #include "LoadLib.hpp"
 #include <dlfcn.h>
 #include "Error/Error.hpp"
+#include <iostream>
 
-extern "C" {
-int entryPoint() {
-    void strcat();
-}
+extern "C" {/*
+class *entryPoint() {
+    return class*
+}*/
 }
 
-void LoadLib::LoadingLib(std::string files) {
-    void *OpenFile = dlopen(files.c_str(), RTLD_NOW);
-    void *findFunc = nullptr;
-
-    if (!OpenFile)
-        throw Error(dlerror());
-    findFunc = dlsym(OpenFile, "strcat");
-    if (!findFunc)
-        throw Error(dlerror());
-    return findFunc;
-}

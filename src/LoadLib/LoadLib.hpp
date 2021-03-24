@@ -5,16 +5,35 @@
 ** LoadLib.hpp.h
 */
 
-#ifndef B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_LOADLIB_HPP
-#define B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_LOADLIB_HPP
+#pragma once
 
 #include <string>
+#include <iostream>
+#include "InterfaceGame/Iinterface.hpp"
+#include <dlfcn.h>
+#include <exception>
+#include <type_traits>
 
-class LoadLib {
+class LoadLib
+{
 public:
-    LoadLib() = default;
-    ~LoadLib() = default;
-    LoadLib *LoadingLib(std::string files);
-};
+    void *openFile = nullptr;
 
-#endif //B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_LOADLIB_HPP
+    LoadLib() = default;
+    ~LoadLib() { dlclose(openFile); };
+    void initHandler(const std::string libName) {
+        openFile = dlopen(libName.c_str(), RTLD_LAZY);
+        if (!openFile)
+            throw std::runtime_error(dlerror());
+    }
+
+    template <class T, typename = std::enable_if<std::is_base_of<Iinterface, T>::value>>
+    T loadingLib(const std::string functionName)
+    {
+        T (*findFunc)() = nullptr;
+        findFunc = (T(*)(void))dlsym(openFile, functionName.c_str());
+        if (!findFunc)
+            throw std::runtime_error(dlerror());
+        return findFunc();
+    }
+};
