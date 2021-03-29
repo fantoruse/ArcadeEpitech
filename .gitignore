@@ -1,0 +1,4 @@
+caca.cpp
+cmake-build-debug
+*.o
+.idea
