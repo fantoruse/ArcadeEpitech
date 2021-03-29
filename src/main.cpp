@@ -24,9 +24,9 @@ int main(int argc, char **argv) {
     } catch (const Error &e) {
         std::cerr << e.what() << std::endl;
         return 84;
-    } catch (...)
+    } /*catch (...)
     {
         return 84;
-    }
+    }*/
     return 0;
 }

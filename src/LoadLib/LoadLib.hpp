@@ -27,11 +27,11 @@ public:
             throw std::runtime_error(dlerror());
     }
 
-    template <class T, typename = std::enable_if<std::is_base_of<Iinterface, T>::value>>
+    template <typename T> //, typename = std::enable_if<std::is_base_of<Iinterface, T>::value>>
     T loadingLib(const std::string functionName)
     {
         T (*findFunc)() = nullptr;
-        findFunc = (T(*)(void))dlsym(openFile, functionName.c_str());
+        findFunc = (T(*)(void))(dlsym(openFile, functionName.c_str()));
         if (!findFunc)
             throw std::runtime_error(dlerror());
         return findFunc();
