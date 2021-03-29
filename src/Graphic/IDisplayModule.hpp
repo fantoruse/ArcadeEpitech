@@ -8,6 +8,8 @@
 #ifndef ARCADE_IGRAPHIC_HPP
 #define ARCADE_IGRAPHIC_HPP
 
+#include <memory>
+
 namespace arcade {
 
 enum events_e {
