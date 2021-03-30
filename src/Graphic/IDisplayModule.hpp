@@ -8,6 +8,8 @@
 #ifndef ARCADE_IGRAPHIC_HPP
 #define ARCADE_IGRAPHIC_HPP
 
+#include <memory>
+
 namespace arcade {
 
 enum events_e {
@@ -26,7 +28,7 @@ public:
     virtual ~IDisplayModule() = default;
 
     virtual std::string getName() const = 0;
-    virtual void draw(Drawable drawable, std::pair<int, int> position, int size) = 0;
+    virtual void draw(Drawable drawable, std::pair<float, float> position, int size) = 0;
     virtual void init() = 0;
     virtual void destroy() = 0;
     virtual events_e pollEvent() = 0;

@@ -10,6 +10,9 @@ SRC	=	src/main.cpp				\
 		src/Error/Error.cpp				\
 		src/LoadLib/LoadLib.cpp			\
 		src/InterfaceGame/Iinterface.cpp	\
+		src/Graphic/SFML/SfmlModule.cpp 	\
+		src/Graphic/ADisplayModule.cpp
+		##src/LoadLib/LoadLib.cpp			\
 
 SRC_TESTS   =   tests/component/Chipsets/Gates/testsAnd.cpp
 
