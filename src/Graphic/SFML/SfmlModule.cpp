@@ -17,8 +17,16 @@ void arcade::SFMLModule::init()
 void arcade::SFMLModule::destroy()
 {
 }
-void arcade::SFMLModule::draw(Drawable drawable, std::pair<int, int> position, int size)
+void arcade::SFMLModule::draw(Drawable drawable, std::pair<float, float> position, int size)
 {
+    auto SpriteToDisplay = _sprites.find(drawable.getName());
+    sf::Shape ShapeToDisplay = _shapes[drawable.getName()];
+
+    if (SpriteToDisplay == _sprites.crend()) {
+        SpriteToDisplay.setPosition(position.first, position.second);
+    } else {
+
+    }
 }
 arcade::events_e arcade::SFMLModule::pollEvent()
 {

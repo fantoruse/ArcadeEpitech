@@ -28,7 +28,7 @@ public:
     virtual ~IDisplayModule() = default;
 
     virtual std::string getName() const = 0;
-    virtual void draw(Drawable drawable, std::pair<int, int> position, int size) = 0;
+    virtual void draw(Drawable drawable, std::pair<float, float> position, int size) = 0;
     virtual void init() = 0;
     virtual void destroy() = 0;
     virtual events_e pollEvent() = 0;
