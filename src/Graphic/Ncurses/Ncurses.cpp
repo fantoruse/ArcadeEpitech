@@ -7,15 +7,11 @@
 
 #include "Ncurses.hpp"
 
-arcade::Ncurses() : ADisplayModule("NCURSES")
+arcade::Ncurses::Ncurses(): ADisplayModule("NCURSES")
 {
 }
 
-void arcade::draw (Drawable drawable, std::pair<int, int> position, int size)
-{   
-}
-
-void arcade::init()
+void arcade::Ncurses::init()
 {
     initscr();
     nodelay(stdscr, true);
@@ -23,24 +19,29 @@ void arcade::init()
     noecho();
     curs_set(0);
     getmaxyx(stdscr, _screen_y, _screen_x);
+    start_color();
 }
 
-void arcade::destroy()
+void arcade::Ncurses::destroy()
 {
     endwin();
 }
 
-arcade::events_e arcade::pollEvent()
+void arcade::Ncurses::draw (Drawable drawable, std::pair<int, int> position, int size)
 {
-
+    mvprintw(position.first, position.second, drawable.getType(CHARACTER[c]));
 }
 
-void arcade::load()
+arcade::events_e arcade::Ncurses::pollEvent()
 {
+    int input = getch();
 
+    for (auto &&i : KEYS)
+        if (input == i.first)
+            return i.second;
 }
 
-std::unique_ptr<IDisplayModule> arcade::createGraphLib()
+void arcade::Ncurses::load()
 {
 
 }
