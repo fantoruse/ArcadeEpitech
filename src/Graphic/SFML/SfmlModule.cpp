@@ -5,7 +5,7 @@
 ** Created by antoine,
 */
 
-#include "Graphic/SFML/SfmlModule.hpp"
+#include "SFML/SfmlModule.hpp"
 
 arcade::SFMLModule::SFMLModule(): arcade::ADisplayModule("SFML")
 {

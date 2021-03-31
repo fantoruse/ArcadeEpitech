@@ -12,7 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <vector>
-#include "Graphic/ADisplayModule.hpp"
+#include "ADisplayModule.hpp"
 
 namespace arcade {
 class SFMLModule: public arcade::ADisplayModule
