@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     try {
    //     a.VerifyArg(argv[1]);
         b.initHandler(std::string(argv[1]));
-        Iinterface *z = b.loadingLib<Iinterface *>(std::string("toto"));
+        auto z = b.loadingLib<Iinterface *(void)>("toto")();
         z->draw();
     } catch (const Error &e) {
         std::cerr << e.what() << std::endl;
