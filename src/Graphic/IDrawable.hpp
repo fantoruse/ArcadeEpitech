@@ -30,14 +30,14 @@ namespace arcade {
             YELLOW
         };
 
-
     class IDrawable {
         public:
-            IDrawable();
-            ~IDrawable();
-            virtual drawableType_e getType() const;
-            virtual int getSize() const;
-            virtual colors_e getColor() const;
-            virtual std::string getInfo() const;
+            IDrawable() = default;
+            ~IDrawable() = default;
+
+            virtual drawableType_e getType() = 0;
+            virtual int getSize() = 0;
+            virtual colors_e getColor() = 0;
+            virtual std::string getInfo() = 0;
     };
 }
