@@ -25,7 +25,6 @@ namespace arcade {
         void draw(Drawable drawable, std::pair<int, int> position, int size);
         events_e pollEvent();
         void load();
-        std::unique_ptr<IDisplayModule> createGraphLib();
 
     private:
         int _screen_x;
