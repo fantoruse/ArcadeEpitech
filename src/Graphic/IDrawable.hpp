@@ -38,6 +38,6 @@ namespace arcade {
             virtual drawableType_e getType() = 0;
             virtual int getSize() = 0;
             virtual colors_e getColor() = 0;
-            virtual std::string getInfo() = 0;
+            virtual std::array<std::string, 3> getInfo() = 0;
     };
 }

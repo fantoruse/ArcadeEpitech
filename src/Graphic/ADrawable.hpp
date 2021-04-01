@@ -8,15 +8,17 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "IDrawable.hpp"
 
 namespace arcade {
-    class ADisplayModule : public arcade::IDrawable {
+    class ADrawable : public arcade::IDrawable {
         public:
             void setSize(int size);
             int getSize();
 
         protected:
             int _size;
+            std::array<std::string, 3> _infos;
     };
 }
