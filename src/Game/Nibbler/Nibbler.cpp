@@ -10,13 +10,12 @@
 #include <iostream>
 #include <fstream>
 
-arcade::Nibbler::Nibbler(): arcade::AGame() , _applePosition(0, 0), _score(0), _name("Nibbler")
+arcade::Nibbler::Nibbler(): arcade::AGame() , _applePosition(0, 0), _score(0), _name("Nibbler"), _is_apple(false)
 {
     int n = 0;
 
-    _map = {
-        {}
-    };
+    std::srand(std::time(0));
+    loadMap();
     while (n != 4) {
         _enemies.push_back(std::make_pair((_playerPosition.first - n), _playerPosition.second));
         n++;
@@ -38,9 +37,6 @@ void arcade::Nibbler::updateSnake()
         _enemies[o] = std::make_pair(temp1.first, temp1.second);
         temp1 = temp2;
     }
-    for(auto i: _enemies)
-        std::cout << "FIRST HEHE    = = =" << i.first << " | " << "SECOND HERE = = = " << i.second ;
-    std::cout << std::endl;
 }
 
 void arcade::Nibbler::play(){}
@@ -49,8 +45,8 @@ std::vector<arcade::IObject> arcade::Nibbler::update() const {}
 
 void arcade::Nibbler::AppleGenerator()
 {
-    int rx = 0;
-    int ry = 0;
+    float rx = 0;
+    float ry = 0;
     bool end = false;
 
     if (_is_apple)
@@ -59,12 +55,17 @@ void arcade::Nibbler::AppleGenerator()
         ry = rand() % 18;
         rx = rand() % 18;
         for (auto it: _enemies) {
-            if (it.first != rx and it.second != ry) {
+            if ((it.first != rx and it.second != ry) || _map[rx][ry] != '#') {
                 end = true;
                 break;
             }
         }
+    _applePosition.first = rx;
+    _applePosition.second = ry;
+    _is_apple = true;
     }
+}
+
 void arcade::Nibbler::loadMap()
 {
     std::ifstream file(".conf/Nibbler_map.txt");
@@ -72,8 +73,9 @@ void arcade::Nibbler::loadMap()
 
     if (!file)
         return;
-    while (std::getline(file, line))
+    while (std::getline(file, line)) {
         _map.push_back(line);
+    }
 }
 
 int main() {
@@ -81,6 +83,7 @@ int main() {
     arcade::Nibbler a;
     while(i!=5) {
         a.updateSnake();
+        a.AppleGenerator();
         i++;
         }
     return 0;
