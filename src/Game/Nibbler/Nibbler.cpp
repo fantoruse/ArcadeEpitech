@@ -8,6 +8,7 @@
 #include "Nibbler.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 
 arcade::Nibbler::Nibbler(): arcade::AGame() , _applePosition(0, 0), _score(0), _name("Nibbler")
 {
@@ -64,6 +65,15 @@ void arcade::Nibbler::AppleGenerator()
             }
         }
     }
+void arcade::Nibbler::loadMap()
+{
+    std::ifstream file(".conf/Nibbler_map.txt");
+    std::string line;
+
+    if (!file)
+        return;
+    while (std::getline(file, line))
+        _map.push_back(line);
 }
 
 int main() {

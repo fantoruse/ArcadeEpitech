@@ -14,7 +14,9 @@ SRC	=	src/main.cpp				\
 		##src/Graphic/ADisplayModule.cpp
 		##src/LoadLib/LoadLib.cpp			\
 
-SRC_TESTS   =   tests/component/Chipsets/Gates/testsAnd.cpp
+SRC_TESTS   =   tests/
+
+###############################################################################
 
 OBJ	=	$(SRC:.cpp=.o)
 
