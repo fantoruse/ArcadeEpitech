@@ -14,7 +14,7 @@ SRC	=	src/main.cpp				\
 		##src/Graphic/ADisplayModule.cpp
 		##src/LoadLib/LoadLib.cpp			\
 
-SRC_TESTS   =   tests/
+SRC_TESTS   =
 
 ###############################################################################
 

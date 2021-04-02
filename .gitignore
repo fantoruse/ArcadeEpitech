@@ -3,8 +3,7 @@ cmake-build-debug
 *.o
 .idea
 CMakeLists.txt
-        caca.so
-
-cmake-build-debug/CMakeFiles/clion-log.txt
-cmake-build-debug/Testing/Temporary/LastTest.log
-cmake-build-debug/
+*.so
+*.gc*
+arcade
+unit_tests
