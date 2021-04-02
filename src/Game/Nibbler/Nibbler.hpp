@@ -27,6 +27,7 @@ namespace arcade {
 
         private:
             std::pair<float, float> _applePosition;
+            bool _is_apple;
             unsigned long int _score;
             std::string _name;
             std::vector<std::string> _map;

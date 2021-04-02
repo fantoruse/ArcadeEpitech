@@ -22,6 +22,8 @@ arcade::Nibbler::Nibbler(): arcade::AGame() , _applePosition(0, 0), _score(0), _
     }
 }
 
+arcade::Nibbler::~Nibbler(){}
+
 void arcade::Nibbler::updateSnake()
 {
     auto it = _enemies.begin();
@@ -40,11 +42,29 @@ void arcade::Nibbler::updateSnake()
     std::cout << std::endl;
 }
 
-arcade::Nibbler::~Nibbler(){}
-
 void arcade::Nibbler::play(){}
 
 std::vector<arcade::IObject> arcade::Nibbler::update() const {}
+
+void arcade::Nibbler::AppleGenerator()
+{
+    int rx = 0;
+    int ry = 0;
+    bool end = false;
+
+    if (_is_apple)
+        return;
+    while (!end) {
+        ry = rand() % 18;
+        rx = rand() % 18;
+        for (auto it: _enemies) {
+            if (it.first != rx and it.second != ry) {
+                end = true;
+                break;
+            }
+        }
+    }
+}
 
 int main() {
     int i = 0;
