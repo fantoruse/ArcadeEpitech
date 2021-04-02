@@ -5,10 +5,11 @@
 ** nibbler.cpp.c
 */
 
-#include "Nibbler.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <map>
+#include "Nibbler.hpp"
 
 arcade::Nibbler::Nibbler(): arcade::AGame() , _applePosition(0, 0), _score(0), _name("Nibbler")
 {
@@ -56,6 +57,33 @@ void arcade::Nibbler::loadMap()
         return;
     while (std::getline(file, line))
         _map.push_back(line);
+}
+
+static const std::map<arcade::events_e, std::pair<float, float>> DIRECTIONS = {
+    {arcade::UP, std::make_pair(-1, 0)},
+    {arcade::DOWN, std::make_pair(1, 0)},
+    {arcade::LEFT, std::make_pair(0, -1)},
+    {arcade::RIGHT, std::make_pair(0, 1)}
+};
+
+void arcade::Nibbler::move(arcade::events_e dir)
+{
+    auto finded = DIRECTIONS.find(dir);
+
+    if (finded == DIRECTIONS.end() || colisionWall(dir))
+        return;
+    _playerPosition.first += DIRECTIONS.at(dir).first;
+    _playerPosition.second += DIRECTIONS.at(dir).second;
+}
+
+bool arcade::Nibbler::colisionWall(arcade::events_e dir)
+{
+    float y = _playerPosition.first + DIRECTIONS.at(dir).first;
+    float x = _playerPosition.second + DIRECTIONS.at(dir).second;
+
+    if ((y <= 1 || x <= 1) || _map[y][x] == '#')
+        return true;
+    return false;
 }
 
 int main() {

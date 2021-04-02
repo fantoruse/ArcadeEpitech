@@ -14,6 +14,16 @@
 #include "AGame.hpp"
 
 namespace arcade {
+    enum events_e {
+    CLOSE,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    SPACE,
+    ESCAPE,
+    NOTHING
+};
 class Nibbler : public AGame {
 public:
     Nibbler();
@@ -21,12 +31,13 @@ public:
 
     void AppleGenerator();
     void updateSnake();
-    void mouvement(int i);
+    void move(arcade::events_e dir);
     void play() override;
     std::vector<arcade::IObject> update() const override;
 
 private:
     void loadMap();
+    bool colisionWall(arcade::events_e dir);
 
 private:
     std::pair<float, float> _applePosition;
