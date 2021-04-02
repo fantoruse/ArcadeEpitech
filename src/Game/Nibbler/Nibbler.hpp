@@ -11,17 +11,19 @@
 #include <string>
 #include <iostream>
 #include <utility>
-#include "../AGame.hpp"
+#include "AGame.hpp"
 
 namespace arcade {
     class Nibbler : public AGame {
         public:
             Nibbler();
-            ~Nibbler() = default;
+            ~Nibbler() override;
 
             void AppleGenerator();
             void updateSnake();
             void mouvement(int i);
+            void play() override;
+            std::vector<arcade::IObject> update() const override;
 
         private:
             std::pair<float, float> _applePosition;

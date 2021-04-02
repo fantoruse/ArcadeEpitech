@@ -15,7 +15,7 @@ class IGame
 {
 public:
     virtual void play() = 0;
-    virtual std::vector<arcade::IObject> &update() const = 0;
+    virtual std::vector<arcade::IObject> update() const = 0;
 };
 
 #endif //ARCADE_IGAME_HPP

@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <iostream>
 
-arcade::Nibbler::Nibbler(): arcade::AGame() : _applePosition(0, 0), _score(0), _name("Nibbler")
+arcade::Nibbler::Nibbler(): arcade::AGame() , _applePosition(0, 0), _score(0), _name("Nibbler")
 {
     int n = 0;
 
@@ -17,7 +17,7 @@ arcade::Nibbler::Nibbler(): arcade::AGame() : _applePosition(0, 0), _score(0), _
         {}
     };
     while (n != 4) {
-        _enemies.push_back(std::make_paire(_playerPosition.first() - n, _playerPosition.second));
+        _enemies.push_back(std::make_pair((_playerPosition.first - n), _playerPosition.second));
         n++;
     }
 }
@@ -28,19 +28,30 @@ void arcade::Nibbler::updateSnake()
     auto temp1 = _enemies[0];
     auto temp2 = _enemies[0];
 
-    it = std::make_paire(_playerPosition.first(), _playerPosition.second());
+    _enemies[0] = std::make_pair(_playerPosition.first, _playerPosition.second);
     it++;
-    while (it != _enemies.end()) {
-        temp2 = std::make_paire(it.first(), it.second());
-        it = std::make_paire(temp1.first(), temp1.second());
+    for (int o=1; it != _enemies.end(); ++o, it++) {
+        temp2 = std::make_pair(_enemies[o].first, _enemies[o].second);
+        _enemies[o] = std::make_pair(temp1.first, temp1.second);
         temp1 = temp2;
-        it++;
     }
+    for(auto i: _enemies)
+        std::cout << "FIRST HEHE    = = =" << i.first << " | " << "SECOND HERE = = = " << i.second ;
+    std::cout << std::endl;
 }
 
+arcade::Nibbler::~Nibbler(){}
+
+void arcade::Nibbler::play(){}
+
+std::vector<arcade::IObject> arcade::Nibbler::update() const {}
+
 int main() {
+    int i = 0;
     arcade::Nibbler a;
-    while(1)
+    while(i!=5) {
         a.updateSnake();
-        a.mouvement(1);
+        i++;
+        }
+    return 0;
 }

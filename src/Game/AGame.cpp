@@ -6,3 +6,7 @@
 */
 
 #include "AGame.hpp"
+
+arcade::AGame::AGame() : IGame(), _playerPosition(1000,1000), _objects() {}
+
+arcade::AGame::~AGame() {}
