@@ -11,6 +11,8 @@
 #include <string>
 #include <iostream>
 #include <utility>
+#include <chrono>
+
 #include "AGame.hpp"
 
 namespace arcade {
