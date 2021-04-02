@@ -1,31 +1,33 @@
 /*
 ** EPITECH PROJECT, 2021
-** nibler.hpp.h
+** nibbler.hpp.h
 ** File description:
-** nibler.hpp.h
+** nibbler.hpp.h
 */
 
-#ifndef B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_NIBBLER_HPP
-#define B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_NIBBLER_HPP
+#pragma once
 
 #include <vector>
 #include <string>
 #include <iostream>
+#include <utility>
+#include "../AGame.hpp"
 
-class Nibler
-    {
-public:
-    Nibler();
-    ~Nibler() = default;
-    void AppleGenerator();
-    void setSnake();
-    void mouvement(int i);
+namespace arcade {
+    class Nibbler : public AGame {
+        public:
+            Nibbler();
+            ~Nibbler() = default;
 
-private:
-    std::pair<int, int> _applePosition;
-    unsigned long int _score;
-    std::string _name;
-    std::vector<std::string> _map;
-};
+            void AppleGenerator();
+            void updateSnake();
+            void mouvement(int i);
 
-#endif //B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_NIBLER_HPP
+        private:
+            std::pair<float, float> _applePosition;
+            unsigned long int _score;
+            std::string _name;
+            std::vector<std::string> _map;
+            std::vector<std::pair<float, float>> _enemies;
+    };
+}

@@ -6,8 +6,3 @@
 */
 
 #include "AGame.hpp"
-
-std::vector<arcade::IObject> &AGame::update() const
-{
-    return _objects;
-}

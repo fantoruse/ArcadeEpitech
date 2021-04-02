@@ -5,23 +5,19 @@
 ** Created by antoine,
 */
 
-#ifndef ARCADE_IOBJECT_HPP
-#define ARCADE_IOBJECT_HPP
+#pragma once
 
 #include <vector>
 #include "Graphic/IDrawable.hpp"
 
 namespace arcade {
-class IObject {
-public:
-    virtual ~IObject() = default;
-    virtual std::pair<int,int> getPosition() const = 0;
-    virtual IDrawable &getDrawable() const = 0;
-    virtual std::string getName() const = 0;
+    class IObject {
+    public:
+        virtual ~IObject() = default;
 
-protected:
-private:
-};
+        virtual std::pair<int,int> getPosition() const = 0;
+        virtual IDrawable &getDrawable() const = 0;
+        virtual std::string getName() const = 0;
+
+    };
 }
-
-#endif //ARCADE_IOBJECT_HPP
