@@ -70,13 +70,13 @@ void arcade::Nibbler::move(arcade::events_e dir)
 {
     auto finded = DIRECTIONS.find(dir);
 
-    if (finded == DIRECTIONS.end() || colisionWall(dir))
+    if (finded == DIRECTIONS.end() || collisionWall(dir))
         return;
     _playerPosition.first += DIRECTIONS.at(dir).first;
     _playerPosition.second += DIRECTIONS.at(dir).second;
 }
 
-bool arcade::Nibbler::colisionWall(arcade::events_e dir)
+bool arcade::Nibbler::collisionWall(arcade::events_e dir)
 {
     float y = _playerPosition.first + DIRECTIONS.at(dir).first;
     float x = _playerPosition.second + DIRECTIONS.at(dir).second;

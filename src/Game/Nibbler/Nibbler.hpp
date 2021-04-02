@@ -37,7 +37,7 @@ public:
 
 private:
     void loadMap();
-    bool colisionWall(arcade::events_e dir);
+    bool collisionWall(arcade::events_e dir);
 
 private:
     std::pair<float, float> _applePosition;
