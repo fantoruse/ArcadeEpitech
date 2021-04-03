@@ -5,8 +5,7 @@
 ** Created by antoine,
 */
 
-#ifndef ARCADE_IGRAPHIC_HPP
-#define ARCADE_IGRAPHIC_HPP
+#pragma once
 
 #include <memory>
 #include "IDrawable.hpp"
@@ -39,5 +38,3 @@ public:
     virtual void refresh() = 0;
 };
 }
-
-#endif //ARCADE_IGRAPHIC_HPP

@@ -5,8 +5,7 @@
 ** Created by antoine,
 */
 
-#ifndef ARCADE_IGAME_HPP
-#define ARCADE_IGAME_HPP
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -19,5 +18,3 @@ namespace arcade {
         virtual const std::string getName() const = 0;
     };
 }
-
-#endif //ARCADE_IGAME_HPP

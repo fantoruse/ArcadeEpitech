@@ -5,8 +5,7 @@
 ** Error.hpp.h
 */
 
-#ifndef B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_Error_HPP
-#define B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_Error_HPP
+#pragma once
 
 #include <exception>
 #include <string>
@@ -20,5 +19,3 @@ public:
 private:
     std::string _description;
 };
-
-#endif //B_OOP_400_PAR_4_1_ARCADE_CLEMENT1_RUAT_Error_HPP

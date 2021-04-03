@@ -5,8 +5,7 @@
 ** Created by theo
 */
 
-#ifndef ARCADE_NCURSES_HPP
-#define ARCADE_NCURSES_HPP
+#pragma once
 
 #include "Graphic/ADisplayModule.hpp"
 #include <memory>
@@ -42,5 +41,3 @@ namespace arcade {
         {' ', arcade::SPACE},
         };
 }
-
-#endif

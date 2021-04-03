@@ -11,7 +11,7 @@
 #include <map>
 #include "Nibbler.hpp"
 
-arcade::Nibbler::Nibbler(): arcade::AGame("bite") , _applePosition(0, 0), _score(0), _name("Nibbler"), _isApple(false)
+arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _isApple(false)
 {
     int n = 0;
 
@@ -40,11 +40,11 @@ void arcade::Nibbler::updateSnake()
     }
 }
 
-std::vector<std::shared_ptr<arcade::IObject>> play() const {
+std::vector<std::shared_ptr<arcade::IObject>> play() {
 }
 
-const std::string getName() const {
-    return "bite";
+const std::string getName() {
+    return "test";
 }
 
 void arcade::Nibbler::AppleGenerator()

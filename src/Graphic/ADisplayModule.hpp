@@ -5,8 +5,7 @@
 ** Created by antoine,
 */
 
-#ifndef ARCADE_ADISPLAYMODULE_HPP
-#define ARCADE_ADISPLAYMODULE_HPP
+#pragma once
 
 #include <string>
 #include "IDisplayModule.hpp"
@@ -21,5 +20,3 @@ protected:
     std::string _name;
 };
 }
-
-#endif //ARCADE_ADISPLAYMODULE_HPP

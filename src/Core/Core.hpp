@@ -5,6 +5,8 @@
 ** nibbler.cpp.c
 */
 
+#pragma once
+
 #include <string>
 
 namespace arcade {

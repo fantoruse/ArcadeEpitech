@@ -5,8 +5,7 @@
 ** Created by antoine,
 */
 
-#ifndef ARCADE_SFMLMODULE_HPP
-#define ARCADE_SFMLMODULE_HPP
+#pragma once
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -47,6 +46,3 @@ private:
     };
 };
 }
-
-
-#endif //ARCADE_SFMLMODULE_HPP
