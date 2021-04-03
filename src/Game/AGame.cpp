@@ -7,6 +7,6 @@
 
 #include "AGame.hpp"
 
-arcade::AGame::AGame() : IGame(), _playerPosition(1000,1000), _objects() {}
+arcade::AGame::AGame(std::string const &name) : IGame(), _playerPosition(1000,1000), _objects(), _name(name) {}
 
 arcade::AGame::~AGame() {}

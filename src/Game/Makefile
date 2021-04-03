@@ -37,7 +37,7 @@ all: nibbler
 
 .PHONY: nibbler
 nibbler: $(NIBBLER_OBJ)
-	$(CXX) -o $(NIBBLER_NAME) $(NIBBLER_OBJ) $(NIBBLER_LIB)
+	$(CXX) -fPIC -o $(NIBBLER_NAME) -shared $(NIBBLER_OBJ) $(NIBBLER_LIB)
 
 #CLEAN RULES
 

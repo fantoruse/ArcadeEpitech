@@ -8,14 +8,16 @@
 #ifndef ARCADE_IGAME_HPP
 #define ARCADE_IGAME_HPP
 
+#include <memory>
 #include <vector>
 #include "IObject.hpp"
 
-class IGame
-{
-public:
-    virtual void play() = 0;
-    virtual std::vector<arcade::IObject> update() const = 0;
-};
+namespace arcade {
+    class IGame {
+    public:
+        virtual std::vector <std::shared_ptr<IObject>> play() const = 0;
+        virtual const std::string getName() const = 0;
+    };
+}
 
 #endif //ARCADE_IGAME_HPP

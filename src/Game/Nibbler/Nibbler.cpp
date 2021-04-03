@@ -11,7 +11,7 @@
 #include <map>
 #include "Nibbler.hpp"
 
-arcade::Nibbler::Nibbler(): arcade::AGame() , _applePosition(0, 0), _score(0), _name("Nibbler"), _is_apple(false)
+arcade::Nibbler::Nibbler(): arcade::AGame("bite") , _applePosition(0, 0), _score(0), _name("Nibbler"), _isApple(false)
 {
     int n = 0;
 
@@ -40,9 +40,12 @@ void arcade::Nibbler::updateSnake()
     }
 }
 
-void arcade::Nibbler::play(){}
+std::vector<std::shared_ptr<arcade::IObject>> play() const {
+}
 
-std::vector<arcade::IObject> arcade::Nibbler::update() const {}
+const std::string getName() const {
+    return "bite";
+}
 
 void arcade::Nibbler::AppleGenerator()
 {
@@ -50,7 +53,7 @@ void arcade::Nibbler::AppleGenerator()
     float ry = 0;
     bool end = false;
 
-    if (_is_apple)
+    if (_isApple)
         return;
     while (!end) {
         ry = rand() % 18;
@@ -63,7 +66,7 @@ void arcade::Nibbler::AppleGenerator()
         }
     _applePosition.first = rx;
     _applePosition.second = ry;
-    _is_apple = true;
+    _isApple = true;
     }
 }
 
@@ -106,6 +109,13 @@ bool arcade::Nibbler::collisionWall(arcade::events_e dir)
     return false;
 }
 
+extern  "C" arcade::IGame *GetGame() {
+        auto b = new arcade::Nibbler();
+        return b;
+}
+
+
+/*
 int main() {
     int i = 0;
     arcade::Nibbler a;
@@ -116,3 +126,4 @@ int main() {
         }
     return 0;
 }
+*/
