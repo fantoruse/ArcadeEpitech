@@ -11,34 +11,31 @@
 #include <array>
 
 namespace arcade {
+    enum colors_e {
+        WHITE,
+        BLACK,
+        GREEN,
+        RED,
+        BLUE,
+        CYAN,
+        MAGENTA,
+        YELLOW,
+        NONE
+    };
 
-    enum drawableType_e
-    {
+    enum type_e {
         SPRITE,
         SHAPE,
         TEXT
     };
 
-    enum colors_e
-        {
-            WHITE,
-            BLACK,
-            GREEN,
-            RED,
-            BLUE,
-            CYAN,
-            MAGENTA,
-            YELLOW
-        };
-
     class IDrawable {
-        public:
-            IDrawable() = default;
-            ~IDrawable() = default;
-
-            virtual drawableType_e getType() = 0;
-            virtual int getSize() = 0;
-            virtual colors_e getColor() = 0;
-            virtual std::array<std::string, 3> getInfo() = 0;
+    public:
+        virtual ~IDrawable() = default;
+        virtual const std::string &getString() const = 0;
+        virtual type_e getType() const = 0;
+        virtual size_t getSize() const = 0;
+        virtual colors_e getColor() const = 0;
     };
+
 }

@@ -33,7 +33,7 @@ public:
     void AppleGenerator();
     void updateSnake();
     void move(arcade::events_e dir);
-    std::vector<std::shared_ptr<IObject>> play() const override;
+    const std::vector<std::shared_ptr<IObject>> play() override;
     const std::string getName() const override;
 private:
     void loadMap();
