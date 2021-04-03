@@ -12,7 +12,6 @@
 #include <iostream>
 #include <utility>
 #include <chrono>
-
 #include "AGame.hpp"
 
 namespace arcade {
@@ -34,9 +33,8 @@ public:
     void AppleGenerator();
     void updateSnake();
     void move(arcade::events_e dir);
-    void play() override;
-    std::vector<arcade::IObject> update() const override;
-
+    std::vector<std::shared_ptr<IObject>> play() const override;
+    const std::string getName() const override;
 private:
     void loadMap();
     bool collisionWall(arcade::events_e dir);
@@ -47,5 +45,6 @@ private:
     std::string _name;
     std::vector<std::string> _map;
     std::vector<std::pair<float, float>> _enemies;
+    bool _isApple;
 };
 }

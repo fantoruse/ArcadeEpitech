@@ -13,11 +13,13 @@
 namespace arcade {
     class AGame: public IGame {
     public:
-        AGame();
+        AGame(std::string const &name);
         virtual ~AGame();
+        const std::string getName() const = 0;
 
     protected:
         std::pair<float, float> _playerPosition;
-        std::vector<arcade::IObject> _objects;
+        std::vector<std::shared_ptr<IObject>> _objects;
+        std::string _name;
     };
 }
