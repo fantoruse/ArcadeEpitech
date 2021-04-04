@@ -15,8 +15,8 @@ namespace arcade {
     public:
         AGame(std::string const &name);
         virtual ~AGame();
-        virtual const std::vector<std::shared_ptr<IObject>> play() = 0;
-        virtual const std::string getName() const;
+ //       virtual const std::vector<std::shared_ptr<IObject>> play() = 0;
+ //           virtual const std::string getName() const;
 
     protected:
         std::pair<float, float> _playerPosition;

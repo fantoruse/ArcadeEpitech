@@ -15,8 +15,8 @@ namespace arcade {
     class IObject {
     public:
         virtual ~IObject() = default;
-        virtual std::pair<float,float> getPosition() const = 0;
-        virtual const std::vector<std::shared_ptr<IDrawable>> getDrawables() const = 0;
-        virtual std::string getName() const = 0;
+        virtual const std::pair<int,int> getPosition() const = 0;
+        virtual const std::vector<IDrawable*> getDrawables() const = 0;
+        virtual const std::string getName() const = 0;
     };
 }

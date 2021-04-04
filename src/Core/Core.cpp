@@ -18,5 +18,6 @@ void Core::OpenGame(std::string path) {
     ldb.initHandler(path);
     auto libs = ldb.loadingLib<IGame *(void)>("GetGame")();
     libs->getName();
+//    libs->getName();
 }
 }

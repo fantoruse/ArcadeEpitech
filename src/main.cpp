@@ -20,10 +20,11 @@ int main(int argc, char **argv) {
     arcade::Core oli;
     try {
    //     a.VerifyArg(argv[1]);
-        /*b.initHandler(std::string(argv[1]));
-        auto z = b.loadingLib<Iinterface *(void)>("toto")();
+      /*  b.initHandler(std::string(argv[1]));
+        std::cout << "bite\n" << "\n";
+        auto z = b.loadingLib< *(void)>("GetGame")();
         z->draw();*/
-        oli.OpenGame("./src/Game/arcade_nibbler.so");
+        oli.OpenGame(argv[1]);
     } catch (const Error &e) {
         std::cerr << e.what() << std::endl;
         return 84;

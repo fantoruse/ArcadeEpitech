@@ -13,6 +13,8 @@
 #include <utility>
 #include <chrono>
 #include "AGame.hpp"
+#include "IGame.hpp"
+#include "IObject.hpp"
 
 namespace arcade {
     enum events_e {
@@ -33,8 +35,8 @@ public:
     void AppleGenerator();
     void updateSnake();
     void move(arcade::events_e dir);
-    const std::vector<std::shared_ptr<IObject>> play() override;
-    const std::string getName() const override;
+    //   const std::vector<std::shared_ptr<IObject>> play() override;
+       const std::string getName() const override;
 private:
     void loadMap();
     bool collisionWall(arcade::events_e dir);

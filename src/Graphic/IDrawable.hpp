@@ -26,7 +26,8 @@ namespace arcade {
     enum type_e {
         SPRITE,
         SHAPE,
-        TEXT
+        TEXT,
+        NO_TYPE
     };
 
     class IDrawable {
@@ -37,5 +38,4 @@ namespace arcade {
         virtual size_t getSize() const = 0;
         virtual colors_e getColor() const = 0;
     };
-
 }

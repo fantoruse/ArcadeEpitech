@@ -39,11 +39,13 @@ void arcade::Nibbler::updateSnake()
         temp1 = temp2;
     }
 }
+/*
+const std::vector<std::shared_ptr<arcade::IObject>> play() {
+    return
+}*/
 
-std::vector<std::shared_ptr<arcade::IObject>> play() {
-}
-
-const std::string getName() {
+const std::string arcade::Nibbler::getName() const {
+    std::cout << "bite" << "\n";
     return "test";
 }
 
@@ -113,17 +115,3 @@ extern  "C" arcade::IGame *GetGame() {
         auto b = new arcade::Nibbler();
         return b;
 }
-
-
-/*
-int main() {
-    int i = 0;
-    arcade::Nibbler a;
-    while(i!=5) {
-        a.updateSnake();
-        a.AppleGenerator();
-        i++;
-        }
-    return 0;
-}
-*/
