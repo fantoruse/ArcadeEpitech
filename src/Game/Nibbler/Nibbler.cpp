@@ -11,7 +11,7 @@
 #include <map>
 #include "Nibbler.hpp"
 
-arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _isApple(false)
+arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _isApple(false), _objects()
 {
     int n = 0;
 
@@ -39,10 +39,26 @@ void arcade::Nibbler::updateSnake()
         temp1 = temp2;
     }
 }
-/*
-const std::vector<std::shared_ptr<arcade::IObject>> play() {
-    return
-}*/
+
+std::shared_ptr<arcade::IObject> arcade::Nibbler::init_object(bool is_static, std::string name, std::vector<std::shared_ptr<IDrawable>> drawables, std::pair<int,int> pos)
+{
+    if (is_static)
+        return(std::make_shared<arcade::IObject>(new StaticObject(name, drawables, pos)));
+    else
+        return(std::make_shared<arcade::IObject>(new MovableObject(name, drawables, pos)));
+}
+
+void arcade::Nibbler::init_all_object()
+{
+
+}
+
+const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play()
+{
+    if (_objects.empty())
+        init_all_object();
+    return;
+}
 
 const std::string arcade::Nibbler::getName() const {
     std::cout << "bite" << "\n";
