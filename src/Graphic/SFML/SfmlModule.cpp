@@ -17,8 +17,8 @@ void arcade::SFMLModule::init()
 void arcade::SFMLModule::destroy()
 {
 }
-void arcade::SFMLModule::draw(Drawable drawable, std::pair<float, float> position, int size)
-{
+void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string &name)
+{/*
     auto SpriteToDisplay = _sprites.find(drawable.getName());
     sf::Shape ShapeToDisplay = _shapes[drawable.getName()];
 
@@ -26,7 +26,7 @@ void arcade::SFMLModule::draw(Drawable drawable, std::pair<float, float> positio
         SpriteToDisplay.setPosition(position.first, position.second);
     } else {
 
-    }
+    }*/
 }
 arcade::events_e arcade::SFMLModule::pollEvent()
 {
@@ -44,10 +44,16 @@ arcade::events_e arcade::SFMLModule::pollEvent()
     return arcade::NOTHING;
 }
 
-void arcade::SFMLModule::load()
+void arcade::SFMLModule::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name)
 {
     sf::Texture loading;
 
     for (auto &&i : TEXTURES)
         _textures[i].loadFromFile(i);
+}
+
+void arcade::SFMLModule::clearWin() {
+}
+
+void arcade::SFMLModule::refreshWin() {
 }

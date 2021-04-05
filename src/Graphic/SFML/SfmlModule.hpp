@@ -11,38 +11,47 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <vector>
-#include "ADisplayModule.hpp"
+#include "../ADisplayModule.hpp"
 
 namespace arcade {
-class SFMLModule: public arcade::ADisplayModule
-{
-public:
-    SFMLModule();
-    ~SFMLModule() = default;
+    class SFMLModule : public arcade::ADisplayModule {
+    public:
+        SFMLModule();
 
-    void init() override;
-    void destroy() override;
-    void draw(Drawable drawable, std::pair<float, float> position, int size) override;
-    events_e pollEvent() override;
-    void load() override;
+        ~SFMLModule() = default;
 
-private:
-    sf::RenderWindow _window;
-    std::map<std::string, sf::Texture> _textures;
-    std::map<std::string, sf::Sprite> _sprites;
-    std::map<std::string, sf::Shape> _shapes;
+        void init() override;
 
-    static const std::vector<std::string> TEXTURES = {
-        "plouf.png"
+        void destroy() override;
+
+        void refreshWin() override;
+
+        void clearWin() override;
+
+        void draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position,
+                  std::string &name) override;
+
+        events_e pollEvent() override;
+
+        void load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name) override;
+
+    private:
+        sf::RenderWindow _window;
+        std::map<std::string, sf::Texture> _textures;
+        std::map<std::string, sf::Sprite> _sprites;
+        std::map<std::string, sf::Shape> _shapes;
     };
-
-    static const std::vector<std::pair<sf::Keyboard::Key, arcade::events_e>> KEYS = {
-        {sf::Keyboard::Escape, arcade::ESCAPE},
-        {sf::Keyboard::Up, arcade::UP},
-        {sf::Keyboard::Down, arcade::DOWN},
-        {sf::Keyboard::Left, arcade::LEFT},
-        {sf::Keyboard::Right, arcade::RIGHT},
-        {sf::Keyboard::Space, arcade::SPACE},
-    };
-};
 }
+
+static const std::vector<std::string> TEXTURES = {
+        "plouf.png"
+};
+
+static const std::vector<std::pair<sf::Keyboard::Key, arcade::events_e>> KEYS = {
+        {sf::Keyboard::Escape, arcade::ESCAPE},
+        {sf::Keyboard::Up,     arcade::UP},
+        {sf::Keyboard::Down,   arcade::DOWN},
+        {sf::Keyboard::Left,   arcade::LEFT},
+        {sf::Keyboard::Right,  arcade::RIGHT},
+        {sf::Keyboard::Space,  arcade::SPACE},
+};
