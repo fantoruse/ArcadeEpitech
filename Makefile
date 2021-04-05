@@ -13,7 +13,7 @@ SRC	=\
 		src/InterfaceGame/Iinterface.cpp	\
 		src/Core/Core.cpp					\
 		src/Graphic/ADisplayModule.cpp		\
-		src/Graphic/Ncurses/Ncurses.cpp 	\
+		##src/Graphic/Ncurses/Ncurses.cpp 	\
 		##src/Graphic/SFML/SfmlModule.cpp 	\
 
 OBJ	=	$(SRC:.cpp=.o)

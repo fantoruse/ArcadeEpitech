@@ -25,8 +25,11 @@ namespace arcade {
         ldb.initHandler(path);
         std::cout << "bite\n" << "\n";
         auto libs = ldb.loadingLib<IDisplayModule * (void)>("createGraphLib")();
-        while(1)
-            libs->init();
+        libs->init();
+        while(1) {
+            if (libs->pollEvent() == arcade::CLOSE)
+                break;
+        }
      //   libs->getName();
     //    auto tmp = libs->play();
     }

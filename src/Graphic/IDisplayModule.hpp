@@ -42,4 +42,4 @@ namespace arcade {
     };
 }
 
-extern "C" arcade::IDisplayModule *creatGraphLib();
+extern "C" arcade::IDisplayModule *createGraphLib();

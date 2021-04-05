@@ -7,26 +7,45 @@
 
 #include "SFML/SfmlModule.hpp"
 
-arcade::SFMLModule::SFMLModule(): arcade::ADisplayModule("SFML")
+arcade::SFMLModule::SFMLModule(): arcade::ADisplayModule("SFML"), _window(), _textures(), _sprites(), _shapes()
 {
 }
 void arcade::SFMLModule::init()
 {
     _window.create(sf::VideoMode(1920, 1080), "Arcade");
+    _window.setMouseCursorVisible(false);
 }
 void arcade::SFMLModule::destroy()
 {
 }
-void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string &name)
-{/*
-    auto SpriteToDisplay = _sprites.find(drawable.getName());
-    sf::Shape ShapeToDisplay = _shapes[drawable.getName()];
+void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string &name)
+{
+    sf::Sprite sprite;
+    sf::RectangleShape rectangle;
+    sf::Text text;
+    sf::Font font;
 
-    if (SpriteToDisplay == _sprites.crend()) {
-        SpriteToDisplay.setPosition(position.first, position.second);
+
+    if (drawable[0]->getType() != arcade::NO_TYPE) {
+        sprite.setTexture(_textures[drawable[0]->getString()]);
+        sprite.setPosition(position.first, position.second);
+        _window.draw(sprite);
+    } else if (drawable[1]->getType() != arcade::NO_TYPE) {
+        rectangle.setFillColor(COLORS.at(drawable[1]->getColor()));
+        rectangle.setOutlineColor(COLORS.at(drawable[1]->getColor()));
+        rectangle.setSize({(float)drawable[1]->getSize(), (float)drawable[1]->getSize()});
+        rectangle.setPosition(position.first, position.second);
+        _window.draw(rectangle);
     } else {
-
-    }*/
+        font.loadFromFile("a faire");
+        text.setFont(font);
+        text.setString(drawable[2]->getString());
+        text.setScale({(float)drawable[2]->getSize(), (float)drawable[2]->getSize()});
+        text.setFillColor(COLORS.at(drawable[2]->getColor()));
+        text.setOutlineColor(COLORS.at(drawable[2]->getColor()));
+        text.setPosition(position.first, position.second);
+        _window.draw(text);
+    }
 }
 arcade::events_e arcade::SFMLModule::pollEvent()
 {
@@ -35,7 +54,7 @@ arcade::events_e arcade::SFMLModule::pollEvent()
     while (_window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            _window.close();
+            return arcade::CLOSE;
         else if (event.type == sf::Event::KeyPressed)
             for (auto &&i : KEYS)
                 if (event.key.code == i.first)
@@ -44,16 +63,27 @@ arcade::events_e arcade::SFMLModule::pollEvent()
     return arcade::NOTHING;
 }
 
-void arcade::SFMLModule::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name)
+void arcade::SFMLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] std::string &name)
 {
-    sf::Texture loading;
-
-    for (auto &&i : TEXTURES)
+    for (auto &&i : TEXTURES_TO_LOAD)
         _textures[i].loadFromFile(i);
 }
 
-void arcade::SFMLModule::clearWin() {
+void arcade::SFMLModule::clearWin()
+{
+    _window.clear();
 }
 
-void arcade::SFMLModule::refreshWin() {
+void arcade::SFMLModule::refreshWin()
+{
+    _window.display();
+}
+arcade::SFMLModule::~SFMLModule()
+{
+    _window.close();
+}
+
+extern "C" arcade::IDisplayModule *createGraphLib()
+{
+    return (new arcade::SFMLModule());
 }
