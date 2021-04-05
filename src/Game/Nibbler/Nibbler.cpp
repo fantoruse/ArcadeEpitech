@@ -11,7 +11,7 @@
 #include <map>
 #include "Nibbler.hpp"
 
-arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _isApple(false), _objects()
+arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _map(), _enemies(), _objects(), _isApple(false)
 {
     int n = 0;
 
@@ -39,20 +39,6 @@ void arcade::Nibbler::updateSnake()
         temp1 = temp2;
     }
 }
-
-std::shared_ptr<arcade::IObject> arcade::Nibbler::init_object(bool is_static, std::string name, std::vector<std::shared_ptr<IDrawable>> drawables, std::pair<int,int> pos)
-{
-    if (is_static)
-        return(std::make_shared<arcade::IObject>(new StaticObject(name, drawables, pos)));
-    else
-        return(std::make_shared<arcade::IObject>(new MovableObject(name, drawables, pos)));
-}
-
-void arcade::Nibbler::init_all_object()
-{
-
-}
-
 const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play()
 {
     if (_objects.empty())
@@ -125,6 +111,40 @@ bool arcade::Nibbler::collisionWall(arcade::events_e dir)
     if ((y <= 1 || x <= 1) || _map[y][x] == '#')
         return true;
     return false;
+}
+std::shared_ptr<arcade::IObject> arcade::Nibbler::init_object(bool is_static,
+    const std::string &name, const std::vector<std::shared_ptr<arcade::IDrawable>> &drawables,
+    std::pair<float, float> pos
+)
+{
+    if (is_static)
+        return std::make_shared<arcade::StaticObject>(StaticObject(name, drawables, pos));
+    else
+        return std::make_shared<arcade::MovableObject>(MovableObject(name, drawables, pos));
+}
+
+
+void arcade::Nibbler::init_all_object()
+{
+    for (std::size_t y = 0; y < _map.size(); ++y) {
+        for (std::size_t x = 0; _map[y][x] != '\0'; ++x) {
+            if (_map[y][x] == '#') {
+                _objects.push_back(init_object(true, "Wall",
+                    createDrawableVector("Wall"), std::make_pair(x, y)));
+            }
+        }
+    }
+}
+
+std::vector<std::shared_ptr<arcade::IDrawable>> arcade::Nibbler::createDrawableVector(
+    const std::string &name) const
+{
+    std::vector<std::shared_ptr<arcade::IDrawable>> dest;
+
+    dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[0]));
+    dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[1]));
+    dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[2]));
+    return dest;
 }
 
 extern  "C" arcade::IGame *GetGame() {

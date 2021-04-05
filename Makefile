@@ -15,11 +15,9 @@ SRC	=	src/main.cpp				\
 		##src/Graphic/ADisplayModule.cpp	\
 		##src/LoadLib/LoadLib.cpp			\
 
-SRC_TESTS   =
+OBJ	=	$(SRC:.cpp=.o)
 
 ###############################################################################
-
-OBJ	=	$(SRC:.cpp=.o)
 
 NAME	=	arcade
 
@@ -29,30 +27,49 @@ CPPFLAGS	=	-iquote./src/
 
 CXX	=	g++ -std=c++17
 
-all: $(NAME)
+#MAIN RULES
+all: $(NAME) games core graphical
 
 $(NAME):	$(OBJ)
 	$(CXX) -o $(NAME) $(OBJ) -ldl
 
+################################################################################
+
+#GAME RULES
+
+.PHONY: games
+games:
+	make -C ./src/Game
+
+.PHONY: core
+core:
+	make -C ./src/Core
+
+.PHONY: graphical
+graphical:
+	make -C ./src/Graphic
+
+################################################################################
+
+#CLEAN RULES
 clean:
-	$(RM) $(OBJ) *.gcda *.gcno unit_tests
+	$(RM) $(OBJ) *.gcda *.gcno
+	make clean -C ./src/Game
+	make clean -C ./src/Core
+	make clean -C ./src/Graphic
 
 fclean:	clean
 	$(RM) $(NAME) unit_tests
+	make fclean -C ./src/Game
+	make fclean -C ./src/Core
+	make fclean -C ./src/Graphic
 
-re:	fclean all $(NAME)
+re:	fclean all
 
 debug:	CPPFLAGS += -g3 -ggdb
 debug:	re
+	make debug -C ./src/Game
+	make debug -C ./src/Core
+	make debug -C ./src/Graphic
 
-tests_run: SRC += $(SRC_TESTS)
-tests_run: LDFLAGS += -lcriterion --coverage
-tests_run: CPPFLAGS += -iquote./tests/ -DTU
-tests_run: CXXFLAGS := $(filter-out -Werror, $(CXXFLAGS))
-tests_run: SRC := $(filter-out src/main.cpp, $(SRC))
-tests_run: NAME := unit_tests
-tests_run:
-	$(CXX) -o $(NAME) $(SRC) $(LDFLAGS) $(CPPFLAGS)
-	./$(NAME)
-
-.PHONY: all fclean re clean $(NAME) debug tests_run
+.PHONY: all fclean re clean $(NAME) debug

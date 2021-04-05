@@ -9,6 +9,7 @@
 #include <filesystem>
 #include "Core/Core.hpp"
 #include "LoadLib/LoadLib.hpp"
+#include "Game/Object/IObject.hpp"
 #include "Game/IGame.hpp"
 
 namespace arcade {

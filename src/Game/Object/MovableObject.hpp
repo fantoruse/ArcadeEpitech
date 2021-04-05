@@ -12,7 +12,7 @@
 namespace arcade {
     class MovableObject : public StaticObject {
         public:
-            MovableObject(std::string &, std::vector<std::shared_ptr<IDrawable>>, std::pair<int,int>);
+            MovableObject(const std::string &, std::vector<std::shared_ptr<IDrawable>>, std::pair<int,int>);
             ~MovableObject() = default;
 
             void setPosition(std::pair<int, int>);

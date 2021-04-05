@@ -5,6 +5,15 @@
 ## makefile
 ##
 
+#SHARED
+
+SHARED_SRC =	Drawable.cpp	\
+				ADisplayModule.cpp
+
+SHARED_OBJ = $(SHARED_SRC:.cpp=.o)
+
+#################################################################################
+
 #SFML SOURCES
 
 SFML_SRC = SFML/SfmlModule.cpp
@@ -59,26 +68,26 @@ all: SFML SDL NCURSE
 #MAIN RULES
 
 .PHONY: SFML
-SFML: $(SFML_OBJ)
-	$(CXX) -o $(SFML_NAME) $(SFML_OBJ) $(SFML_LIB)
+SFML: $(SFML_OBJ) $(SHARED_OBJ)
+	$(CXX) -o $(SFML_NAME) $(SFML_OBJ) $(SHARED_OBJ) $(SFML_LIB)
 
 .PHONY: SDL
-SDL: $(SDL_OBJ)
-	$(CXX) -o $(SDL_NAME) $(SDL_OBJ) $(SDL_LIB)
+SDL: $(SDL_OBJ) $(SHARED_OBJ)
+	$(CXX) -o $(SDL_NAME) $(SDL_OBJ) $(SHARED_OBJ) $(SDL_LIB)
 
 .PHONY: NCURSE
-NCURSE: $(NCURSE_OBJ)
-	$(CXX) -o $(NCURSE_NAME) $(NCURSE_OBJ) $(NCURSE_LIB)
+NCURSE: $(NCURSE_OBJ) $(SHARED_OBJ)
+	$(CXX) -o $(NCURSE_NAME) $(NCURSE_OBJ) $(SHARED_OBJ) $(NCURSE_LIB)
 
 #CLEAN RULES
 
 .PHONY: clean
 clean:
-	$(RM) $(SFML_OBJ) $(SDL_OBJ)
+	$(RM) $(SFML_OBJ) $(SDL_OBJ) $(NCURSE_OBJ) $(SHARED_OBJ)
 
 .PHONY: fclean
 fclean: clean
-	$(RM) $(SFML_NAME) $(SDL_NAME)
+	$(RM) $(SFML_NAME) $(SDL_NAME) $(NCURSE_NAME)
 
 .PHONY: re
 re: fclean all

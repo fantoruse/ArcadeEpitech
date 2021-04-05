@@ -7,7 +7,7 @@
 
 #include "MovableObject.hpp"
 
-arcade::MovableObject::MovableObject(std::string &name, std::vector<std::shared_ptr<arcade::IDrawable>> drawables, std::pair<int,int> pos): StaticObject(name, drawables, pos)
+arcade::MovableObject::MovableObject(const std::string &name, std::vector<std::shared_ptr<arcade::IDrawable>> drawables, std::pair<int,int> pos): StaticObject(name, drawables, pos)
 {
 }
 
