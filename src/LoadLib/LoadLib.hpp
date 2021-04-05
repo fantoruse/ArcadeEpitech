@@ -23,7 +23,7 @@ public:
     ~LoadLib() { /*dlclose(_openFile);*/ };
     void initHandler(const std::string &libName) {
         _openFile = dlopen(libName.c_str(), RTLD_LAZY);
-        if (!_openFile)
+        if (!_openFile) 
             throw std::runtime_error(dlerror());
     }
 

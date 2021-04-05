@@ -34,7 +34,7 @@ SDL_OBJ	=	$(SDL_SRC:.cpp=.o)
 
 SDL_NAME	=	arcade_sdl2.so
 
-SDL_LIB		=	-lSDL2
+SDL_LIB		=	-lSDL2main -lSDL2 -lSDL2_image
 
 #################################################################################
 
@@ -54,7 +54,7 @@ NCURSE_LIB		=	-lncurses
 
 CXX	=	g++
 
-CPPFLAGS	=	-iquote./
+CPPFLAGS	=	-iquote./ -iquote../
 
 CXXFLAGS	=	-Wall -Wextra -fPIC
 

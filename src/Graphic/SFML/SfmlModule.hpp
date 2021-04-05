@@ -17,15 +17,11 @@ namespace arcade {
 class SFMLModule : public arcade::ADisplayModule {
 public:
     SFMLModule();
-
     ~SFMLModule() override;
 
     void init() override;
-
     void destroy() override;
-
     void refreshWin() override;
-
     void clearWin() override;
 
     void draw(std::vector<std::shared_ptr<IDrawable>> drawable,
