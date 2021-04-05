@@ -12,7 +12,7 @@
 namespace arcade {
     class StaticObject : public IObject {
         public:
-            StaticObject(std::string &, std::vector<std::shared_ptr<IDrawable>>, std::pair<int,int>);
+            StaticObject(const std::string &, const std::vector<std::shared_ptr<IDrawable>>&, std::pair<int,int>);
             ~StaticObject() = default;
 
             void setDrawables(std::vector<std::shared_ptr<IDrawable>>);
