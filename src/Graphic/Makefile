@@ -40,7 +40,7 @@ SDL_LIB		=	-lSDL2
 
 #NCURSE SOURCES
 
-NCURSE_SRC	=
+NCURSE_SRC	=	Ncurses/Ncurses.cpp
 
 NCURSE_OBJ	=	$(NCURSE_SRC:.cpp=.o)
 
@@ -56,7 +56,7 @@ CXX	=	g++
 
 CPPFLAGS	=	-iquote./
 
-CXXFLAGS	=	-Wall -Wextra -fPIC -shared
+CXXFLAGS	=	-Wall -Wextra -fPIC
 
 #################################################################################
 
@@ -77,7 +77,7 @@ SDL: $(SDL_OBJ) $(SHARED_OBJ)
 
 .PHONY: NCURSE
 NCURSE: $(NCURSE_OBJ) $(SHARED_OBJ)
-	$(CXX) -o $(NCURSE_NAME) $(NCURSE_OBJ) $(SHARED_OBJ) $(NCURSE_LIB)
+	$(CXX) -o $(NCURSE_NAME) $(NCURSE_OBJ) $(SHARED_OBJ) $(NCURSE_LIB) -shared
 
 #CLEAN RULES
 

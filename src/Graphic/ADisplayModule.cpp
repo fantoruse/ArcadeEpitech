@@ -7,7 +7,7 @@
 
 #include "ADisplayModule.hpp"
 
-arcade::ADisplayModule(const std::string &name) : _name(name)
+arcade::ADisplayModule::ADisplayModule(const std::string &name): _name(name)
 {
 }
 

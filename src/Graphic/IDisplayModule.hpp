@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <utility>
+#include <vector>
 #include "IDrawable.hpp"
 
 namespace arcade {
@@ -29,9 +30,8 @@ namespace arcade {
     class IDisplayModule {
     public:
         virtual ~IDisplayModule() = default;
-
-        virtual const std::string getName() const = 0;
-        virtual const std::string getPath() const = 0;
+    
+        virtual std::string getName() const = 0;
         virtual void init() = 0;
         virtual void destroy() = 0;
         virtual void clearWin() = 0;
@@ -41,3 +41,5 @@ namespace arcade {
         virtual events_e pollEvent() = 0;
     };
 }
+
+extern "C" arcade::IDisplayModule *creatGraphLib();

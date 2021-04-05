@@ -23,8 +23,12 @@ namespace arcade {
         LoadLib ldb;
 
         ldb.initHandler(path);
-        auto libs = ldb.loadingLib<IGame * (void)>("GetGame")();
-        libs->getName();
+        std::cout << "bite\n" << "\n";
+        auto libs = ldb.loadingLib<IDisplayModule * (void)>("createGraphLib")();
+        while(1)
+            libs->init();
+     //   libs->getName();
+    //    auto tmp = libs->play();
     }
 
     void Core::OpenFirstLibs(std::string arg) {
@@ -47,7 +51,7 @@ namespace arcade {
             tmp = p.path();
             tmp.erase(0, 6);
             _loadLibs.push_back(std::pair<std::string, IDisplayModule*>(tmp, libs));for (auto $e: _loadLibs) {
-           }
+            }
             std::cout << tmp << "\n";
         }
     }

@@ -6,6 +6,7 @@
 */
 
 #include "Ncurses.hpp"
+#include <iostream>
 
 arcade::Ncurses::Ncurses(): ADisplayModule("NCURSES")
 {
@@ -27,9 +28,19 @@ void arcade::Ncurses::destroy()
     endwin();
 }
 
-void arcade::Ncurses::draw (Drawable drawable, std::pair<int, int> position, int size)
+void arcade::Ncurses::clearWin()
 {
-    mvprintw(position.first, position.second, drawable.getType(CHARACTER[c]));
+    wclear(stdscr);
+}
+
+void arcade::Ncurses::refreshWin()
+{
+    wrefresh(stdscr);
+}
+
+void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string &name)
+{
+    mvprintw(position.first, position.second, drawable[2]->getString().c_str());
 }
 
 arcade::events_e arcade::Ncurses::pollEvent()
@@ -41,7 +52,12 @@ arcade::events_e arcade::Ncurses::pollEvent()
             return i.second;
 }
 
-void arcade::Ncurses::load()
+void arcade::Ncurses::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name)
 {
 
+}
+
+extern "C" arcade::IDisplayModule *createGraphLib()
+{
+        return (new arcade::Ncurses());
 }

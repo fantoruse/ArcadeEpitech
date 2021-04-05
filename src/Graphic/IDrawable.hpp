@@ -33,7 +33,7 @@ namespace arcade {
     class IDrawable {
     public:
         virtual ~IDrawable() = default;
-        virtual const std::string &getString() const = 0;
+        virtual std::string getString() const = 0;
         virtual type_e getType() const = 0;
         virtual std::size_t getSize() const = 0;
         virtual colors_e getColor() const = 0;

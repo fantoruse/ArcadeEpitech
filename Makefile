@@ -5,15 +5,16 @@
 ## makefile
 ##
 
-SRC	=	src/main.cpp				\
-		src/dynamicFile.cpp			\
-		src/Error/Error.cpp				\
-		src/LoadLib/LoadLib.cpp			\
+SRC	=\
+		src/main.cpp						\
+		src/dynamicFile.cpp					\
+		src/Error/Error.cpp					\
+		src/LoadLib/LoadLib.cpp				\
 		src/InterfaceGame/Iinterface.cpp	\
-		src/Core/Core.cpp	\
+		src/Core/Core.cpp					\
+		src/Graphic/ADisplayModule.cpp		\
+		src/Graphic/Ncurses/Ncurses.cpp 	\
 		##src/Graphic/SFML/SfmlModule.cpp 	\
-		##src/Graphic/ADisplayModule.cpp	\
-		##src/LoadLib/LoadLib.cpp			\
 
 OBJ	=	$(SRC:.cpp=.o)
 
@@ -28,10 +29,10 @@ CPPFLAGS	=	-iquote./src/
 CXX	=	g++ -std=c++17
 
 #MAIN RULES
-all: $(NAME) games core graphical
+all: $(NAME) #games core graphical
 
 $(NAME):	$(OBJ)
-	$(CXX) -o $(NAME) $(OBJ) -ldl
+	$(CXX) -o $(NAME) $(OBJ) -ldl -lncurses
 
 ################################################################################
 
