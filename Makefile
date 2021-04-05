@@ -27,7 +27,7 @@ CXXFLAGS	=	-Wall -Wextra
 
 CPPFLAGS	=	-iquote./src/
 
-CXX	=	g++
+CXX	=	g++ -std=c++17
 
 all: $(NAME)
 

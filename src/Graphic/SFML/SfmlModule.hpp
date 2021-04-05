@@ -25,7 +25,7 @@ public:
     void draw(Drawable drawable, std::pair<float, float> position, int size) override;
     events_e pollEvent() override;
     void load() override;
-        
+
 private:
     sf::RenderWindow _window;
     std::map<std::string, sf::Texture> _textures;

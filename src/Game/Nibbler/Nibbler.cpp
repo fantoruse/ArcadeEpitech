@@ -57,7 +57,7 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play()
 {
     if (_objects.empty())
         init_all_object();
-    return;
+    return _objects;
 }
 
 const std::string arcade::Nibbler::getName() const {
