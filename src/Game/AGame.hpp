@@ -8,7 +8,7 @@
 #pragma once
 
 #include "IGame.hpp"
-#include "IObject.hpp"
+#include "Object/IObject.hpp"
 
 namespace arcade {
     class AGame: public IGame {

@@ -46,7 +46,7 @@ class Nibbler : public AGame {
     private:
         void loadMap();
         bool collisionWall(arcade::events_e dir);
-        std::shared_ptr<arcade::IObject> init_object(bool is_static, const std::string &name, std::vector<std::shared_ptr<arcade::IDrawable>> drawables, std::pair<float,float> pos);
+        std::shared_ptr<arcade::IObject> init_object(bool is_static, const std::string &name, const std::vector<std::shared_ptr<arcade::IDrawable>> &drawables, std::pair<float,float> pos);
         void init_all_object();
         std::vector<std::shared_ptr<arcade::IDrawable>> createDrawableVector(const std::string &name) const;
 

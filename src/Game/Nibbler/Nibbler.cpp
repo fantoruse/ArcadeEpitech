@@ -11,7 +11,7 @@
 #include <map>
 #include "Nibbler.hpp"
 
-arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _isApple(false), _objects()
+arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _map(), _enemies(), _objects(), _isApple(false)
 {
     int n = 0;
 

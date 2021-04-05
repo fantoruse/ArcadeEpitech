@@ -30,7 +30,7 @@ NIBBLER_LIB	=
 
 #PACMAN SOURCES
 
-PACMAN_SRC =	Nibbler/Nibbler.cpp
+PACMAN_SRC =	Pacman/pacman.cpp
 
 PACMAN_OBJ =	$(PACMAN_SRC:.cpp=.o)
 
@@ -46,7 +46,7 @@ CXX	=	g++
 
 CPPFLAGS	=	-iquote./ -iquote..
 
-CXXFLAGS	=	-Wall -Wextra -fPIC -shared
+CXXFLAGS	=	-Wall -Wextra -fPIC
 
 #################################################################################
 
@@ -59,7 +59,7 @@ all: nibbler
 
 .PHONY: nibbler
 nibbler: $(NIBBLER_OBJ) $(SHARED_OBJ)
-	$(CXX) -o $(NIBBLER_NAME) $(NIBBLER_OBJ) $(SHARED_OBJ) $(NIBBLER_LIB)
+	$(CXX) -o $(NIBBLER_NAME) $(NIBBLER_OBJ) $(SHARED_OBJ) $(NIBBLER_LIB) -shared
 
 .PHONY: pacman
 pacman: $(PACMAN_OBJ) $(SHARED_OBJ)

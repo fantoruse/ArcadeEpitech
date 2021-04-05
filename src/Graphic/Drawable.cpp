@@ -12,10 +12,7 @@ arcade::Drawable::Drawable(const std::string &obj, std::size_t size,
 ) : _infos(obj), _size(size), _type(type), _color(color)
 {
 }
-void arcade::Drawable::setSize(std::size_t size)
-{
-    _size = size;
-}
+
 const std::string &arcade::Drawable::getString() const
 {
     return _infos;
