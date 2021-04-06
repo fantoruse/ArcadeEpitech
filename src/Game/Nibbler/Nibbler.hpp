@@ -22,16 +22,6 @@
 #include "Graphic/Drawable.hpp"
 
 namespace arcade {
-    enum events_e {
-    CLOSE,
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    SPACE,
-    ESCAPE,
-    NOTHING
-};
 class Nibbler : public AGame {
     public:
         Nibbler();
@@ -40,7 +30,7 @@ class Nibbler : public AGame {
         void AppleGenerator();
         void updateSnake();
         void move(arcade::events_e dir);
-        const std::vector<std::shared_ptr<IObject>> play() override;
+        const std::vector<std::shared_ptr<IObject>> play(arcade::events_e) override;
         const std::string getName() const override;
 
     private:

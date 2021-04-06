@@ -39,7 +39,7 @@ void arcade::Nibbler::updateSnake()
         temp1 = temp2;
     }
 }
-const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play()
+const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play([[maybe_unused]]arcade::events_e events)
 {
     if (_objects.empty())
         init_all_object();
