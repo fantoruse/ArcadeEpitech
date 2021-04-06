@@ -6,18 +6,17 @@
 */
 
 #include "Sdl.hpp"
-#include "../Error/Error.hpp"
 
 arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _window(), _status(true), _textures(), _sprites(), _shapes() {
 }
 
 void arcade::SDLModule::init() {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-        throw Error("can't open SDL window");
-    _window = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080,
+    if (SDL_Init(SDL_INIT_VIDEO) < 0);
+   //     throw Error("can't open SDL window");
+    _window = SDL_CreateWindow("ANTOINE LE PLUS BEAU", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080,
                                SDL_WINDOW_BORDERLESS);
-    if (!_window)
-        throw Error("Error can't open a sdl window");
+    if (!_window);
+   //     throw Error("Error can't open a sdl window");
     _renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
     SDL_SetRenderDrawColor(_renderer, 255, 0, 0, 255);
 }
