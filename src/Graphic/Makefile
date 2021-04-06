@@ -58,12 +58,19 @@ CPPFLAGS	=	-iquote./ -iquote../
 
 CXXFLAGS	=	-Wall -Wextra -fPIC
 
+DEST_DIRECTORY	=	../../lib
+
 #################################################################################
 
 #RULES
 
 .PHONY: all
 all: SFML SDL NCURSE
+all:
+	mkdir $(DEST_DIRECTORY)
+	mv $(NCURSE_NAME) $(DEST_DIRECTORY)
+	mv $(SFML_NAME) $(DEST_DIRECTORY)
+	mv $(SDL_NAME) $(DEST_DIRECTORY)
 
 #MAIN RULES
 
@@ -88,6 +95,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(SFML_NAME) $(SDL_NAME) $(NCURSE_NAME)
+	$(RM) -r $(DEST_DIRECTORY)
 
 .PHONY: re
 re: fclean all
