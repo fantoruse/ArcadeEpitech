@@ -95,7 +95,6 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(SFML_NAME) $(SDL_NAME) $(NCURSE_NAME)
-	$(RM) -r $(DEST_DIRECTORY)
 
 .PHONY: re
 re: fclean all

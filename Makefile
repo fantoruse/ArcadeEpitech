@@ -59,7 +59,10 @@ fclean:	clean
 	make fclean -C ./src/Game
 	make fclean -C ./src/Graphic
 
-re:	fclean all
+re:		fclean all
+re:
+	make re -C src/Graphic
+	make re -C src/Game
 
 debug:	CPPFLAGS += -g3 -ggdb
 debug:	re

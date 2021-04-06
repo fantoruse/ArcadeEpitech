@@ -91,12 +91,11 @@ namespace arcade {
                 break;
         }
         auto gaming = _loadGames[0].second;
-        auto k  = gaming->play(arcade::UP);
-        auto n = k[1]->getDrawables();
         auto libs = _loadLibs[0].second;
         libs->init();
         while (1) {
             auto tmp = _actualLibs;
+            auto k  = gaming->play(arcade::UP);
             if (libs->pollEvent() == arcade::CLOSE) {
                 break;
             }
@@ -104,7 +103,9 @@ namespace arcade {
             libs->clearWin();
             libs->getName();
             std::string s = "bite";
-            libs->draw(n,std::pair<int, int>(10,150), s);
+            for (auto n : k) {
+                libs->draw(n.get()->getDrawables() , n.get()->getPosition(), s);
+            }
             switchLibs(libs->pollEvent());
             if (tmp != _actualLibs)
                 for (long unsigned int a = 0; a != _loadLibs.size(); a++) {

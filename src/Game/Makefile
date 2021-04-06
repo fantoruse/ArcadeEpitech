@@ -80,7 +80,6 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(NIBBLER_NAME) $(PACMAN_NAME)
-	$(RM) -r $(DEST_DIRECTORY)
 
 .PHONY: re
 re: fclean all
