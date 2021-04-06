@@ -26,6 +26,7 @@ int main(int argc, char **argv) {
         z->draw();*/
         //oli.OpenGame(argv[1]);
         oli.OpenFirstLibs(argv[1]);
+        oli.OpenGame();
         oli.OpenLibsInLibs(argv[1]);
         oli .gameLoop();
        //oli.OpenFirstLibs(argv[1]);

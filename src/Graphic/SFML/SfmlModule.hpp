@@ -25,7 +25,7 @@ public:
     void clearWin() override;
 
     void draw(std::vector<std::shared_ptr<IDrawable>> drawable,
-        std::pair<int, int> position, std::string &name
+        std::pair<int, int> position, std::string name
     ) override;
 
     events_e pollEvent() override;

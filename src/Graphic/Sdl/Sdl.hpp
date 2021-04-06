@@ -21,7 +21,7 @@ namespace arcade {
 
         void init() override;
         void destroy() override;
-        void draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string &name) override;
+        void draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string name) override;
         events_e pollEvent() override;
         void load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name) override;
         void refreshWin() override;
