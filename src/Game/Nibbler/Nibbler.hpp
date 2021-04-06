@@ -32,6 +32,7 @@ class Nibbler : public AGame {
         void move(arcade::events_e dir);
         const std::vector<std::shared_ptr<IObject>> play(arcade::events_e) override;
         const std::string getName() const override;
+        bool isLost() const {return false;};
 
     private:
         void loadMap();
