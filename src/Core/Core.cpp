@@ -91,7 +91,7 @@ namespace arcade {
                 break;
         }
         auto gaming = _loadGames[0].second;
-        auto k  = gaming->play();
+        auto k  = gaming->play(arcade::UP);
         auto n = k[1]->getDrawables();
         auto libs = _loadLibs[0].second;
         libs->init();
