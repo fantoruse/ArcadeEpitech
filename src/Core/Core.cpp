@@ -10,28 +10,28 @@
 #include "Core/Core.hpp"
 #include "LoadLib/LoadLib.hpp"
 #include "Game/Object/IObject.hpp"
-#include "Game/IGame.hpp"
 
 namespace arcade {
 
     Core::Core() {
         this->_loadLibs;
         this->_actualLibs;
+        this->_loadGames;
+        this->_actualGames;
     }
 
-    void Core::OpenGame(std::string path) {
+    void Core::OpenGame() {
         LoadLib ldb;
-
-        ldb.initHandler(path);
-        std::cout << "bite\n" << "\n";
-        auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
-        libs->init();
-        // while(1) {
-        //     if (libs->pollEvent() == arcade::CLOSE)
-        //         break;
-        // }
-        //   libs->getName();
-        //    auto tmp = libs->play();
+        std::string tmp;
+        for (auto &p: std::filesystem::directory_iterator("./games")) {
+            ldb.initHandler(p.path());
+            auto libs = ldb.loadingLib<IGame *(void)>("GetGame")();
+            tmp = p.path();
+            tmp.erase(0, 12);
+            _loadGames.push_back(std::pair<std::string, IGame *>(tmp, libs));
+          //  std::cout << tmp << "\n";
+        }
+        std::cout << "name game === " << _loadGames[0].first << "\n";
     }
 
     void Core::OpenFirstLibs(std::string arg) {
@@ -63,7 +63,7 @@ namespace arcade {
             for (long unsigned int i = 0; i != _loadLibs.size(); i++) {
                 if (_loadLibs[i].first == _actualLibs) {
                     i++;
-                    if (i > _loadLibs.size())
+                    if (i >= _loadLibs.size())
                         i = 0;
                     _actualLibs = _loadLibs[i].first;
                 }
@@ -72,8 +72,9 @@ namespace arcade {
         if (event == arcade::PREV) {
             for (long unsigned int i = 0; i != _loadLibs.size(); i++) {
                 if (_loadLibs[i].first == _actualLibs) {
+                    //std::cout << _loadLibs.size() << "\n";
                     if (i == 0)
-                        i = _loadLibs.size();
+                        i = _loadLibs.size() - 1;
                     else
                         i--;
                     _actualLibs = _loadLibs[i].first;
@@ -89,25 +90,31 @@ namespace arcade {
             if (_loadLibs[i].first == _actualLibs)
                 break;
         }
-            auto libs = _loadLibs[0].second;
-            libs->init();
-            while (1) {
-                auto tmp = _actualLibs;
-                if (libs->pollEvent() == arcade::CLOSE)
-                    break;
-                libs->refreshWin();
-                libs->clearWin();
-                libs->getName();
-                switchLibs(libs->pollEvent());
-                if (tmp != _actualLibs)
-                    for (; i != _loadLibs.size(); i++) {
-                        if (_loadLibs[i].first == _actualLibs) {
-                            libs->destroy();
-                            libs = _loadLibs[i].second;
-                            libs->init();
-                            break;
-                        }
+        auto gaming = _loadGames[0].second;
+        auto k  = gaming->play();
+        auto n = k[1]->getDrawables();
+        auto libs = _loadLibs[0].second;
+        libs->init();
+        while (1) {
+            auto tmp = _actualLibs;
+            if (libs->pollEvent() == arcade::CLOSE) {
+                break;
+            }
+            libs->refreshWin();
+            libs->clearWin();
+            libs->getName();
+            std::string s = "bite";
+            libs->draw(n,std::pair<int, int>(10,150), s);
+            switchLibs(libs->pollEvent());
+            if (tmp != _actualLibs)
+                for (long unsigned int a = 0; a != _loadLibs.size(); a++) {
+                    if (_loadLibs[a].first == _actualLibs) {
+                        libs->destroy();
+                        libs = _loadLibs[a].second;
+                        libs->init();
+                        break;
                     }
+                }
         }
     }
 }

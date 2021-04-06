@@ -38,7 +38,7 @@ void arcade::Ncurses::refreshWin()
     wrefresh(stdscr);
 }
 
-void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string &name)
+void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string name)
 {
     mvprintw(position.first, position.second, drawable[2]->getString().c_str());
 }
@@ -50,8 +50,9 @@ arcade::events_e arcade::Ncurses::pollEvent()
     for (auto &&i : KEYS)
         if (input == i.first)
             return i.second;
-        if (input == 't')
+        if (input == 't') {
             return arcade::CLOSE;
+        }
 }
 
 void arcade::Ncurses::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name)

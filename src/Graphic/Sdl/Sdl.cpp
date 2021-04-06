@@ -26,7 +26,7 @@ void arcade::SDLModule::destroy() {
     SDL_DestroyWindow(_window);
 }
 
-void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string &name) {
+void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string name) {
     std::size_t size = drawable[1]->getSize();
 
     if (drawable[0]->getType() == arcade::SPRITE);

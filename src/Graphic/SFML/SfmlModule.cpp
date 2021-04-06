@@ -19,7 +19,7 @@ void arcade::SFMLModule::destroy()
 {
     _window.close();
 }
-void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string &name)
+void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string name)
 {
     sf::Sprite sprite;
     sf::RectangleShape rectangle;
