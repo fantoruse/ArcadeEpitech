@@ -91,12 +91,15 @@ namespace arcade {
                 break;
         }
         auto gaming = _loadGames[0].second;
-        auto k  = gaming->play();
-        auto n = k[1]->getDrawables();
         auto libs = _loadLibs[0].second;
         libs->init();
         while (1) {
             auto tmp = _actualLibs;
+            std::cout << "Clement il pue la merde se fdp\n";
+            auto k  = gaming->play(libs->pollEvent());
+            std::cout << "Clement il pue la merde se fdp1\n";
+            auto n = k[1]->getDrawables();
+            std::cout << "Clement il pue la merde se fdp2\n";
             if (libs->pollEvent() == arcade::CLOSE) {
                 break;
             }

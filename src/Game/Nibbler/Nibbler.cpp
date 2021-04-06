@@ -43,12 +43,20 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play([[mayb
 {
     if (_objects.empty())
         init_all_object();
+    //move();
+    updateSnake();
+    AppleGenerator();
+    auto temp = _objects;
+    temp.push_back(init_object(true, "apple",
+            createDrawableVector("apple"), std::make_pair(_applePosition.first, _applePosition.second)));
+    for (auto i = _enemies.begin(); i != _enemies.end(); i += 1)
+        temp.push_back(init_object(true, "enemie",
+                    createDrawableVector("enemie"), std::make_pair(i->first, i->second)));
     return _objects;
 }
 
 const std::string arcade::Nibbler::getName() const {
-    std::cout << "bite" << "\n";
-    return "test";
+    return _name;
 }
 
 void arcade::Nibbler::AppleGenerator()
