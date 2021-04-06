@@ -8,3 +8,5 @@ CMakeLists.txt
 arcade
 unit_tests
 .vscode
+games
+lib

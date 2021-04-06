@@ -48,12 +48,18 @@ CPPFLAGS	=	-iquote./ -iquote..
 
 CXXFLAGS	=	-Wall -Wextra -fPIC
 
+DEST_DIRECTORY	=	../../games
+
 #################################################################################
 
 #RULES
 
 .PHONY: all
-all: nibbler
+all: nibbler #pacman
+all:
+	mkdir $(DEST_DIRECTORY)
+	mv $(NIBBLER_NAME) $(DEST_DIRECTORY)
+#mv $(PACMAN_NAME) $(DEST_DIRECTORY)
 
 #MAIN RULES
 
@@ -74,6 +80,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(NIBBLER_NAME) $(PACMAN_NAME)
+	$(RM) -r $(DEST_DIRECTORY)
 
 .PHONY: re
 re: fclean all
