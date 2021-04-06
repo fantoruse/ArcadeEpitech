@@ -11,7 +11,7 @@
 #include <vector>
 //#include <SDL2/SDL_ttf.h>
 #include <map>
-#include "ADisplayModule.hpp"
+#include "../ADisplayModule.hpp"
 
 namespace arcade {
     class SDLModule: public arcade::ADisplayModule {
@@ -20,15 +20,12 @@ namespace arcade {
         ~SDLModule() override;
 
         void init() override;
-        // void destroy() override;
-        // void draw(std::vector<std::shared_ptr<IDrawable>> drawable,
-        //     std::pair<int, int> position, std::string &name
-        // ) override;        events_e pollEvent() override;
-        // void load(std::vector<std::shared_ptr<IDrawable>> drawable,
-        //     std::string &name
-        // ) override;
-        // void refreshWin() override;
-        // void clearWin() override;
+        void destroy() override;
+        void draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string &name) override;
+        events_e pollEvent() override;
+        void load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name) override;
+        void refreshWin() override;
+        void clearWin() override;
 
     private:
         SDL_Renderer *_renderer;

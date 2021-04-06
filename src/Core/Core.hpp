@@ -23,6 +23,7 @@ namespace arcade {
         void OpenFirstLibs(std::string);
         void OpenLibsInLibs(std::string);
         void switchLibs(events_e);
+        void gameLoop();
 
     protected:
         std::vector<std::pair<std::string, IDisplayModule*>> _loadLibs;

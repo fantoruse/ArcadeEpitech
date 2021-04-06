@@ -24,7 +24,10 @@ int main(int argc, char **argv) {
         std::cout << "bite\n" << "\n";
         auto z = b.loadingLib< *(void)>("GetGame")();
         z->draw();*/
-        oli.OpenGame(argv[1]);
+        //oli.OpenGame(argv[1]);
+        oli.OpenFirstLibs(argv[1]);
+        oli.OpenLibsInLibs(argv[1]);
+        oli .gameLoop();
        //oli.OpenFirstLibs(argv[1]);
     } catch (const Error &e) {
         std::cerr << e.what() << std::endl;
