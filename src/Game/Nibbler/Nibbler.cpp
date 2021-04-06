@@ -52,7 +52,7 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play([[mayb
     for (auto i = _enemies.begin(); i != _enemies.end(); i += 1)
         temp.push_back(init_object(true, "enemie",
                     createDrawableVector("enemie"), std::make_pair(i->first, i->second)));
-    return _objects;
+    return temp;
 }
 
 const std::string arcade::Nibbler::getName() const {
@@ -71,7 +71,7 @@ void arcade::Nibbler::AppleGenerator()
         ry = rand() % 18;
         rx = rand() % 18;
         for (auto it: _enemies) {
-            if ((it.first != rx and it.second != ry) || _map[rx][ry] != '#') {
+            if ((it.first != ry and it.second != rx) && _map[ry][rx] != '#') {
                 end = true;
                 break;
             }
@@ -122,8 +122,7 @@ bool arcade::Nibbler::collisionWall(arcade::events_e dir)
 }
 std::shared_ptr<arcade::IObject> arcade::Nibbler::init_object(bool is_static,
     const std::string &name, const std::vector<std::shared_ptr<arcade::IDrawable>> &drawables,
-    std::pair<float, float> pos
-)
+    std::pair<float, float> pos)
 {
     if (is_static)
         return std::make_shared<arcade::StaticObject>(StaticObject(name, drawables, pos));
@@ -134,11 +133,11 @@ std::shared_ptr<arcade::IObject> arcade::Nibbler::init_object(bool is_static,
 
 void arcade::Nibbler::init_all_object()
 {
-    for (std::size_t y = 0; y < _map.size(); ++y) {
-        for (std::size_t x = 0; _map[y][x] != '\0'; ++x) {
+    for (std::size_t y = 0; y < _map.size(); y++) {
+        for (std::size_t x = 0; _map[y][x] != '\0'; x++) {
             if (_map[y][x] == '#') {
                 _objects.push_back(init_object(true, "Wall",
-                    createDrawableVector("Wall"), std::make_pair(x, y)));
+                    createDrawableVector("Wall"), std::make_pair(y, x)));
             }
         }
     }
@@ -149,6 +148,8 @@ std::vector<std::shared_ptr<arcade::IDrawable>> arcade::Nibbler::createDrawableV
 {
     std::vector<std::shared_ptr<arcade::IDrawable>> dest;
 
+    if (DRAWABLE_LIST.find(name) == DRAWABLE_LIST.end())
+        return dest;
     dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[0]));
     dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[1]));
     dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[2]));

@@ -95,11 +95,7 @@ namespace arcade {
         libs->init();
         while (1) {
             auto tmp = _actualLibs;
-            std::cout << "Clement il pue la merde se fdp\n";
-            auto k  = gaming->play(libs->pollEvent());
-            std::cout << "Clement il pue la merde se fdp1\n";
-            auto n = k[1]->getDrawables();
-            std::cout << "Clement il pue la merde se fdp2\n";
+            auto k  = gaming->play(arcade::UP);
             if (libs->pollEvent() == arcade::CLOSE) {
                 break;
             }
@@ -107,7 +103,9 @@ namespace arcade {
             libs->clearWin();
             libs->getName();
             std::string s = "bite";
-            libs->draw(n,std::pair<int, int>(10,150), s);
+            for (auto n : k) {
+                libs->draw(n.get()->getDrawables() , n.get()->getPosition(), s);
+            }
             switchLibs(libs->pollEvent());
             if (tmp != _actualLibs)
                 for (long unsigned int a = 0; a != _loadLibs.size(); a++) {
