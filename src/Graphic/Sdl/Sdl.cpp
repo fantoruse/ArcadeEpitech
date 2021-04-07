@@ -6,41 +6,51 @@
 */
 
 #include "Sdl.hpp"
+#include <iostream>
 
-arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _window(), _status(true), _textures(), _sprites(), _shapes() {
+arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _window(), _status(true), _textures(),
+                                 _sprites(), _shapes() {
 }
 
 void arcade::SDLModule::init() {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0);
-   //     throw Error("can't open SDL window");
-    _window = SDL_CreateWindow("ANTOINE LE PLUS BEAU", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080,
+    std::cout << "\n WINDOW IS OPEN\n";
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+        return;
+    _window = SDL_CreateWindow("ANTOINE LE PLUS BEAU", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600,
                                SDL_WINDOW_BORDERLESS);
-    if (!_window);
-   //     throw Error("Error can't open a sdl window");
-    _renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_SetRenderDrawColor(_renderer, 255, 0, 0, 255);
+    if (!_window)
+        return;
+    _renderer = SDL_CreateRenderer(_window, -1, 0);
+    SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
+    SDL_Delay(10);
 }
 
 void arcade::SDLModule::destroy() {
     SDL_DestroyWindow(_window);
+    SDL_DestroyRenderer(_renderer);
+    SDL_Quit();
 }
 
-void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string name) {
-    std::size_t size = drawable[1]->getSize();
+void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position,
+                             std::string name) {
+    //std::size_t size = drawable[1]->getSize();
 
-    if (drawable[0]->getType() == arcade::SPRITE);
-//         //sprite
-//     //rectangle
-    else if (drawable[1]->getType() == arcade::SHAPE) {
-        SDL_Rect rectangle;
-        rectangle.x = position.first;
-        rectangle.y = position.second;
-        rectangle.h = 100 * size;
-        rectangle.w = 100 * size;
-        SDL_RenderDrawRect(_renderer, &rectangle);
-        SDL_SetRenderDrawColor(_renderer, 100, 100, 100, 100);
-        SDL_RenderPresent(_renderer);
-    }
+    //if (drawable[0]->getType() == arcade::SPRITE);
+    //else if (drawable[1]->getType() == arcade::SHAPE) {
+    SDL_Rect rectangle;
+    rectangle.x = position.first;
+    rectangle.y = position.second;
+    rectangle.h = 1;
+    rectangle.w = 1;
+    SDL_SetRenderDrawColor(_renderer, 0, 255, 255, 255);
+ //   SDL_RenderFillRect(_renderer, &rectangle);
+    SDL_RenderDrawRect(_renderer, &rectangle);
+ //   SDL_RenderPresent(_renderer);
+   // SDL_RenderPresent(_renderer);
+   SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
+   SDL_RenderPresent(_renderer);
+   // SDL_RenderClear(_renderer);
+    //}
 }
 
 arcade::events_e arcade::SDLModule::pollEvent() {
@@ -58,16 +68,17 @@ arcade::events_e arcade::SDLModule::pollEvent() {
 }
 
 void arcade::SDLModule::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name) {
-  //  SDL_Texture *texture;
+    //  SDL_Texture *texture;
 
 //     SDL_Surface *surface = IMG_Load("bite");
 //     texture = SDL_CreateTextureFromSurface(_renderer, surface);
-  //  SDL_Rect rect{50, 50, 100, 100};
- //   SDL_RenderCopy(_renderer, texture, NULL, &rect);
- //   SDL_RenderPresent(_renderer);
+    //  SDL_Rect rect{50, 50, 100, 100};
+    //   SDL_RenderCopy(_renderer, texture, NULL, &rect);
+    //   SDL_RenderPresent(_renderer);
 }
 
 arcade::SDLModule::~SDLModule() {
+
     SDL_DestroyWindow(_window);
 }
 
@@ -77,6 +88,7 @@ void arcade::SDLModule::refreshWin() {
 
 void arcade::SDLModule::clearWin() {
     SDL_RenderClear(_renderer);
+    SDL_RenderPresent(_renderer);
 }
 
 extern "C" arcade::IDisplayModule *createGraphLib() {

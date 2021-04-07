@@ -22,6 +22,7 @@ static const std::vector<std::pair<int, arcade::events_e>> KEYS = {
 {' ', arcade::SPACE},
 {'s', arcade::NEXT},
 {'q', arcade::PREV},
+{'t', arcade::CLOSE},
 };
 
 namespace arcade {

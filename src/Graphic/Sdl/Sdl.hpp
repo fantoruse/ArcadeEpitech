@@ -44,8 +44,22 @@ static const std::vector<std::pair<SDL_Keycode, arcade::events_e>> KEYS = {
     {SDLK_LEFT, arcade::LEFT},
     {SDLK_RIGHT, arcade::RIGHT},
     {SDLK_SPACE, arcade::SPACE},
+    {SDLK_s, arcade::NEXT},
+    {SDLK_q, arcade::PREV},
+    {SDLK_t, arcade::CLOSE},
 };
 
+static const std::map<arcade::colors_e, SDL_Color> COLORS = {
+        {arcade::WHITE,   SDL_Color {255,255,255}},
+        {arcade::BLACK,   SDL_Color {0,0,0}},
+        {arcade::GREEN,   SDL_Color {125,255,0}},
+        {arcade::RED,     SDL_Color {250,125,125}},
+        {arcade::BLUE,    SDL_Color {0,200,255}},
+        {arcade::CYAN,    SDL_Color {176,224,230}},
+        {arcade::MAGENTA, SDL_Color {255,20,147}},
+        {arcade::YELLOW,  SDL_Color {255,255,0}},
+        {arcade::NONE, SDL_Color{255, 255, 0}},
+};
 static const std::vector<std::string> TEXTURES = {
     "plouf.png"
 };
