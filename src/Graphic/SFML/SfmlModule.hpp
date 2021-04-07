@@ -41,12 +41,10 @@ namespace arcade {
     private:
         sf::RenderWindow _window;
         std::map<std::string, sf::Texture> _textures;
-        std::map<std::string, sf::Sprite> _sprites;
-        std::map<std::string, sf::RectangleShape> _shapes;
     };
 }
 
-static const std::vector<std::string> TEXTURES_TO_LOAD = {"plouf.png"};
+static const std::vector<std::string> TEXTURES_TO_LOAD = {"wall.png"};
 
 static const std::vector<std::pair<sf::Keyboard::Key, arcade::events_e>> KEYS = {
         {sf::Keyboard::Escape, arcade::ESCAPE}, {sf::Keyboard::Key::Up, arcade::UP},
