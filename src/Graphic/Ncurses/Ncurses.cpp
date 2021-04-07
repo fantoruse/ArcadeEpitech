@@ -15,6 +15,8 @@ arcade::Ncurses::Ncurses(): ADisplayModule("NCURSES")
 void arcade::Ncurses::init()
 {
     initscr();
+    endwin();
+    initscr();
     nodelay(stdscr, true);
     cbreak();
     noecho();
