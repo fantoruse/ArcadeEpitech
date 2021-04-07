@@ -7,7 +7,7 @@
 
 #include "SFML/SfmlModule.hpp"
 
-arcade::SFMLModule::SFMLModule(): arcade::ADisplayModule("SFML"), _window(), _textures(), _sprites(), _shapes()
+arcade::SFMLModule::SFMLModule(): arcade::ADisplayModule("SFML"), _window(), _textures()
 {
 }
 void arcade::SFMLModule::init()
@@ -19,7 +19,6 @@ void arcade::SFMLModule::destroy()
 {
     _window.close();
 }
-#include <iostream>
 void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string name)
 {
     sf::Sprite sprite;
@@ -28,7 +27,7 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
     sf::Font font;
     float size = (float)drawable[1]->getSize();
     
-    if (drawable[0]->getType() == arcade::SPRITE) {
+    if (drawable[0]->getType() == arcade::SPRITE && _textures.find(drawable[0]->getString()) != _textures.cend()) {
         sprite.setTexture(_textures[drawable[0]->getString()]);
         sprite.setPosition(position.first, position.second);
         _window.draw(sprite);
