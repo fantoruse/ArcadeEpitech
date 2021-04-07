@@ -39,12 +39,13 @@ void arcade::Nibbler::updateSnake()
         temp1 = temp2;
     }
 }
-const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play([[maybe_unused]]arcade::events_e events)
+const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade::events_e ev)
 {
     if (_objects.empty())
         init_all_object();
-    //move(events);
-    headMov();
+    std::cout << "event play == "<< ev << std::endl;
+    move(ev);
+    //headMov();
     //updateSnake();
     AppleGenerator();
     auto temp = _objects;
@@ -96,19 +97,22 @@ void arcade::Nibbler::loadMap()
 }
 
 static const std::map<arcade::events_e, std::pair<float, float>> DIRECTIONS = {
-    {arcade::UP, std::make_pair(-1, 0)},
     {arcade::DOWN, std::make_pair(1, 0)},
     {arcade::LEFT, std::make_pair(0, -1)},
-    {arcade::RIGHT, std::make_pair(0, 1)}
+    {arcade::RIGHT, std::make_pair(0, 1)},
+    {arcade::UP, std::make_pair(-1, 0)}
 };
 
 void arcade::Nibbler::move(arcade::events_e dir)
 {
     auto finded = DIRECTIONS.find(dir);
 
-    if (finded == DIRECTIONS.end() || collisionWall(dir))
+    if (finded == DIRECTIONS.cend() || collisionWall(dir))
         return;
-    _playerMov = DIRECTIONS.at(dir);
+    _enemies[0].first += DIRECTIONS.at(dir).first;
+    _enemies[0].second += DIRECTIONS.at(dir).second;
+
+    std::cerr << "player first === "<< _enemies[0].first << "player second === " << _enemies[0].second << std::endl;
 }
 
 void arcade::Nibbler::headMov()

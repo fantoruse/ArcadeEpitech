@@ -98,13 +98,13 @@ namespace arcade {
         while (1) {
             //std::chrono::seconds sec(1);
             auto tmp = _actualLibs;
-            auto k  = gaming->play(libs->pollEvent());
-            if (libs->pollEvent() == arcade::CLOSE) {
+            arcade::events_e event = libs->pollEvent();
+            if (event == arcade::CLOSE) {
                 break;
             }
-            if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds (500)) {
+            auto k = gaming->play(event);
+            if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::seconds(1/60)) {
                 libs->clearWin();
-                auto k = gaming->play(arcade::UP);
                 start = std::chrono::steady_clock::now();
                 libs->getName();
                 std::string s = "bite";
@@ -114,7 +114,7 @@ namespace arcade {
                 libs->refreshWin();
             }
             end = std::chrono::steady_clock::now();
-            switchLibs(libs->pollEvent());
+            switchLibs(event);
             if (tmp != _actualLibs)
                 for (long unsigned int a = 0; a != _loadLibs.size(); a++) {
                     if (_loadLibs[a].first == _actualLibs) {

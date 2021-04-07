@@ -49,9 +49,9 @@ namespace arcade {
 static const std::vector<std::string> TEXTURES_TO_LOAD = {"plouf.png"};
 
 static const std::vector<std::pair<sf::Keyboard::Key, arcade::events_e>> KEYS = {
-        {sf::Keyboard::Escape, arcade::ESCAPE}, {sf::Keyboard::Up, arcade::UP},
-        {sf::Keyboard::Down, arcade::DOWN}, {sf::Keyboard::Left, arcade::LEFT},
-        {sf::Keyboard::Right, arcade::RIGHT}, {sf::Keyboard::Space, arcade::SPACE},
+        {sf::Keyboard::Escape, arcade::ESCAPE}, {sf::Keyboard::Key::Up, arcade::UP},
+        {sf::Keyboard::Key::Down, arcade::DOWN}, {sf::Keyboard::Key::Left, arcade::LEFT},
+        {sf::Keyboard::Key::Right, arcade::RIGHT}, {sf::Keyboard::Space, arcade::SPACE},
         {sf::Keyboard::S, arcade::NEXT}, {sf::Keyboard::Q, arcade::PREV},
         {sf::Keyboard::T, arcade::CLOSE}};
 

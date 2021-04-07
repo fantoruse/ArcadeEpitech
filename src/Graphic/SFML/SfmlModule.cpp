@@ -57,10 +57,12 @@ arcade::events_e arcade::SFMLModule::pollEvent()
     {
         if (event.type == sf::Event::Closed)
             return arcade::CLOSE;
-        else if (event.type == sf::Event::KeyPressed)
-            for (auto &&i : KEYS)
+        else if (event.type == sf::Event::KeyReleased) {
+            std::cout << "event == " << event.key.code << std::endl;
+            for (auto i : KEYS)
                 if (event.key.code == i.first)
                     return i.second;
+        }
     }
     return arcade::NOTHING;
 }
