@@ -57,7 +57,6 @@ DEST_DIRECTORY	=	../../games
 .PHONY: all
 all: nibbler #pacman
 all:
-	mkdir $(DEST_DIRECTORY)
 	mv $(NIBBLER_NAME) $(DEST_DIRECTORY)
 #mv $(PACMAN_NAME) $(DEST_DIRECTORY)
 
