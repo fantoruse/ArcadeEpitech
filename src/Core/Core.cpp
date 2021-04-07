@@ -30,7 +30,6 @@ namespace arcade {
             tmp = p.path();
             tmp.erase(0, 12);
             _loadGames.push_back(std::pair<std::string, IGame *>(tmp, libs));
-            //  std::cout << tmp << "\n";
         }
         std::cout << "name game === " << _loadGames[0].first << "\n";
     }
@@ -99,6 +98,7 @@ namespace arcade {
         while (1) {
             //std::chrono::seconds sec(1);
             auto tmp = _actualLibs;
+            auto k  = gaming->play(libs->pollEvent());
             if (libs->pollEvent() == arcade::CLOSE) {
                 break;
             }
