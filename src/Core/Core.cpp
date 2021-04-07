@@ -103,7 +103,7 @@ namespace arcade {
                 break;
             }
             auto k = gaming->play(event);
-            if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::seconds(1/60)) {
+            //if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds(17)) {
                 libs->clearWin();
                 start = std::chrono::steady_clock::now();
                 libs->getName();
@@ -112,7 +112,7 @@ namespace arcade {
                     libs->draw(n.get()->getDrawables(), n.get()->getPosition(), s);
                 }
                 libs->refreshWin();
-            }
+            //}
             end = std::chrono::steady_clock::now();
             switchLibs(event);
             if (tmp != _actualLibs)

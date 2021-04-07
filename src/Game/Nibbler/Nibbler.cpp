@@ -43,9 +43,8 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade
 {
     if (_objects.empty())
         init_all_object();
-    std::cout << "event play == "<< ev << std::endl;
     move(ev);
-    //headMov();
+    headMov();
     //updateSnake();
     AppleGenerator();
     auto temp = _objects;
@@ -109,16 +108,23 @@ void arcade::Nibbler::move(arcade::events_e dir)
 
     if (finded == DIRECTIONS.cend() || collisionWall(dir))
         return;
-    _enemies[0].first += DIRECTIONS.at(dir).first;
-    _enemies[0].second += DIRECTIONS.at(dir).second;
-
-    std::cerr << "player first === "<< _enemies[0].first << "player second === " << _enemies[0].second << std::endl;
+    _playerMov = DIRECTIONS.at(dir);
 }
 
 void arcade::Nibbler::headMov()
 {
-    _enemies[0].first += _playerMov.first;
-    _enemies[0].second += _playerMov.second;
+    float y = _enemies[0].first + _playerMov.first;
+    float x = _enemies[0].second + _playerMov.second;
+    static auto start = std::chrono::steady_clock::now();
+    auto end = std::chrono::steady_clock::now();
+
+    if ((y < 1 || x < 1) || _map[y][x] == '#')
+        return;
+    if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds(500)) {
+            _enemies[0].first += _playerMov.first;
+            _enemies[0].second += _playerMov.second;
+            start = std::chrono::steady_clock::now();
+        }
 }
 
 bool arcade::Nibbler::collisionWall(arcade::events_e dir)
@@ -126,7 +132,7 @@ bool arcade::Nibbler::collisionWall(arcade::events_e dir)
     float y = _enemies[0].first + DIRECTIONS.at(dir).first;
     float x = _enemies[0].second + DIRECTIONS.at(dir).second;
 
-    if ((y <= 1 || x <= 1) || _map[y][x] == '#')
+    if ((y < 1 || x < 1) || _map[y][x] == '#')
         return true;
     return false;
 }
