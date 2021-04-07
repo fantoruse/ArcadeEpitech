@@ -14,6 +14,7 @@ void arcade::SFMLModule::init()
 {
     _window.create(sf::VideoMode(1920, 1080), "Arcade");
     _window.setMouseCursorVisible(false);
+    _window.setFramerateLimit(60);
 }
 void arcade::SFMLModule::destroy()
 {
@@ -25,11 +26,12 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
     sf::RectangleShape rectangle;
     sf::Text text;
     sf::Font font;
+    sf::Texture texture;
     float size = (float)drawable[1]->getSize();
     
-    if (drawable[0]->getType() == arcade::SPRITE && _textures.find(drawable[0]->getString()) != _textures.cend()) {
-        sprite.setTexture(_textures[drawable[0]->getString()]);
-        sprite.setPosition(position.first, position.second);
+    if (drawable[0]->getType() == arcade::SPRITE && texture.loadFromFile(drawable[0]->getString())) {
+        sprite.setTexture(texture);
+        sprite.setPosition(position.second * size, position.first * size);
         _window.draw(sprite);
     } else if (drawable[1]->getType() == arcade::SHAPE) {
         rectangle.setFillColor(COLORS.at(drawable[1]->getColor()));

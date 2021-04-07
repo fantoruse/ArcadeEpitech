@@ -30,7 +30,6 @@ void arcade::Nibbler::updateSnake()
     auto prev = _enemies[0];
     auto next = _enemies[0];
 
-    //_enemies[0] = std::make_pair(_playerPosition.first, _playerPosition.second);
     for (std::size_t i=1; i <= _enemies.size(); ++i) {
         next = std::make_pair(_enemies[i].first, _enemies[i].second);
         _enemies[i] = std::make_pair(prev.first, prev.second);
@@ -39,6 +38,7 @@ void arcade::Nibbler::updateSnake()
 }
 const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade::events_e ev)
 {
+    auto i = _enemies.begin();
     if (_objects.empty())
         init_all_object();
     move(ev);
@@ -48,7 +48,10 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade
     auto temp = _objects;
     temp.push_back(init_object(true, "apple",
             createDrawableVector("apple"), std::make_pair(_applePosition.first, _applePosition.second)));
-    for (auto i = _enemies.begin(); i != _enemies.end(); i += 1)
+    temp.push_back(init_object(true, "player",
+        createDrawableVector("player"), std::make_pair(i->first, i->second)));
+    i++;
+    for (; i != _enemies.end(); i += 1)
         temp.push_back(init_object(true, "enemie",
                     createDrawableVector("enemie"), std::make_pair(i->first, i->second)));
     temp.push_back(updateScore());
