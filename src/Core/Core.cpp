@@ -30,7 +30,6 @@ namespace arcade {
             tmp = p.path();
             tmp.erase(0, 12);
             _loadGames.push_back(std::pair<std::string, IGame *>(tmp, libs));
-            //  std::cout << tmp << "\n";
         }
         std::cout << "name game === " << _loadGames[0].first << "\n";
     }

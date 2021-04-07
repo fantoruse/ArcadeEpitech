@@ -18,7 +18,7 @@ arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _sc
     std::srand(std::time(0));
     loadMap();
     while (n != 4) {
-        _enemies.push_back(std::make_pair((_playerPosition.first - n), _playerPosition.second));
+        _enemies.push_back(std::make_pair((_playerPosition.first), _playerPosition.second - n));
         n++;
     }
 }
@@ -43,7 +43,8 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play([[mayb
 {
     if (_objects.empty())
         init_all_object();
-    move(events);
+    //move(events);
+    headMov();
     //updateSnake();
     AppleGenerator();
     auto temp = _objects;
@@ -107,8 +108,13 @@ void arcade::Nibbler::move(arcade::events_e dir)
 
     if (finded == DIRECTIONS.end() || collisionWall(dir))
         return;
-    _playerPosition.first += DIRECTIONS.at(dir).first;
-    _playerPosition.second += DIRECTIONS.at(dir).second;
+    _playerMov = DIRECTIONS.at(dir);
+}
+
+void arcade::Nibbler::headMov()
+{
+    _enemies[0].first += _playerMov.first;
+    _enemies[0].second += _playerMov.second;
 }
 
 bool arcade::Nibbler::collisionWall(arcade::events_e dir)
