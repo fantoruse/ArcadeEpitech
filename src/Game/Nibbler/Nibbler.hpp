@@ -58,13 +58,16 @@ class Nibbler : public AGame {
 }
 
 static const std::map<std::string, std::vector<arcade::Drawable>> DRAWABLE_LIST = {
-    {"Wall", {{"wall.png", 10, arcade::SPRITE, arcade::NONE},
+    {"Wall", {{"./resources/wall.jpeg", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::WHITE},
         {"#", 1, arcade::TEXT, arcade::WHITE}}},
-    {"enemie", {{"enemie.png", 10, arcade::NO_TYPE, arcade::NONE},
+    {"player", {{"./resources/player.png", 50, arcade::SPRITE, arcade::NONE},
+        {"Rect", 50, arcade::SHAPE, arcade::GREEN},
+        {"O", 10, arcade::TEXT, arcade::WHITE}}},
+    {"enemie", {{"./resources/enemi.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::BLUE},
         {"O", 10, arcade::TEXT, arcade::WHITE}}},
-    {"apple", {{"apple.png", 10, arcade::NO_TYPE, arcade::NONE},
+    {"apple", {{"./resources/apple.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::RED},
         {"A", 1, arcade::TEXT, arcade::WHITE}}},
     };

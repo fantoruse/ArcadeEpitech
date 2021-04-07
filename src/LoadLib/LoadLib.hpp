@@ -33,6 +33,7 @@ public:
         T *p = (T*)(dlsym(_openFile, functionName.c_str()));
         if (!p)
             throw std::runtime_error(dlerror());
+        //dlclose(_openFile);
         return std::function<T>(p);
     }
 private:
