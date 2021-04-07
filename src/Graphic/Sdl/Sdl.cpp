@@ -23,7 +23,7 @@ void arcade::SDLModule::init() {
         return;
     _renderer = SDL_CreateRenderer(_window, -1, 0);
     SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
-    SDL_Delay(10);
+   // SDL_Delay(10);
 }
 
 void arcade::SDLModule::destroy() {
@@ -43,8 +43,8 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
     rectangle.x = position.second * (drawable[1]->getSize());
     rectangle.h = 50;
     rectangle.w = 50;
-    SDL_SetRenderDrawColor(_renderer, 0, 255, 255, 255);
- //   SDL_RenderFillRect(_renderer, &rectangle);
+    SDL_SetRenderDrawColor(_renderer, COLORS.at(drawable[1]->getColor()).r,COLORS.at(drawable[1]->getColor()).g, COLORS.at(drawable[1]->getColor()).b, COLORS.at(drawable[1]->getColor()).a );
+    SDL_RenderFillRect(_renderer, &rectangle);
     SDL_RenderDrawRect(_renderer, &rectangle);
  //   SDL_RenderPresent(_renderer);
    // SDL_RenderPresent(_renderer);

@@ -50,16 +50,17 @@ static const std::vector<std::pair<SDL_Keycode, arcade::events_e>> KEYS = {
 };
 
 static const std::map<arcade::colors_e, SDL_Color> COLORS = {
-        {arcade::WHITE,   SDL_Color {255,255,255}},
-        {arcade::BLACK,   SDL_Color {0,0,0}},
-        {arcade::GREEN,   SDL_Color {125,255,0}},
-        {arcade::RED,     SDL_Color {250,125,125}},
-        {arcade::BLUE,    SDL_Color {0,200,255}},
-        {arcade::CYAN,    SDL_Color {176,224,230}},
-        {arcade::MAGENTA, SDL_Color {255,20,147}},
-        {arcade::YELLOW,  SDL_Color {255,255,0}},
-        {arcade::NONE, SDL_Color{255, 255, 0}},
+        {arcade::WHITE,   {(Uint8)255,(Uint8)255,(Uint8)255,(Uint8)255}},
+        {arcade::BLACK,   {(Uint8)0,(Uint8)0,(Uint8)0,(Uint8)255}},
+        {arcade::GREEN,   {(Uint8)125,(Uint8)255,(Uint8)0,(Uint8)255}},
+        {arcade::RED,     {(Uint8)250,(Uint8)125,(Uint8)125,(Uint8)255}},
+        {arcade::BLUE,    {(Uint8)0,(Uint8)200,(Uint8)255,(Uint8)255}},
+        {arcade::CYAN,    {(Uint8)176,(Uint8)224,(Uint8)230,(Uint8)255}},
+        {arcade::MAGENTA, {(Uint8)255,(Uint8)20,(Uint8)147,(Uint8)255}},
+        {arcade::YELLOW,  {(Uint8)255,(Uint8)255,(Uint8)0,(Uint8)255}},
+        {arcade::NONE,{(Uint8)255, (Uint8)255, (Uint8)0, (Uint8)255}},
 };
+
 static const std::vector<std::string> TEXTURES = {
     "plouf.png"
 };

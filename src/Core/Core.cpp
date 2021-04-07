@@ -102,7 +102,7 @@ namespace arcade {
             if (libs->pollEvent() == arcade::CLOSE) {
                 break;
             }
-            if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::seconds(1)) {
+            if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds (500)) {
                 libs->clearWin();
                 auto k = gaming->play(arcade::UP);
                 start = std::chrono::steady_clock::now();

@@ -28,7 +28,7 @@ namespace arcade {
 
     protected:
         std::vector<std::pair<std::string, IGame*>> _loadGames;
-        std::vector<std::pair<std::string, IDisplayModule*>> _loadLibs;
+            std::vector<std::pair<std::string, IDisplayModule*>> _loadLibs;
         std::string _actualLibs;
         std::string _actualGames;
     };
