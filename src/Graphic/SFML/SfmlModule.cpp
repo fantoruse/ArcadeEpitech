@@ -19,23 +19,24 @@ void arcade::SFMLModule::destroy()
 {
     _window.close();
 }
+#include <iostream>
 void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string name)
 {
     sf::Sprite sprite;
     sf::RectangleShape rectangle;
     sf::Text text;
     sf::Font font;
-
-
-    if (drawable[0]->getType() != arcade::NO_TYPE) {
+    float size = (float)drawable[1]->getSize();
+    
+    if (drawable[0]->getType() == arcade::SPRITE) {
         sprite.setTexture(_textures[drawable[0]->getString()]);
         sprite.setPosition(position.first, position.second);
         _window.draw(sprite);
-    } else if (drawable[1]->getType() != arcade::NO_TYPE) {
+    } else if (drawable[1]->getType() == 1) {
         rectangle.setFillColor(COLORS.at(drawable[1]->getColor()));
         rectangle.setOutlineColor(COLORS.at(drawable[1]->getColor()));
-        rectangle.setSize({(float)drawable[1]->getSize(), (float)drawable[1]->getSize()});
-        rectangle.setPosition(position.first, position.second);
+        rectangle.setSize({size, size});
+        rectangle.setPosition(position.second * size, position.first * size);
         _window.draw(rectangle);
     } else {
         font.loadFromFile("a faire");
