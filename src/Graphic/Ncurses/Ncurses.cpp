@@ -27,6 +27,7 @@ void arcade::Ncurses::init()
     init_pair('O', 1, 1);
     init_pair('#', 2, 2);
     init_pair('A', 4, 4);
+    init_pair('S', 0, 3);
 }
 
 void arcade::Ncurses::destroy()
@@ -48,6 +49,7 @@ void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std
 {
     char c = drawable[2]->getString().c_str()[0];
 
+    wattron(stdscr, COLOR_PAIR('S'));
     wattron(stdscr, COLOR_PAIR(c));
     mvprintw(position.first, position.second, drawable[2]->getString().c_str());
     wattroff(stdscr, COLOR_PAIR(c));

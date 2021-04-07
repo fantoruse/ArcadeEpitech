@@ -192,7 +192,7 @@ std::shared_ptr<arcade::IObject> arcade::Nibbler::updateScore()
     dest.push_back(std::make_shared<arcade::Drawable>("Score: " + std::to_string(_score), 2, arcade::TEXT, arcade::RED));
 
     return std::make_shared<arcade::StaticObject>(StaticObject(
-        "Score", dest, std::make_pair(1300, 200)));
+        "Score", dest, std::make_pair(10, 30)));
 }
 
 extern  "C" arcade::IGame *getGame() {
