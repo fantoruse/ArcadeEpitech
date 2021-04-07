@@ -38,10 +38,10 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
     //if (drawable[0]->getType() == arcade::SPRITE);
     //else if (drawable[1]->getType() == arcade::SHAPE) {
     SDL_Rect rectangle;
-    rectangle.x = position.first;
-    rectangle.y = position.second;
-    rectangle.h = 1;
-    rectangle.w = 1;
+    rectangle.x = position.first * 30;
+    rectangle.y = position.second * 30;
+    rectangle.h = 5;
+    rectangle.w = 5;
     SDL_SetRenderDrawColor(_renderer, 0, 255, 255, 255);
  //   SDL_RenderFillRect(_renderer, &rectangle);
     SDL_RenderDrawRect(_renderer, &rectangle);
