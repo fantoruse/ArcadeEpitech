@@ -9,6 +9,7 @@
 #include <filesystem>
 #include "Core/Core.hpp"
 #include "LoadLib/LoadLib.hpp"
+#include <chrono>
 #include "Game/Object/IObject.hpp"
 
 namespace arcade {
@@ -29,7 +30,7 @@ namespace arcade {
             tmp = p.path();
             tmp.erase(0, 12);
             _loadGames.push_back(std::pair<std::string, IGame *>(tmp, libs));
-          //  std::cout << tmp << "\n";
+            //  std::cout << tmp << "\n";
         }
         std::cout << "name game === " << _loadGames[0].first << "\n";
     }
@@ -93,19 +94,26 @@ namespace arcade {
         auto gaming = _loadGames[0].second;
         auto libs = _loadLibs[0].second;
         libs->init();
+        auto start = std::chrono::steady_clock::now();
+        auto end = std::chrono::steady_clock::now();
         while (1) {
+            //std::chrono::seconds sec(1);
             auto tmp = _actualLibs;
-            auto k  = gaming->play(arcade::UP);
             if (libs->pollEvent() == arcade::CLOSE) {
                 break;
             }
-            libs->refreshWin();
-            libs->clearWin();
-            libs->getName();
-            std::string s = "bite";
-            for (auto n : k) {
-                libs->draw(n.get()->getDrawables() , n.get()->getPosition(), s);
+            if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::seconds(1)) {
+                libs->clearWin();
+                auto k = gaming->play(arcade::UP);
+                start = std::chrono::steady_clock::now();
+                libs->getName();
+                std::string s = "bite";
+                for (auto n : k) {
+                    libs->draw(n.get()->getDrawables(), n.get()->getPosition(), s);
+                }
+                libs->refreshWin();
             }
+            end = std::chrono::steady_clock::now();
             switchLibs(libs->pollEvent());
             if (tmp != _actualLibs)
                 for (long unsigned int a = 0; a != _loadLibs.size(); a++) {
