@@ -26,7 +26,7 @@ namespace arcade {
         std::string tmp;
         for (auto &p: std::filesystem::directory_iterator("./games")) {
             ldb.initHandler(p.path());
-            auto libs = ldb.loadingLib<IGame *(void)>("GetGame")();
+            auto libs = ldb.loadingLib<IGame *(void)>("getGame")();
             tmp = p.path();
             tmp.erase(0, 12);
             _loadGames.push_back(std::pair<std::string, IGame *>(tmp, libs));

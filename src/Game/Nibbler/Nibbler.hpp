@@ -41,6 +41,7 @@ class Nibbler : public AGame {
         std::shared_ptr<arcade::IObject> init_object(bool is_static, const std::string &name, const std::vector<std::shared_ptr<arcade::IDrawable>> &drawables, std::pair<float,float> pos);
         void init_all_object();
         std::vector<std::shared_ptr<arcade::IDrawable>> createDrawableVector(const std::string &name) const;
+        void eatApple();
 
     private:
         std::pair<float, float> _applePosition;
@@ -51,7 +52,7 @@ class Nibbler : public AGame {
         std::vector<std::pair<float, float>> _enemies;
         std::vector<std::shared_ptr<arcade::IObject>> _objects;
         bool _isApple;
-
+        bool _started;
     };
 }
 

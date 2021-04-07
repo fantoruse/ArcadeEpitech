@@ -11,7 +11,7 @@
 #include <map>
 #include "Nibbler.hpp"
 
-arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _map(), _enemies(), _objects(), _isApple(false)
+arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _map(), _enemies(), _objects(), _isApple(false), _started(false)
 {
     int n = 0;
 
@@ -27,16 +27,14 @@ arcade::Nibbler::~Nibbler(){}
 
 void arcade::Nibbler::updateSnake()
 {
-    auto it = _enemies.begin();
-    auto temp1 = _enemies[0];
-    auto temp2 = _enemies[0];
+    auto prev = _enemies[0];
+    auto next = _enemies[0];
 
-    _enemies[0] = std::make_pair(_playerPosition.first, _playerPosition.second);
-    it++;
-    for (int o=1; it != _enemies.end(); ++o, it++) {
-        temp2 = std::make_pair(_enemies[o].first, _enemies[o].second);
-        _enemies[o] = std::make_pair(temp1.first, temp1.second);
-        temp1 = temp2;
+    //_enemies[0] = std::make_pair(_playerPosition.first, _playerPosition.second);
+    for (std::size_t i=1; i <= _enemies.size(); ++i) {
+        next = std::make_pair(_enemies[i].first, _enemies[i].second);
+        _enemies[i] = std::make_pair(prev.first, prev.second);
+        prev = next;
     }
 }
 const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade::events_e ev)
@@ -45,7 +43,7 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade
         init_all_object();
     move(ev);
     headMov();
-    //updateSnake();
+    eatApple();
     AppleGenerator();
     auto temp = _objects;
     temp.push_back(init_object(true, "apple",
@@ -109,6 +107,7 @@ void arcade::Nibbler::move(arcade::events_e dir)
     if (finded == DIRECTIONS.cend() || collisionWall(dir))
         return;
     _playerMov = DIRECTIONS.at(dir);
+    _started = true;
 }
 
 void arcade::Nibbler::headMov()
@@ -121,10 +120,12 @@ void arcade::Nibbler::headMov()
     if ((y < 1 || x < 1) || _map[y][x] == '#')
         return;
     if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds(500)) {
-            _enemies[0].first += _playerMov.first;
-            _enemies[0].second += _playerMov.second;
-            start = std::chrono::steady_clock::now();
-        }
+        if (_started)
+            updateSnake();
+        _enemies[0].first += _playerMov.first;
+        _enemies[0].second += _playerMov.second;
+        start = std::chrono::steady_clock::now();
+    }
 }
 
 bool arcade::Nibbler::collisionWall(arcade::events_e dir)
@@ -171,8 +172,16 @@ std::vector<std::shared_ptr<arcade::IDrawable>> arcade::Nibbler::createDrawableV
     dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[2]));
     return dest;
 }
+void arcade::Nibbler::eatApple()
+{
+    if (_enemies[0].second == _applePosition.second
+    && _enemies[0].first == _applePosition.first) {
+        _isApple = false;
+        _enemies.push_back(std::make_pair(_enemies.end()->first, _enemies.end()->second));
+    }
+}
 
-extern  "C" arcade::IGame *GetGame() {
+extern  "C" arcade::IGame *getGame() {
         auto b = new arcade::Nibbler();
         return b;
 }
