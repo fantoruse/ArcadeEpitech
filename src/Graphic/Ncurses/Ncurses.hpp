@@ -13,18 +13,6 @@
 #include <map>
 #include "ADisplayModule.hpp"
 
-static const std::vector<std::pair<int, arcade::events_e>> KEYS = {
-{27, arcade::ESCAPE},
-{KEY_UP, arcade::UP},
-{KEY_DOWN, arcade::DOWN},
-{KEY_LEFT, arcade::LEFT},
-{KEY_RIGHT, arcade::RIGHT},
-{' ', arcade::SPACE},
-{'s', arcade::NEXT},
-{'q', arcade::PREV},
-{'t', arcade::CLOSE},
-};
-
 namespace arcade {
     class Ncurses : public arcade::ADisplayModule {
     public:
@@ -46,3 +34,15 @@ namespace arcade {
         std::map<std::string, char> _sprites;
     };
 }
+
+static const std::vector<std::pair<int, arcade::events_e>> KEYS = {
+    {KEY_UP, arcade::UP},
+    {KEY_DOWN, arcade::DOWN},
+    {KEY_LEFT, arcade::LEFT},
+    {KEY_RIGHT, arcade::RIGHT},
+    {' ', arcade::SPACE},
+    {'s', arcade::NEXT},
+    {'q', arcade::PREV},
+    {'t', arcade::CLOSE},
+    {27, arcade::ESCAPE},
+};
