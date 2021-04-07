@@ -13,11 +13,12 @@ arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _wi
 }
 
 void arcade::SDLModule::init() {
+
     std::cout << "\n WINDOW IS OPEN\n";
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
         return;
-    _window = SDL_CreateWindow("ANTOINE LE PLUS BEAU", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600,
-                               SDL_WINDOW_BORDERLESS);
+    _window = SDL_CreateWindow("ANTOINE LE PLUS BEAU", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1980, 1080,
+                               SDL_WINDOW_SHOWN);
     if (!_window)
         return;
     _renderer = SDL_CreateRenderer(_window, -1, 0);
@@ -38,17 +39,17 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
     //if (drawable[0]->getType() == arcade::SPRITE);
     //else if (drawable[1]->getType() == arcade::SHAPE) {
     SDL_Rect rectangle;
-    rectangle.x = position.first * 30;
-    rectangle.y = position.second * 30;
-    rectangle.h = 5;
-    rectangle.w = 5;
+    rectangle.y = position.first * (drawable[1]->getSize());
+    rectangle.x = position.second * (drawable[1]->getSize());
+    rectangle.h = 50;
+    rectangle.w = 50;
     SDL_SetRenderDrawColor(_renderer, 0, 255, 255, 255);
  //   SDL_RenderFillRect(_renderer, &rectangle);
     SDL_RenderDrawRect(_renderer, &rectangle);
  //   SDL_RenderPresent(_renderer);
    // SDL_RenderPresent(_renderer);
    SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
-   SDL_RenderPresent(_renderer);
+   //SDL_RenderPresent(_renderer);
    // SDL_RenderClear(_renderer);
     //}
 }
@@ -83,12 +84,12 @@ arcade::SDLModule::~SDLModule() {
 }
 
 void arcade::SDLModule::refreshWin() {
-    SDL_UpdateWindowSurface(_window);
+      SDL_RenderPresent(_renderer);
+      //SDL_UpdateWindowSurface(_window);
 }
 
 void arcade::SDLModule::clearWin() {
     SDL_RenderClear(_renderer);
-    SDL_RenderPresent(_renderer);
 }
 
 extern "C" arcade::IDisplayModule *createGraphLib() {
