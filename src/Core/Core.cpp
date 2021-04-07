@@ -95,7 +95,7 @@ namespace arcade {
         libs->init();
         while (1) {
             auto tmp = _actualLibs;
-            auto k  = gaming->play(arcade::UP);
+            auto k  = gaming->play(libs->pollEvent());
             if (libs->pollEvent() == arcade::CLOSE) {
                 break;
             }

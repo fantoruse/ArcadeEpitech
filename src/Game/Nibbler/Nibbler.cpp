@@ -43,8 +43,8 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play([[mayb
 {
     if (_objects.empty())
         init_all_object();
-    //move();
-    updateSnake();
+    move(events);
+    //updateSnake();
     AppleGenerator();
     auto temp = _objects;
     temp.push_back(init_object(true, "apple",
@@ -113,8 +113,8 @@ void arcade::Nibbler::move(arcade::events_e dir)
 
 bool arcade::Nibbler::collisionWall(arcade::events_e dir)
 {
-    float y = _playerPosition.first + DIRECTIONS.at(dir).first;
-    float x = _playerPosition.second + DIRECTIONS.at(dir).second;
+    float y = _enemies[0].first + DIRECTIONS.at(dir).first;
+    float x = _enemies[0].second + DIRECTIONS.at(dir).second;
 
     if ((y <= 1 || x <= 1) || _map[y][x] == '#')
         return true;
