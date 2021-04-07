@@ -32,14 +32,14 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
         sprite.setTexture(_textures[drawable[0]->getString()]);
         sprite.setPosition(position.first, position.second);
         _window.draw(sprite);
-    } else if (drawable[1]->getType() == 1) {
+    } else if (drawable[1]->getType() == arcade::SHAPE) {
         rectangle.setFillColor(COLORS.at(drawable[1]->getColor()));
         rectangle.setOutlineColor(COLORS.at(drawable[1]->getColor()));
         rectangle.setSize({size, size});
         rectangle.setPosition(position.second * size, position.first * size);
         _window.draw(rectangle);
     } else {
-        font.loadFromFile("a faire");
+        font.loadFromFile("./resources/font.ttf");
         text.setFont(font);
         text.setString(drawable[2]->getString());
         text.setScale({(float)drawable[2]->getSize(), (float)drawable[2]->getSize()});

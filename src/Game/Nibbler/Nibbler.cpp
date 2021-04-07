@@ -51,8 +51,11 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade
     for (auto i = _enemies.begin(); i != _enemies.end(); i += 1)
         temp.push_back(init_object(true, "enemie",
                     createDrawableVector("enemie"), std::make_pair(i->first, i->second)));
+    temp.push_back(updateScore());
     return temp;
 }
+
+
 
 const std::string arcade::Nibbler::getName() const {
     return _name;
@@ -178,7 +181,18 @@ void arcade::Nibbler::eatApple()
     && _enemies[0].first == _applePosition.first) {
         _isApple = false;
         _enemies.push_back(std::make_pair(_enemies.end()->first, _enemies.end()->second));
+        _score += 100;
     }
+}
+std::shared_ptr<arcade::IObject> arcade::Nibbler::updateScore()
+{
+    std::vector<std::shared_ptr<arcade::IDrawable>> dest;
+    dest.push_back(std::make_shared<arcade::Drawable>("apple.png", 10, arcade::NO_TYPE, arcade::NONE));
+    dest.push_back(std::make_shared<arcade::Drawable>("Rect", 50, arcade::NO_TYPE, arcade::RED));
+    dest.push_back(std::make_shared<arcade::Drawable>("Score: " + std::to_string(_score), 2, arcade::TEXT, arcade::RED));
+
+    return std::make_shared<arcade::StaticObject>(StaticObject(
+        "Score", dest, std::make_pair(1300, 200)));
 }
 
 extern  "C" arcade::IGame *getGame() {

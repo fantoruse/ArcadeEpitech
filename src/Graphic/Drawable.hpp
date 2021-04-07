@@ -21,6 +21,7 @@ public:
     std::size_t getSize() const override;
     type_e getType() const override;
     colors_e getColor() const override;
+    void setString(const std::string &name) {_infos = name;};
 
 protected:
     std::string _infos;

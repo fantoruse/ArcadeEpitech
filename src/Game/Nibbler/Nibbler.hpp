@@ -42,6 +42,7 @@ class Nibbler : public AGame {
         void init_all_object();
         std::vector<std::shared_ptr<arcade::IDrawable>> createDrawableVector(const std::string &name) const;
         void eatApple();
+        std::shared_ptr<arcade::IObject> updateScore();
 
     private:
         std::pair<float, float> _applePosition;
@@ -65,4 +66,5 @@ static const std::map<std::string, std::vector<arcade::Drawable>> DRAWABLE_LIST 
         {"O", 10, arcade::TEXT, arcade::WHITE}}},
     {"apple", {{"apple.png", 10, arcade::NO_TYPE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::RED},
-        {"A", 1, arcade::TEXT, arcade::WHITE}}}};
+        {"A", 1, arcade::TEXT, arcade::WHITE}}},
+    };
