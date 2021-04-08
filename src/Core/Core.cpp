@@ -74,8 +74,10 @@ namespace arcade {
     void Core::OpenLibsInLibs(LoadLib ldb, std::string name, std::string arg) {
         try {
             std::string tmp;
-            if (arg == name)
+            name.erase(0,6);
+            if (arg == name)  {
                 return;
+            }
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
             tmp = name;
             tmp.erase(0, 6);
