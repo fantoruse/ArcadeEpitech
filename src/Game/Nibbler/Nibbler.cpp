@@ -5,10 +5,6 @@
 ** nibbler.cpp.c
 */
 
-#include <cstdlib>
-#include <iostream>
-#include <fstream>
-#include <map>
 #include "Nibbler.hpp"
 
 arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _map(), _enemies(), _objects(), _isApple(false), _started(false)
@@ -144,6 +140,7 @@ bool arcade::Nibbler::collisionWall(arcade::events_e dir)
         return true;
     return false;
 }
+
 std::shared_ptr<arcade::IObject> arcade::Nibbler::init_object(bool is_static,
     const std::string &name, const std::vector<std::shared_ptr<arcade::IDrawable>> &drawables,
     std::pair<float, float> pos)
@@ -179,6 +176,7 @@ std::vector<std::shared_ptr<arcade::IDrawable>> arcade::Nibbler::createDrawableV
     dest.push_back(std::make_shared<arcade::Drawable>(DRAWABLE_LIST.at(name)[2]));
     return dest;
 }
+
 void arcade::Nibbler::eatApple()
 {
     if (_enemies[0].second == _applePosition.second
@@ -188,6 +186,7 @@ void arcade::Nibbler::eatApple()
         _score += 100;
     }
 }
+
 std::shared_ptr<arcade::IObject> arcade::Nibbler::updateScore()
 {
     std::vector<std::shared_ptr<arcade::IDrawable>> dest;
@@ -198,6 +197,7 @@ std::shared_ptr<arcade::IObject> arcade::Nibbler::updateScore()
     return std::make_shared<arcade::StaticObject>(StaticObject(
         "Score", dest, std::make_pair(10, 30)));
 }
+
 bool arcade::Nibbler::isLost() const
 {
     float player_y = _enemies[0].first;

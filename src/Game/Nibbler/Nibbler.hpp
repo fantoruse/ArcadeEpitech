@@ -7,19 +7,22 @@
 
 #pragma once
 
+#include <map>
 #include <vector>
 #include <string>
-#include <iostream>
-#include <utility>
 #include <chrono>
+#include <cstdlib>
+#include <fstream>
+#include <utility>
+#include <iostream>
 #include <functional>
 
 #include "AGame.hpp"
 #include "IGame.hpp"
 #include "Object/IObject.hpp"
+#include "Graphic/Drawable.hpp"
 #include "Object/StaticObject.hpp"
 #include "Object/MovableObject.hpp"
-#include "Graphic/Drawable.hpp"
 
 namespace arcade {
 class Nibbler : public AGame {
