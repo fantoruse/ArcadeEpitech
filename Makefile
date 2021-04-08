@@ -49,13 +49,13 @@ graphical:
 #CLEAN RULES
 clean:
 	$(RM) $(OBJ) *.gcda *.gcno
-	make clean -C ./src/Game
 	make clean -C ./src/Graphic
+	make clean -C ./src/Game
 
 fclean:	clean
 	$(RM) $(NAME) unit_tests
-	make fclean -C ./src/Game
 	make fclean -C ./src/Graphic
+	make fclean -C ./src/Game
 
 re:		fclean all
 re:
@@ -64,7 +64,7 @@ re:
 
 debug:	CPPFLAGS += -g3 -ggdb
 debug:	re
-	make debug -C ./src/Game
 	make debug -C ./src/Graphic
+	make debug -C ./src/Game
 
 .PHONY: all fclean re clean $(NAME) debug

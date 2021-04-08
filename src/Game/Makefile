@@ -48,7 +48,7 @@ CPPFLAGS	=	-iquote./ -iquote..
 
 CXXFLAGS	=	-Wall -Wextra -fPIC -std=c++17
 
-DEST_DIRECTORY	=	../../games
+DEST_DIRECTORY	=	../../lib
 
 #################################################################################
 
@@ -80,7 +80,6 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(NIBBLER_NAME) $(PACMAN_NAME)
-	$(RM) ../../games/*
 
 .PHONY: re
 re: fclean all
