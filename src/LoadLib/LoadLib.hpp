@@ -20,14 +20,14 @@ class LoadLib
 public:
 
     LoadLib() = default;
-    ~LoadLib() { /*dlclose(_openFile);*/ };
+    ~LoadLib() = default;
     void initHandler(const std::string &libName) {
         _openFile = dlopen(libName.c_str(), RTLD_LAZY);
-        if (!_openFile) 
+        if (!_openFile)
             throw std::runtime_error(dlerror());
     }
 
-    template <typename T> //, typename = std::enable_if<std::is_base_of<Iinterface, T>::value
+    template <typename T>
     std::function<T> loadingLib(const std::string &functionName) const
     {
         T *p = (T*)(dlsym(_openFile, functionName.c_str()));
