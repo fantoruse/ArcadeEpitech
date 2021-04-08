@@ -34,7 +34,7 @@ SDL_OBJ	=	$(SDL_SRC:.cpp=.o)
 
 SDL_NAME	=	arcade_sdl2.so
 
-SDL_LIB		=	-lSDL2main -lSDL2
+SDL_LIB		=	-lSDL2main -lSDL2 -lSDL2_ttf
 
 #################################################################################
 
