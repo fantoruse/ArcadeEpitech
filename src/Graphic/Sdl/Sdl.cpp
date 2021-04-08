@@ -16,10 +16,9 @@ arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _wi
 void arcade::SDLModule::init() {
 
     TTF_Init();
-    std::cout << "\n WINDOW IS OPEN\n";
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
         return;
-    _window = SDL_CreateWindow("ANTOINE LE PLUS BEAU", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1980, 1080,
+    _window = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1980, 1080,
                                SDL_WINDOW_SHOWN);
     if (!_window)
         return;
@@ -30,7 +29,7 @@ void arcade::SDLModule::init() {
 
 void arcade::SDLModule::destroy() {
     SDL_DestroyWindow(_window);
-    SDL_DestroyRenderer(_renderer);
+    //SDL_DestroyRenderer(_renderer);
     TTF_Quit();
     SDL_Quit();
 }
@@ -48,30 +47,28 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
     SDL_RenderFillRect(_renderer, &rectangle);
     SDL_RenderDrawRect(_renderer, &rectangle);
     SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
-        std::cout << "CACA TERMINE\n";
     } else {
         TTF_Font *font = TTF_OpenFont("./resources/font.ttf", 100);
-        SDL_Surface *msg = TTF_RenderText_Solid(font, drawable[2]->getString().c_str(), {255, 255, 255, 255});
+        SDL_Surface *msg = TTF_RenderText_Solid(font, drawable[2]->getString().c_str(), {255, 255, 255, 0});
         SDL_Texture* createTFS = SDL_CreateTextureFromSurface(_renderer, msg);
         SDL_Rect Message_rect;
         Message_rect.x = 1400;
-        Message_rect.y = 900;
-        Message_rect.w = 100;
+        Message_rect.y = 500;
+        Message_rect.w = 200;
         Message_rect.h = 100;
-        std::cout << "bite\n";
         SDL_RenderCopy(_renderer, createTFS, NULL, &Message_rect);
     }
 }
 
 arcade::events_e arcade::SDLModule::pollEvent() {
-    SDL_Event event;
+    SDL_Event event = {0};
 
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
             return arcade::CLOSE;
         }
         for (auto &&i : KEYS)
-            if (event.key.keysym.sym == i.first)
+            if (event.type == SDL_KEYUP && event.key.keysym.sym == i.first)
                 return i.second;
     }
     return arcade::NOTHING;
@@ -82,8 +79,6 @@ void arcade::SDLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawa
 }
 
 arcade::SDLModule::~SDLModule() {
-
-    SDL_DestroyWindow(_window);
 }
 
 void arcade::SDLModule::refreshWin() {
