@@ -43,3 +43,4 @@ namespace arcade {
 }
 
 extern "C" arcade::IDisplayModule *createGraphLib();
+extern "C" std::string getType();

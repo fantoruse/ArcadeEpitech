@@ -85,3 +85,7 @@ extern "C" arcade::IDisplayModule *createGraphLib()
 {
         return (new arcade::Ncurses());
 }
+
+extern "C" std::string getType() {
+    return "graph";
+}

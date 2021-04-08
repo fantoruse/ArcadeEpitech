@@ -31,7 +31,7 @@ class Nibbler : public AGame {
         void updateSnake();
         void move(arcade::events_e dir);
         const std::vector<std::shared_ptr<IObject>> play(arcade::events_e) override;
-        const std::string getName() const override;
+        const std::string &getName() const override;
         bool isLost() const override;
 
     private:

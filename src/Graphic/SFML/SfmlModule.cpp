@@ -91,3 +91,7 @@ extern "C" arcade::IDisplayModule *createGraphLib()
 {
     return (new arcade::SFMLModule());
 }
+
+extern "C" std::string getType() {
+    return "graph";
+}
