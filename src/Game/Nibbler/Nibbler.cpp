@@ -74,7 +74,7 @@ void arcade::Nibbler::AppleGenerator()
         ry = rand() % 18;
         rx = rand() % 18;
         for (auto it: _enemies) {
-            if ((it.first != ry and it.second != rx) && _map[ry][rx] != '#') {
+            if ((it.first != ry && it.second != rx) && _map[rx][ry] != '#') {
                 end = true;
                 break;
             }
