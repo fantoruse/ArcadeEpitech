@@ -65,7 +65,7 @@ arcade::events_e arcade::Ncurses::pollEvent()
     int input = getch();
 
     for (auto i : KEYS) {
-        if (input == (int) i.first) {
+        if (input == static_cast<int>(i.first)) {
             return i.second;
         }
     }

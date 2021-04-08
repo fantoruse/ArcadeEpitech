@@ -123,7 +123,7 @@ void arcade::Nibbler::headMov()
 
     if ((y < 1 || x < 1) || _map[y][x] == '#')
         return;
-    if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds(500)) {
+    if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds(300)) {
         if (_started)
             updateSnake();
         _enemies[0].first += _playerMov.first;

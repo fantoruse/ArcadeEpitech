@@ -27,9 +27,10 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
     sf::Text text;
     sf::Font font;
     sf::Texture texture;
-    float size = (float)drawable[1]->getSize();
+    float size = static_cast<float>(drawable[1]->getSize());
     
     if (drawable[0]->getType() == arcade::SPRITE && texture.loadFromFile(drawable[0]->getString())) {
+        texture.setSmooth(true);
         sprite.setTexture(texture);
         sprite.setPosition(position.second * size, position.first * size);
         _window.draw(sprite);
@@ -43,7 +44,7 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
         font.loadFromFile("./resources/font.ttf");
         text.setFont(font);
         text.setString(drawable[2]->getString());
-        text.setScale({(float)drawable[2]->getSize(), (float)drawable[2]->getSize()});
+        text.setScale({static_cast<float>(drawable[2]->getSize()), static_cast<float>(drawable[2]->getSize())});
         text.setFillColor(COLORS.at(drawable[2]->getColor()));
         text.setOutlineColor(COLORS.at(drawable[2]->getColor()));
         text.setPosition(position.first + 1300, position.second + 500);
@@ -84,7 +85,7 @@ void arcade::SFMLModule::refreshWin()
 }
 arcade::SFMLModule::~SFMLModule()
 {
-    _window.close();
+   // _window.close();
 }
 
 extern "C" arcade::IDisplayModule *createGraphLib()
