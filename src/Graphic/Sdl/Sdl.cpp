@@ -97,3 +97,7 @@ void arcade::SDLModule::clearWin() {
 extern "C" arcade::IDisplayModule *createGraphLib() {
     return (new arcade::SDLModule());
 }
+
+extern "C" std::string getType() {
+    return "graph";
+}

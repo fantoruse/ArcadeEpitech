@@ -58,7 +58,7 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade
 
 
 
-const std::string arcade::Nibbler::getName() const {
+const std::string &arcade::Nibbler::getName() const {
     return _name;
 }
 
@@ -209,4 +209,8 @@ bool arcade::Nibbler::isLost() const
 extern  "C" arcade::IGame *getGame() {
         auto b = new arcade::Nibbler();
         return b;
+}
+
+extern "C" std::string getType() {
+    return "game";
 }

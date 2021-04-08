@@ -13,7 +13,7 @@ arcade::Drawable::Drawable(const std::string &obj, std::size_t size,
 {
 }
 
-std::string arcade::Drawable::getString() const
+const std::string &arcade::Drawable::getString() const
 {
     return _infos;
 }
