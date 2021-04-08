@@ -36,7 +36,7 @@ void arcade::SDLModule::destroy() {
 }
 
 void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position,
-                             std::string name) {
+                             [[maybe_unused]]std::string name) {
     if (drawable[1]->getType() == arcade::SHAPE) {
     SDL_Rect rectangle;
     rectangle.y = position.first * (drawable[1]->getSize());
@@ -77,7 +77,7 @@ arcade::events_e arcade::SDLModule::pollEvent() {
     return arcade::NOTHING;
 }
 
-void arcade::SDLModule::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name) {
+void arcade::SDLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] std::string &name) {
 
 }
 

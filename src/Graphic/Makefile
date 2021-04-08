@@ -56,7 +56,7 @@ CXX	=	g++
 
 CPPFLAGS	=	-iquote./ -iquote../
 
-CXXFLAGS	=	-Wall -Wextra -fPIC
+CXXFLAGS	=	-Wall -Wextra -fPIC -std=c++17
 
 DEST_DIRECTORY	=	../../lib
 
@@ -65,6 +65,7 @@ DEST_DIRECTORY	=	../../lib
 #RULES
 
 .PHONY: all
+all: clean
 all: SFML SDL NCURSE
 all:
 	mv $(NCURSE_NAME) $(DEST_DIRECTORY)
@@ -94,6 +95,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(SFML_NAME) $(SDL_NAME) $(NCURSE_NAME)
+	$(RM) ../../lib/*
 
 .PHONY: re
 re: fclean all

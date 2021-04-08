@@ -46,7 +46,7 @@ CXX	=	g++
 
 CPPFLAGS	=	-iquote./ -iquote..
 
-CXXFLAGS	=	-Wall -Wextra -fPIC
+CXXFLAGS	=	-Wall -Wextra -fPIC -std=c++17
 
 DEST_DIRECTORY	=	../../games
 
@@ -55,6 +55,7 @@ DEST_DIRECTORY	=	../../games
 #RULES
 
 .PHONY: all
+all: clean
 all: nibbler #pacman
 all:
 	mv $(NIBBLER_NAME) $(DEST_DIRECTORY)
@@ -79,6 +80,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(NIBBLER_NAME) $(PACMAN_NAME)
+	$(RM) ../../games/*
 
 .PHONY: re
 re: fclean all

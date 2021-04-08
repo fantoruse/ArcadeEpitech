@@ -12,7 +12,7 @@
 #include "InterfaceGame/Iinterface.hpp"
 #include "Core/Core.hpp"
 
-int main(int argc, char **argv) {
+int main([[maybe_unused]] int argc, char **argv) {
     /*if (argc != 2)
         return 84;*/
     DynamicFile a;

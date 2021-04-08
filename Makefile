@@ -13,8 +13,6 @@ SRC	=\
 		src/InterfaceGame/Iinterface.cpp	\
 		src/Core/Core.cpp					\
 		src/Graphic/ADisplayModule.cpp		\
-		##src/Graphic/Ncurses/Ncurses.cpp 	\
-		##src/Graphic/SFML/SfmlModule.cpp 	\
 
 OBJ	=	$(SRC:.cpp=.o)
 
@@ -22,11 +20,11 @@ OBJ	=	$(SRC:.cpp=.o)
 
 NAME	=	arcade
 
-CXXFLAGS	=	-Wall -Wextra
+CXXFLAGS	=	-Wall -Wextra -std=c++17
 
 CPPFLAGS	=	-iquote./src/
 
-CXX	=	g++ -std=c++17
+CXX	=	g++
 
 #MAIN RULES
 all: $(NAME) games graphical

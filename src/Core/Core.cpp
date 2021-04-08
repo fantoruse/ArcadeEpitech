@@ -16,10 +16,6 @@ namespace arcade {
 
 Core::Core()
 {
-    this->_loadLibs;
-    this->_actualLibs;
-    this->_loadGames;
-    this->_actualGames;
 }
 
 void Core::OpenGame()

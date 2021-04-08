@@ -51,7 +51,7 @@ void arcade::Ncurses::refreshWin()
     wrefresh(stdscr);
 }
 
-void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string name)
+void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string name)
 {
     arcade::colors_e color = drawable[2]->getColor();
 
@@ -72,7 +72,7 @@ arcade::events_e arcade::Ncurses::pollEvent()
     return arcade::NOTHING;
 }
 
-void arcade::Ncurses::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name)
+void arcade::Ncurses::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] std::string &name)
 {
 }
 arcade::Ncurses::~Ncurses()
