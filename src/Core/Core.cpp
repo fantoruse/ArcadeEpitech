@@ -100,6 +100,7 @@ namespace arcade {
             auto tmp = _actualLibs;
             arcade::events_e event = libs->pollEvent();
             if (event == arcade::CLOSE) {
+                libs->destroy();
                 break;
             }
             auto k = gaming->play(event);
