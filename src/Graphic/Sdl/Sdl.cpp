@@ -58,7 +58,6 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
         Message_rect.y = 900;
         Message_rect.w = 100;
         Message_rect.h = 100;
-        std::cout << "bite\n";
         SDL_RenderCopy(_renderer, createTFS, NULL, &Message_rect);
     }
 }
