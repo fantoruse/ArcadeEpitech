@@ -17,7 +17,7 @@ namespace arcade {
     class Ncurses : public arcade::ADisplayModule {
     public:
         Ncurses();
-        ~Ncurses() = default;
+        ~Ncurses() override;
 
         void init() override;
         void destroy() override;

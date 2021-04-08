@@ -46,7 +46,7 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
         text.setScale({(float)drawable[2]->getSize(), (float)drawable[2]->getSize()});
         text.setFillColor(COLORS.at(drawable[2]->getColor()));
         text.setOutlineColor(COLORS.at(drawable[2]->getColor()));
-        text.setPosition(position.first, position.second);
+        text.setPosition(position.first + 1300, position.second + 500);
         _window.draw(text);
     }
 }

@@ -192,7 +192,7 @@ std::shared_ptr<arcade::IObject> arcade::Nibbler::updateScore()
     std::vector<std::shared_ptr<arcade::IDrawable>> dest;
     dest.push_back(std::make_shared<arcade::Drawable>("apple.png", 10, arcade::NO_TYPE, arcade::NONE));
     dest.push_back(std::make_shared<arcade::Drawable>("Rect", 50, arcade::NO_TYPE, arcade::RED));
-    dest.push_back(std::make_shared<arcade::Drawable>("Score: " + std::to_string(_score), 2, arcade::TEXT, arcade::RED));
+    dest.push_back(std::make_shared<arcade::Drawable>("Score: " + std::to_string(_score), 2, arcade::TEXT, arcade::CYAN));
 
     return std::make_shared<arcade::StaticObject>(StaticObject(
         "Score", dest, std::make_pair(10, 30)));

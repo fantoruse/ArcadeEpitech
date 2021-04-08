@@ -24,15 +24,21 @@ void arcade::Ncurses::init()
     getmaxyx(stdscr, _screen_y, _screen_x);
     keypad(stdscr ,TRUE);
     start_color();
-    init_pair('O', 1, 1);
-    init_pair('#', 2, 2);
-    init_pair('A', 4, 4);
-    init_pair('S', 0, 3);
+    init_pair(arcade::WHITE, COLOR_WHITE, COLOR_WHITE);
+    init_pair(arcade::BLACK, COLOR_BLACK, COLOR_BLACK);
+    init_pair(arcade::GREEN, COLOR_GREEN, COLOR_GREEN);
+    init_pair(arcade::RED, COLOR_RED, COLOR_RED);
+    init_pair(arcade::BLUE, COLOR_BLUE, COLOR_BLUE);
+    init_pair(arcade::CYAN, COLOR_CYAN, 0);
+    init_pair(arcade::MAGENTA, COLOR_MAGENTA, COLOR_MAGENTA);
+    init_pair(arcade::YELLOW, COLOR_YELLOW, COLOR_YELLOW);
+    init_pair(arcade::NONE, 0, 0);
 }
 
 void arcade::Ncurses::destroy()
 {
     endwin();
+    wclear(stdscr);
 }
 
 void arcade::Ncurses::clearWin()
@@ -47,12 +53,11 @@ void arcade::Ncurses::refreshWin()
 
 void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, std::string name)
 {
-    char c = drawable[2]->getString().c_str()[0];
+    arcade::colors_e color = drawable[2]->getColor();
 
-    wattron(stdscr, COLOR_PAIR('S'));
-    wattron(stdscr, COLOR_PAIR(c));
+    wattron(stdscr, COLOR_PAIR(color));
     mvprintw(position.first, position.second, drawable[2]->getString().c_str());
-    wattroff(stdscr, COLOR_PAIR(c));
+    wattroff(stdscr, COLOR_PAIR(color));
 }
 
 arcade::events_e arcade::Ncurses::pollEvent()
@@ -64,10 +69,16 @@ arcade::events_e arcade::Ncurses::pollEvent()
             return i.second;
         }
     }
+    return arcade::NOTHING;
 }
 
 void arcade::Ncurses::load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name)
 {
+}
+arcade::Ncurses::~Ncurses()
+{
+    endwin();
+    wclear(stdscr);
 }
 
 extern "C" arcade::IDisplayModule *createGraphLib()

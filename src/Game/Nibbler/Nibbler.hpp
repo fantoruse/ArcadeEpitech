@@ -32,7 +32,7 @@ class Nibbler : public AGame {
         void move(arcade::events_e dir);
         const std::vector<std::shared_ptr<IObject>> play(arcade::events_e) override;
         const std::string getName() const override;
-        bool isLost() const {return false;};
+        bool isLost() const override {return false;};
 
     private:
         void loadMap();
@@ -59,15 +59,15 @@ class Nibbler : public AGame {
 
 static const std::map<std::string, std::vector<arcade::Drawable>> DRAWABLE_LIST = {
     {"Wall", {{"./resources/wall.jpeg", 50, arcade::SPRITE, arcade::NONE},
-        {"Rect", 50, arcade::SHAPE, arcade::WHITE},
-        {"#", 1, arcade::TEXT, arcade::WHITE}}},
+        {"Rect", 50, arcade::SHAPE, arcade::YELLOW},
+        {"#", 1, arcade::TEXT, arcade::YELLOW}}},
     {"player", {{"./resources/player.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::GREEN},
-        {"O", 10, arcade::TEXT, arcade::WHITE}}},
+        {"X", 1, arcade::TEXT, arcade::GREEN}}},
     {"enemie", {{"./resources/enemi.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::BLUE},
-        {"O", 10, arcade::TEXT, arcade::WHITE}}},
+        {"O", 1, arcade::TEXT, arcade::BLUE}}},
     {"apple", {{"./resources/apple.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::RED},
-        {"A", 1, arcade::TEXT, arcade::WHITE}}},
+        {"A", 1, arcade::TEXT, arcade::RED}}},
     };
