@@ -48,7 +48,7 @@ CPPFLAGS	=	-iquote./ -iquote..
 
 CXXFLAGS	=	-Wall -Wextra -fPIC -std=c++17
 
-DEST_DIRECTORY	=	../../games
+DEST_DIRECTORY	=	../../lib
 
 #################################################################################
 
