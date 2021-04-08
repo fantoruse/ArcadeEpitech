@@ -9,7 +9,7 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
-//#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include <map>
 #include "../ADisplayModule.hpp"
 
@@ -47,6 +47,9 @@ static const std::vector<std::pair<SDL_Keycode, arcade::events_e>> KEYS = {
     {SDLK_s, arcade::NEXT},
     {SDLK_q, arcade::PREV},
     {SDLK_t, arcade::CLOSE},
+    {SDLK_r, arcade::RESTART},
+    {SDLK_o, arcade::PREV_GAME},
+    {SDLK_p, arcade::NEXT_GAME}
 };
 
 static const std::map<arcade::colors_e, SDL_Color> COLORS = {

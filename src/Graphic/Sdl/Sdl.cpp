@@ -47,7 +47,7 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
     SDL_RenderFillRect(_renderer, &rectangle);
     SDL_RenderDrawRect(_renderer, &rectangle);
     SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
-    } else {
+    } /*else {
         TTF_Font *font = TTF_OpenFont("./resources/font.ttf", 100);
         SDL_Surface *msg = TTF_RenderText_Solid(font, drawable[2]->getString().c_str(), {255, 255, 255, 0});
         SDL_Texture* createTFS = SDL_CreateTextureFromSurface(_renderer, msg);
@@ -57,7 +57,7 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
         Message_rect.w = 200;
         Message_rect.h = 100;
         SDL_RenderCopy(_renderer, createTFS, NULL, &Message_rect);
-    }
+    }*/
 }
 
 arcade::events_e arcade::SDLModule::pollEvent() {

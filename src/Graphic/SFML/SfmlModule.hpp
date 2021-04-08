@@ -51,7 +51,8 @@ static const std::vector<std::pair<sf::Keyboard::Key, arcade::events_e>> KEYS = 
         {sf::Keyboard::Key::Down, arcade::DOWN}, {sf::Keyboard::Key::Left, arcade::LEFT},
         {sf::Keyboard::Key::Right, arcade::RIGHT}, {sf::Keyboard::Space, arcade::SPACE},
         {sf::Keyboard::S, arcade::NEXT}, {sf::Keyboard::Q, arcade::PREV},
-        {sf::Keyboard::T, arcade::CLOSE}};
+        {sf::Keyboard::T, arcade::CLOSE}, {sf::Keyboard::R, arcade::RESTART},
+        {sf::Keyboard::O, arcade::PREV_GAME}, {sf::Keyboard::P, arcade::NEXT_GAME}};
 
 static const std::map<arcade::colors_e, sf::Color> COLORS = {
         {arcade::WHITE,   sf::Color::White},

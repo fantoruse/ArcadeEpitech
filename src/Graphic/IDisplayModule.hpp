@@ -24,7 +24,10 @@ namespace arcade {
         ESCAPE,
         NEXT,
         PREV,
-        NOTHING
+        NOTHING,
+        RESTART,
+        NEXT_GAME,
+        PREV_GAME
     };
 
     class IDisplayModule {
