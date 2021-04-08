@@ -195,6 +195,16 @@ std::shared_ptr<arcade::IObject> arcade::Nibbler::updateScore()
     return std::make_shared<arcade::StaticObject>(StaticObject(
         "Score", dest, std::make_pair(10, 30)));
 }
+bool arcade::Nibbler::isLost() const
+{
+    float player_y = _enemies[0].first;
+    float player_x = _enemies[0].second;
+
+    for (std::size_t i = 1; i < _enemies.size(); ++i)
+        if (player_y == _enemies[i].first && player_x == _enemies[i].second)
+            return true;
+    return (player_y < 1 || player_y > 17 || player_x < 1 || player_x > 17);
+}
 
 extern  "C" arcade::IGame *getGame() {
         auto b = new arcade::Nibbler();

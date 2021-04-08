@@ -114,6 +114,8 @@ void Core::gameLoop()
         for (auto n : k) {
             libs->draw(n.get()->getDrawables(), n.get()->getPosition(), s);
         }
+        if (gaming->isLost())
+            std::cout << "LOOOSE" << std::endl;
         libs->refreshWin();
         switchLibs(event);
         if (tmp != _actualLibs)
