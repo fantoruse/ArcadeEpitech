@@ -118,7 +118,6 @@ namespace arcade {
                 _loadLibs[a % _loadLibs.size()].second->destroy();
                 a += 1;
                 _loadLibs[a % _loadLibs.size()].second->init();
-               std::cout << a << " modulo est egal a " <<  (a % _loadLibs.size()) << "\n";
             }
         }
     }
