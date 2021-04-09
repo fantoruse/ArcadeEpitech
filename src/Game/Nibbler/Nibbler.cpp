@@ -198,7 +198,7 @@ std::shared_ptr<arcade::IObject> arcade::Nibbler::updateScore()
         "Score", dest, std::make_pair(10, 30)));
 }
 
-bool arcade::Nibbler::isLost() const
+bool arcade::Nibbler::isLost()
 {
     float player_y = _enemies[0].first;
     float player_x = _enemies[0].second;

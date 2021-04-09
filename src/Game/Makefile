@@ -56,10 +56,10 @@ DEST_DIRECTORY	=	../../lib
 
 .PHONY: all
 all: clean
-all: nibbler #pacman
+all: nibbler pacman
 all:
 	mv $(NIBBLER_NAME) $(DEST_DIRECTORY)
-#mv $(PACMAN_NAME) $(DEST_DIRECTORY)
+	mv $(PACMAN_NAME) $(DEST_DIRECTORY)
 
 #MAIN RULES
 
@@ -69,7 +69,7 @@ nibbler: $(NIBBLER_OBJ) $(SHARED_OBJ)
 
 .PHONY: pacman
 pacman: $(PACMAN_OBJ) $(SHARED_OBJ)
-	$(CXX) -o $PACMAN_NAME) $(PACMAN_OBJ) $(SHARED_OBJ) $(PACMAN_LIB)
+	$(CXX) -o $(PACMAN_NAME) $(PACMAN_OBJ) $(SHARED_OBJ) $(PACMAN_LIB) -shared
 
 #CLEAN RULES
 
