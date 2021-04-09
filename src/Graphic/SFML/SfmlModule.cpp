@@ -54,12 +54,19 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
 arcade::events_e arcade::SFMLModule::pollEvent()
 {
     sf::Event event;
+    static bool pressed = false;
+    static sf::Keyboard::Key key = sf::Keyboard::Key::F;
 
     while (_window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
             return arcade::CLOSE;
-        else if (event.type == sf::Event::KeyReleased) {
+        if (event.type == sf::Event::KeyPressed) {
+            pressed = true;
+            key = event.key.code;
+        }
+        if (event.type == sf::Event::KeyReleased && pressed && key == event.key.code) {
+            pressed = false;
             for (auto i : KEYS)
                 if (event.key.code == i.first)
                     return i.second;
