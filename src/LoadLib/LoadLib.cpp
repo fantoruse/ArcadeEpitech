@@ -10,9 +10,4 @@
 #include "Error/Error.hpp"
 #include <iostream>
 
-extern "C" {/*
-class *entryPoint() {
-    return class*
-}*/
-}
 

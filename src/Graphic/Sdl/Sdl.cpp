@@ -7,6 +7,7 @@
 
 #include "Sdl.hpp"
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 
 arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _window(), _status(true), _textures(),
@@ -36,7 +37,11 @@ void arcade::SDLModule::destroy() {
 
 void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position,
                              [[maybe_unused]]std::string name) {
-    if (drawable[1]->getType() == arcade::SHAPE) {
+/*
+    if(drawable[0]->getType() == arcade::SPRITE) {
+        SDL_Surface* images = IMG_Load(_textures)
+    }*/
+     if (drawable[1]->getType() == arcade::SHAPE) {
     SDL_Rect rectangle;
     rectangle.y = position.first * (drawable[1]->getSize());
     rectangle.x = position.second * (drawable[1]->getSize());
@@ -78,7 +83,8 @@ arcade::events_e arcade::SDLModule::pollEvent() {
 }
 
 void arcade::SDLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] std::string &name) {
-
+ /*   for (auto &&i : TEXTURES_TO_LOAD)
+        _textures[i].loadFromFile(i);*/
 }
 
 arcade::SDLModule::~SDLModule() {

@@ -97,35 +97,28 @@ namespace arcade {
     void Core::gameLoop() {
         int a = 0;
 
-        for (long unsigned int i = 0; i != _loadLibs.size(); i++) {
-            if (_loadLibs[i].first == _actualLibs)
-                break;
-        }
         auto gaming = _loadGames[0].second;
-        auto libs = _loadLibs[0].second;
-        libs->init();
+        _loadLibs[0].second->init();
+        arcade::events_e event = arcade::NOTHING;
         while (1) {
-            arcade::events_e event = libs->pollEvent();
+            event = arcade::NOTHING;
+            event = _loadLibs[a % _loadLibs.size()].second->pollEvent();
             if (event == arcade::CLOSE) {
-                libs->destroy();
+                _loadLibs[a % _loadLibs.size()].second->destroy();
                 break;
             }
-            this->game(gaming, event, libs);
+            this->game(gaming, event, _loadLibs[a % _loadLibs.size()].second);
 
             if (event == arcade::PREV) {
-                a--;
-              //  std::cout << i << "\n";
-                libs->destroy();
-                libs = _loadLibs[a % _loadLibs.size()].second;
-                libs->init();
+                _loadLibs[a % _loadLibs.size()].second->destroy();
+                a -= 1;
+                _loadLibs[a % _loadLibs.size()].second->init();
             }
             if (event == arcade::NEXT) {
-                a++;
-                //std::cout << a << "\n";
-                libs->destroy();
-                libs = _loadLibs[a % _loadLibs.size()].second;
-              //  std::cout << a << " modulo est egal a " <<  (a % _loadLibs.size()) << "\n";
-                libs->init();
+                _loadLibs[a % _loadLibs.size()].second->destroy();
+                a += 1;
+                _loadLibs[a % _loadLibs.size()].second->init();
+               std::cout << a << " modulo est egal a " <<  (a % _loadLibs.size()) << "\n";
             }
         }
     }
