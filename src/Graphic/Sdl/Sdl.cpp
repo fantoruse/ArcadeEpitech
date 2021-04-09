@@ -41,21 +41,21 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
     if(drawable[0]->getType() == arcade::SPRITE) {
         SDL_Surface* images = IMG_Load(_textures)
     }*/
-     if (drawable[1]->getType() == arcade::SHAPE) {
-    SDL_Rect rectangle;
-    rectangle.y = position.first * (drawable[1]->getSize());
-    rectangle.x = position.second * (drawable[1]->getSize());
-    rectangle.h = 50;
-    rectangle.w = 50;
-    SDL_SetRenderDrawColor(_renderer, COLORS.at(drawable[1]->getColor()).r, COLORS.at(drawable[1]->getColor()).g,
-                           COLORS.at(drawable[1]->getColor()).b, COLORS.at(drawable[1]->getColor()).a);
-    SDL_RenderFillRect(_renderer, &rectangle);
-    SDL_RenderDrawRect(_renderer, &rectangle);
-    SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
+    if (drawable[1]->getType() == arcade::SHAPE) {
+        SDL_Rect rectangle;
+        rectangle.y = position.first * (drawable[1]->getSize());
+        rectangle.x = position.second * (drawable[1]->getSize());
+        rectangle.h = 50;
+        rectangle.w = 50;
+        SDL_SetRenderDrawColor(_renderer, COLORS.at(drawable[1]->getColor()).r, COLORS.at(drawable[1]->getColor()).g,
+                               COLORS.at(drawable[1]->getColor()).b, COLORS.at(drawable[1]->getColor()).a);
+        SDL_RenderFillRect(_renderer, &rectangle);
+        SDL_RenderDrawRect(_renderer, &rectangle);
+        SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
     } else {
         TTF_Font *font = TTF_OpenFont("./resources/font.ttf", 100);
         SDL_Surface *msg = TTF_RenderText_Solid(font, drawable[2]->getString().c_str(), {255, 255, 255, 0});
-        SDL_Texture* createTFS = SDL_CreateTextureFromSurface(_renderer, msg);
+        SDL_Texture *createTFS = SDL_CreateTextureFromSurface(_renderer, msg);
         SDL_Rect Message_rect;
         Message_rect.x = 1400;
         Message_rect.y = 500;
@@ -70,21 +70,31 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
 
 arcade::events_e arcade::SDLModule::pollEvent() {
     SDL_Event event = {0};
+    static bool isPressed = false;
+    static SDL_Keycode keyTouch = SDLK_x;
 
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
             return arcade::CLOSE;
         }
-        for (auto &&i : KEYS)
-            if (event.type == SDL_KEYUP && event.key.keysym.sym == i.first)
-                return i.second;
+        if (event.type == SDL_KEYDOWN) {
+            isPressed = true;
+            keyTouch = event.key.keysym.sym;
+        }
+        if (event.type == SDL_KEYUP && isPressed && keyTouch == event.key.keysym.sym) {
+            for (auto &&i : KEYS) {
+                if (event.key.keysym.sym == i.first)
+                    return i.second;
+            }
+        }
     }
     return arcade::NOTHING;
 }
 
-void arcade::SDLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] std::string &name) {
- /*   for (auto &&i : TEXTURES_TO_LOAD)
-        _textures[i].loadFromFile(i);*/
+void arcade::SDLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable,
+                             [[maybe_unused]] std::string &name) {
+    /*   for (auto &&i : TEXTURES_TO_LOAD)
+           _textures[i].loadFromFile(i);*/
 }
 
 arcade::SDLModule::~SDLModule() {
