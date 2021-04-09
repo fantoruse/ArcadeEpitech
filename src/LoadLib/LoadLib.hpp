@@ -21,13 +21,8 @@ public:
 
     LoadLib() = default;
     ~LoadLib() = default;/*{dlclose(_openFile);}*/
-    //~LoadLib() {dlclose(_openFile);}
-    void initHandler(const std::string &libName) {
-        _openFile = dlopen(libName.c_str(), RTLD_LAZY);
-        std::cout << "OPEN == "<<_openFile << std::endl;
-        if (!_openFile)
-            throw std::runtime_error(dlerror());
-    }
+   // ~LoadLib() {dlclose(_openFile);}
+    void initHandler(const std::string &libName);
 
     template <typename T>
     std::function<T> loadingLib(const std::string &functionName) const
