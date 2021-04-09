@@ -21,12 +21,12 @@ namespace arcade {
         Core();
         ~Core() = default;
 
-        void OpenGame(LoadLib ldb, std::string s);
+        void OpenGame(const LoadLib &ldb,const std::string &s);
         void OpenFirstLibs(std::string);
-        void OpenLibsInLibs(LoadLib ldb, std::string name, std::string arg);
-        void switchLibs(events_e);
+        void OpenLibsInLibs(const LoadLib &ldb, const std::string &name);
         void gameLoop();
-        void getTypes(std::string);
+        void getTypes(const std::string &s, LoadLib &b);
+        void game(IGame *gaming,  events_e event, IDisplayModule *libs);
 
     protected:
         std::vector<std::pair<std::string, IGame*>> _loadGames;

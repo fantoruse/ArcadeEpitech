@@ -18,16 +18,18 @@ namespace arcade {
     Core::Core() {
     }
 
-    void Core::getTypes(std::string arg) {
-        LoadLib ldb;
+    void Core::getTypes(const std::string &arg, LoadLib &ldb) {
         std::string tmp;
         for (auto &p: std::filesystem::directory_iterator("./lib")) {
             try {
+                tmp = p.path();
+                if (tmp.erase(0,6) == arg)
+                    continue;
                 ldb.initHandler(p.path());
                 auto libs = ldb.loadingLib<std::string()>("getType")();
                 if (libs == "graph") {
                     std::cout << p.path() << "\n";
-                    OpenLibsInLibs(ldb, p.path(), arg);
+                    OpenLibsInLibs(ldb, p.path());
                 } else if (libs == "game") {
                     std::cout << p.path() << "\n";
                     OpenGame(ldb, p.path());
@@ -39,12 +41,12 @@ namespace arcade {
         }
     }
 
-    void Core::OpenGame(LoadLib ldb, std::string name) {
+    void Core::OpenGame(const LoadLib &ldb, const std::string &name) {
         try {
             std::string tmp;
             auto libs = ldb.loadingLib<IGame *(void)>("getGame")();
             tmp = name;
-            tmp.erase(0, 12);
+            tmp.erase(0, 6);
             _loadGames.push_back(std::pair<std::string, IGame *>(tmp, libs));
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
@@ -59,7 +61,7 @@ namespace arcade {
             arg.erase(0, 6);
             _actualLibs = arg;
             _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(arg, libs));
-            getTypes(arg);
+            getTypes(arg, ldb);
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
             throw std::exception();
@@ -68,13 +70,9 @@ namespace arcade {
             throw Error("No games");
     }
 
-    void Core::OpenLibsInLibs(LoadLib ldb, std::string name, std::string arg) {
+    void Core::OpenLibsInLibs(const LoadLib &ldb, const std::string &name) {
         try {
             std::string tmp;
-            name.erase(0,6);
-            if (arg == name)  {
-                return;
-            }
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
             tmp = name;
             tmp.erase(0, 6);
@@ -84,87 +82,51 @@ namespace arcade {
         }
     }
 
-    void Core::switchLibs(events_e event) {
-        if (event == arcade::NEXT) {
-            for (long unsigned int i = 0; i != _loadLibs.size(); i++) {
-                if (_loadLibs[i].first == _actualLibs) {
-                    i++;
-                    if (i >= _loadLibs.size())
-                        i = 0;
-                    _actualLibs = _loadLibs[i].first;
-                }
-            }
-        }
-        if (event == arcade::PREV) {
-            for (long unsigned int i = 0; i != _loadLibs.size(); i++) {
-                if (_loadLibs[i].first == _actualLibs) {
-                    if (i == 0)
-                        i = _loadLibs.size() - 1;
-                    else
-                        i--;
-                    _actualLibs = _loadLibs[i].first;
-                }
-            }
-        }
+    void Core::game(IGame *gaming,  events_e event, IDisplayModule *libs) {
+        auto k = gaming->play(event);
+        libs->clearWin();
+        libs->getName();
+        std::string s = "bite";
+        for (auto n : k)
+            libs->draw(n.get()->getDrawables(), n.get()->getPosition(),s);
+        if (gaming->isLost())
+            std::cout << "LOOOSE" << std::endl;
+        libs->refreshWin();
     }
 
     void Core::gameLoop() {
-        long unsigned int i = 0;
+        int a = 0;
 
-        for (; i != _loadLibs.size(); i++) {
+        for (long unsigned int i = 0; i != _loadLibs.size(); i++) {
             if (_loadLibs[i].first == _actualLibs)
                 break;
         }
         auto gaming = _loadGames[0].second;
         auto libs = _loadLibs[0].second;
         libs->init();
-        auto start = std::chrono::steady_clock::now();
-        auto end = std::chrono::steady_clock::now();
-        i = 0;
         while (1) {
-            auto tmp = _actualLibs;
             arcade::events_e event = libs->pollEvent();
             if (event == arcade::CLOSE) {
                 libs->destroy();
                 break;
             }
-            auto k = gaming->play(event);
-            //if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start) >= std::chrono::milliseconds(170)) {
-                libs->clearWin();
-                libs->getName();
-                std::string s = "bite";
-                for (auto n : k) {
-                    libs->draw(n.get()->getDrawables(), n.get()->getPosition(),s);
-                }
-                start = std::chrono::steady_clock::now();
-           // }
-            end = std::chrono::steady_clock::now();
-            if (gaming->isLost())
-                std::cout << "LOOOSE" << std::endl;
-            libs->refreshWin();
+            this->game(gaming, event, libs);
 
             if (event == arcade::PREV) {
-                i--;
+                a--;
+              //  std::cout << i << "\n";
                 libs->destroy();
-                libs = _loadLibs[i % _loadLibs.size()].second;
+                libs = _loadLibs[a % _loadLibs.size()].second;
                 libs->init();
             }
             if (event == arcade::NEXT) {
-                i++;
+                a++;
+                //std::cout << a << "\n";
                 libs->destroy();
-                libs = _loadLibs[i % _loadLibs.size()].second;
+                libs = _loadLibs[a % _loadLibs.size()].second;
+              //  std::cout << a << " modulo est egal a " <<  (a % _loadLibs.size()) << "\n";
                 libs->init();
             }
-            /*switchLibs(event);
-            if (tmp != _actualLibs)
-                for (long unsigned int a = 0; a != _loadLibs.size(); a++) {
-                    if (_loadLibs[a].first == _actualLibs) {
-                        libs->destroy();
-                        libs = _loadLibs[a].second;
-                        libs->init();
-                        break;
-                    }
-                }*/
         }
     }
 
