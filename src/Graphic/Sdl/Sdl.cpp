@@ -37,11 +37,18 @@ void arcade::SDLModule::destroy() {
 
 void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position,
                              [[maybe_unused]]std::string name) {
-/*
+
     if(drawable[0]->getType() == arcade::SPRITE) {
-        SDL_Surface* images = IMG_Load(_textures)
-    }*/
-    if (drawable[1]->getType() == arcade::SHAPE) {
+        SDL_Texture* images = IMG_LoadTexture(_renderer,drawable[0]->getString().c_str());
+        SDL_Rect Message_rect;
+        Message_rect.x = position.second  * (drawable[0]->getSize());
+        Message_rect.y = position.first * (drawable[0]->getSize());
+        Message_rect.w = drawable[0]->getSize();
+        Message_rect.h = drawable[0]->getSize();
+        SDL_RenderCopy(_renderer, images, NULL, &Message_rect);
+        SDL_DestroyTexture(images);
+    }
+    else if (drawable[1]->getType() == arcade::SHAPE) {
         SDL_Rect rectangle;
         rectangle.y = position.first * (drawable[1]->getSize());
         rectangle.x = position.second * (drawable[1]->getSize());
