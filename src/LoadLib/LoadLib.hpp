@@ -23,9 +23,13 @@ public:
     ~LoadLib() {dlclose(_openFile);}
     void initHandler(const std::string &libName) {
         _openFile = dlopen(libName.c_str(), RTLD_LAZY);
+        std::cout << "OPEN == "<<_openFile << std::endl;
         if (!_openFile)
             throw std::runtime_error(dlerror());
     }
+    void close() {
+        std::cout << "CLOSE == "<<_openFile << std::endl;
+        dlclose(_openFile);}
 
     template <typename T>
     std::function<T> loadingLib(const std::string &functionName) const
@@ -36,6 +40,6 @@ public:
         return std::function<T>(p);
     }
 
-protected:
+private:
         void *_openFile = nullptr;
 };

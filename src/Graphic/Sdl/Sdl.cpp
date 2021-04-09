@@ -57,6 +57,9 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
         Message_rect.w = 200;
         Message_rect.h = 100;
         SDL_RenderCopy(_renderer, createTFS, NULL, &Message_rect);
+        TTF_CloseFont(font);
+        SDL_FreeSurface(msg);
+        SDL_DestroyTexture(createTFS);
     }
 }
 

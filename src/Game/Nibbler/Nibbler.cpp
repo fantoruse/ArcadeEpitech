@@ -36,6 +36,9 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade
 {
     if (_objects.empty())
         init_all_object();
+    if (ev == arcade::RESTART) {
+        std::cout << "RESTART TA MERE" << std::endl;
+    }
     move(ev);
     headMov();
     eatApple();
@@ -119,7 +122,7 @@ void arcade::Nibbler::headMov()
 
     if ((y < 1 || x < 1) || _map[y][x] == '#')
         return;
-    if (std::chrono::duration_cast<std::chrono::seconds>(end - start) >= std::chrono::milliseconds(300)) {
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start) >= std::chrono::milliseconds(500)) {
         if (_started)
             updateSnake();
         _enemies[0].first += _playerMov.first;

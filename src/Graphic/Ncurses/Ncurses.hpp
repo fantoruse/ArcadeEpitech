@@ -44,5 +44,8 @@ static const std::vector<std::pair<int, arcade::events_e>> KEYS = {
     {'s', arcade::NEXT},
     {'q', arcade::PREV},
     {'t', arcade::CLOSE},
+    {'r', arcade::RESTART},
+    {'o', arcade::PREV_GAME},
+    {'p', arcade::NEXT_GAME},
     {27, arcade::ESCAPE},
 };
