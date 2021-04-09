@@ -44,12 +44,12 @@ static const std::vector<std::pair<SDL_Keycode, arcade::events_e>> KEYS = {
     {SDLK_LEFT, arcade::LEFT},
     {SDLK_RIGHT, arcade::RIGHT},
     {SDLK_SPACE, arcade::SPACE},
-    {SDLK_s, arcade::NEXT},
-    {SDLK_q, arcade::PREV},
-    {SDLK_t, arcade::CLOSE},
+    {SDLK_n, arcade::NEXT},
+    {SDLK_p, arcade::PREV},
+    {SDLK_q, arcade::CLOSE},
     {SDLK_r, arcade::RESTART},
-    {SDLK_o, arcade::PREV_GAME},
-    {SDLK_p, arcade::NEXT_GAME}
+    {SDLK_g, arcade::PREV_GAME},
+    {SDLK_h, arcade::NEXT_GAME}
 };
 
 static const std::map<arcade::colors_e, SDL_Color> COLORS = {
