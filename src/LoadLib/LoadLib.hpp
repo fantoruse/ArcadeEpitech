@@ -20,7 +20,7 @@ class LoadLib
 public:
 
     LoadLib() = default;
-    ~LoadLib() = default;
+    ~LoadLib() {dlclose(_openFile);}
     void initHandler(const std::string &libName) {
         _openFile = dlopen(libName.c_str(), RTLD_LAZY);
         if (!_openFile)
@@ -38,5 +38,4 @@ public:
 
 protected:
         void *_openFile = nullptr;
-
 };

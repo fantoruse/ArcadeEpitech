@@ -16,7 +16,6 @@ int main([[maybe_unused]] int argc, char **argv) {
     if (argc != 2)
         return 84;
     DynamicFile a;
-    LoadLib b;
     arcade::Core oli;
     try {
         a.VerifyArg(argv[1]);
