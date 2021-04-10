@@ -72,7 +72,7 @@ arcade::events_e arcade::Ncurses::pollEvent()
     return arcade::NOTHING;
 }
 
-void arcade::Ncurses::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] std::string &name)
+void arcade::Ncurses::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] const std::string &name)
 {
 }
 arcade::Ncurses::~Ncurses()
@@ -85,7 +85,7 @@ std::string arcade::Ncurses::getForm([[maybe_unused]] std::string str) {
     return "toto";
 }
 
-void arcade::Ncurses::drawText([[maybe_unused]]const std::string &string, [[maybe_unused]] std::pair<float, float> position) {}
+void arcade::Ncurses::drawText([[maybe_unused]]const std::string &string, [[maybe_unused]] std::pair<int, int> position) {}
 
 extern "C" arcade::IDisplayModule *createGraphLib()
 {

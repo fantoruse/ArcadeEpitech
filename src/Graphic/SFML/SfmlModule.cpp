@@ -77,7 +77,7 @@ arcade::events_e arcade::SFMLModule::pollEvent()
     return arcade::NOTHING;
 }
 
-void arcade::SFMLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] std::string &name)
+void arcade::SFMLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] const std::string &name)
 {
     for (auto &&i : TEXTURES_TO_LOAD)
         _textures[i].loadFromFile(i);
@@ -101,7 +101,7 @@ std::string arcade::SFMLModule::getForm( [[maybe_unused]] std::string str) {
     return "toto";
 }
 
-void arcade::SFMLModule::drawText([[maybe_unused]] const std::string &string, [[maybe_unused]] std::pair<float, float> position) {}
+void arcade::SFMLModule::drawText([[maybe_unused]] const std::string &string, [[maybe_unused]] std::pair<int, int> position) {}
 
 extern "C" arcade::IDisplayModule *createGraphLib()
 {
