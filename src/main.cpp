@@ -13,8 +13,10 @@
 #include "Core/Core.hpp"
 
 int main([[maybe_unused]] int argc, char **argv) {
-    if (argc != 2)
+    if (argc != 2) {
+        std::cerr << "Arguments it's must be two" << std::endl;
         return 84;
+    }
     std::string tmp = std::string(argv[1]);
     DynamicFile a;
     arcade::Core core;
