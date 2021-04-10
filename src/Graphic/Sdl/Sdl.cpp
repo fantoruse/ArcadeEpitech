@@ -59,6 +59,8 @@ void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, s
         SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
     } else {
         TTF_Font *font = TTF_OpenFont("./resources/font.ttf", 100);
+        if (font == NULL)
+            return;
         SDL_Surface *msg = TTF_RenderText_Solid(font, drawable[2]->getString().c_str(), {255, 255, 255, 0});
         SDL_Texture *createTFS = SDL_CreateTextureFromSurface(_renderer, msg);
         SDL_Rect Message_rect;
