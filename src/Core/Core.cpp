@@ -76,7 +76,7 @@ namespace arcade {
         libs->refreshWin();
     }
 
-    void Core::gameLoop(LoadLib &ldb) {
+    void Core::gameLoop() {
         int a = 0;
         int y = 0;
 

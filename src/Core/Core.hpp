@@ -25,7 +25,7 @@ namespace arcade {
         void OpenGame(const LoadLib &ldb,const std::string &s);
         void OpenFirstLibs(std::string &s, LoadLib &ldb);
         void OpenLibsInLibs(const LoadLib &ldb, const std::string &name);
-        void gameLoop(LoadLib &ldb);
+        void gameLoop();
         void getTypes(const std::string &s, LoadLib &b);
         void game(std::shared_ptr<IGame> &gaming, events_e event, std::shared_ptr<IDisplayModule> &libs);
         void clearLibs() {
