@@ -27,14 +27,14 @@ namespace arcade {
         void OpenLibsInLibs(const LoadLib &ldb, const std::string &name);
         void gameLoop();
         void getTypes(const std::string &s, LoadLib &b);
-        void game(std::shared_ptr<IGame> &gaming, events_e event, std::shared_ptr<IDisplayModule> &libs);
+        void game(IGame  *gaming, events_e event, IDisplayModule *libs);
         void clearLibs() {
             _loadGames.clear();
             _loadLibs.clear();
         }
 
     protected:
-        std::vector<std::pair<std::string, std::shared_ptr<IGame>>> _loadGames;
-        std::vector<std::pair<std::string, std::shared_ptr<IDisplayModule>>> _loadLibs;
+        std::vector<std::pair<std::string, IGame *>> _loadGames;
+        std::vector<std::pair<std::string, IDisplayModule *>> _loadLibs;
     };
 }

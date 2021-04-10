@@ -37,7 +37,7 @@ namespace arcade {
     void Core::OpenGame(const LoadLib &ldb, const std::string &name) {
         try {
             auto libs = ldb.loadingLib<IGame *(void)>("getGame")();
-            _loadGames.push_back(std::pair<std::string, std::shared_ptr<IGame>>(name, libs));
+            _loadGames.push_back(std::pair<std::string, IGame *>(name, libs));
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
         }
@@ -47,7 +47,7 @@ namespace arcade {
         try {
             ldb.initHandler(arg);
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
-            _loadLibs.push_back(std::pair<std::string, std::shared_ptr<IDisplayModule>>(arg, libs));
+            _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(arg, libs));
             getTypes(arg, ldb);
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
@@ -60,13 +60,13 @@ namespace arcade {
     void Core::OpenLibsInLibs(const LoadLib &ldb, const std::string &name) {
         try {
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
-            _loadLibs.push_back(std::pair<std::string, std::shared_ptr<IDisplayModule>>(name, libs));
+            _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(name, libs));
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
         }
     }
 
-    void Core::game(std::shared_ptr<IGame> &gaming, events_e event, std::shared_ptr<IDisplayModule> &libs) {
+    void Core::game(IGame *gaming, events_e event, IDisplayModule *libs) {
         auto k = gaming->play(event);
         libs->clearWin();
         libs->getName();
