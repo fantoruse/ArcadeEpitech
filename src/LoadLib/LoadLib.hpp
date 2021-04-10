@@ -21,8 +21,7 @@ class LoadLib
 public:
 
     LoadLib() = default;
-    ~LoadLib() = default;/*{dlclose(_openFile);}*/
-   // ~LoadLib() {dlclose(_openFile);}
+    ~LoadLib() = default;
     void initHandler(const std::string &libName);
     void destroyOpenFile();
     template <typename T>
