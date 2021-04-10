@@ -75,7 +75,7 @@ static const std::map<std::string, std::vector<arcade::Drawable>> DRAWABLE_LIST 
     {"enemie", {{"./resources/enemi.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::BLUE},
         {"O", 1, arcade::TEXT, arcade::BLUE}}},
-    {"stat", {{"./resources/enemi.png", 50, arcade::SPRITE, arcade::NONE},
+    {"stat", {{"./resources/enemi.png", 50, arcade::SPRITE, arcade::CYAN},
         {"Rect", 50, arcade::SHAPE, arcade::CYAN},
         {"O", 1, arcade::TEXT, arcade::CYAN}}},
     {"apple", {{"./resources/apple.png", 50, arcade::SPRITE, arcade::NONE},
@@ -84,7 +84,7 @@ static const std::map<std::string, std::vector<arcade::Drawable>> DRAWABLE_LIST 
     {"ball", {{"./resources/ball.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::WHITE},
         {".", 1, arcade::TEXT, arcade::WHITE}}},
-    {"special", {{"./resources/special.jpg", 50, arcade::SPRITE, arcade::NONE},
+    {"special", {{"./resources/special.png", 50, arcade::SPRITE, arcade::NONE},
         {"Rect", 50, arcade::SHAPE, arcade::MAGENTA},
         {"0", 1, arcade::TEXT, arcade::MAGENTA}}},
     };

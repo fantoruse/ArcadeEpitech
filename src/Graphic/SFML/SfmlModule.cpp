@@ -27,12 +27,14 @@ void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, 
     sf::Text text;
     sf::Font font;
     sf::Texture texture;
-    float size = static_cast<float>(drawable[1]->getSize());
+    float size = static_cast<float>(drawable[0]->getSize());
     
     if (drawable[0]->getType() == arcade::SPRITE && texture.loadFromFile(drawable[0]->getString())) {
         texture.setSmooth(true);
         sprite.setTexture(texture);
         sprite.setPosition(position.second * size, position.first * size);
+        if (drawable[0]->getColor() != arcade::NONE)
+            sprite.setColor(COLORS.at(drawable[0]->getColor()));
         _window.draw(sprite);
     } else if (drawable[1]->getType() == arcade::SHAPE) {
         rectangle.setFillColor(COLORS.at(drawable[1]->getColor()));
