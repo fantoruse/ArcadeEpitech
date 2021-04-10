@@ -27,9 +27,10 @@ CPPFLAGS	=	-iquote./src/
 CXX	=	g++
 
 #MAIN RULES
-all: $(NAME) games graphical
+all: core games graphical
 
-$(NAME):	$(OBJ)
+.PHONY: core
+core:	$(OBJ)
 	$(CXX) -o $(NAME) $(OBJ) -ldl -lncurses
 
 ################################################################################
@@ -40,8 +41,8 @@ $(NAME):	$(OBJ)
 games:
 	make -C ./src/Game
 
-.PHONY: graphical
-graphical:
+.PHONY: graphicals
+graphicals:
 	make -C ./src/Graphic
 
 ################################################################################
@@ -67,4 +68,4 @@ debug:	re
 	make debug -C ./src/Graphic
 	make debug -C ./src/Game
 
-.PHONY: all fclean re clean $(NAME) debug
+.PHONY: all fclean re clean debug
