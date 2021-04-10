@@ -37,7 +37,7 @@ namespace arcade {
     void Core::OpenGame(const LoadLib &ldb, const std::string &name) {
         try {
             auto libs = ldb.loadingLib<IGame *(void)>("getGame")();
-            _loadGames.push_back(std::pair<std::string, IGame *>(name, libs));
+            _loadGames.push_back(std::pair<std::string, std::shared_ptr<IGame>>(name, libs));
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
         }
@@ -47,7 +47,7 @@ namespace arcade {
         try {
             ldb.initHandler(arg);
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
-            _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(arg, libs));
+            _loadLibs.push_back(std::pair<std::string, std::shared_ptr<IDisplayModule>>(arg, libs));
             getTypes(arg, ldb);
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
@@ -60,21 +60,19 @@ namespace arcade {
     void Core::OpenLibsInLibs(const LoadLib &ldb, const std::string &name) {
         try {
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
-            _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(name, libs));
+            _loadLibs.push_back(std::pair<std::string, std::shared_ptr<IDisplayModule>>(name, libs));
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
         }
     }
 
-    void Core::game(IGame *gaming, events_e event, IDisplayModule *libs) {
+    void Core::game(std::shared_ptr<IGame> &gaming, events_e event, std::shared_ptr<IDisplayModule> &libs) {
         auto k = gaming->play(event);
         libs->clearWin();
         libs->getName();
         std::string s = "tmp";
         for (auto n : k)
             libs->draw(n.get()->getDrawables(), n.get()->getPosition(), s);
-        if (gaming->isLost())
-            std::cout << "LOOOSE" << std::endl;
         libs->refreshWin();
     }
 
@@ -87,12 +85,11 @@ namespace arcade {
         while (1) {
             event = arcade::NOTHING;
             event = _loadLibs[a % _loadLibs.size()].second->pollEvent();
-            if (event == arcade::CLOSE) {
+            if (event == arcade::CLOSE || _loadGames[y % _loadGames.size()].second->isLost()) {
                 _loadLibs[a % _loadLibs.size()].second->destroy();
                 break;
             }
             this->game(_loadGames[y % _loadGames.size()].second, event, _loadLibs[a % _loadLibs.size()].second);
-
             if (event == arcade::PREV) {
                 _loadLibs[a % _loadLibs.size()].second->destroy();
                 a -= 1;
@@ -109,9 +106,6 @@ namespace arcade {
                 y -=1;
         }
     }
-    Core::~Core() {
-        _loadGames.clear();
-        _loadLibs.clear();
-    }
-}
 
+  //  Core::~Core() {}
+}

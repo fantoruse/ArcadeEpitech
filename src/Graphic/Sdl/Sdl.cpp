@@ -10,8 +10,7 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
-arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _window(), _status(true), _textures(),
-                                 _sprites(), _shapes() {
+arcade::SDLModule::SDLModule() : arcade::ADisplayModule("SDL"), _renderer(), _window(), _status(true){
 }
 
 void arcade::SDLModule::init() {
@@ -25,7 +24,6 @@ void arcade::SDLModule::init() {
         return;
     _renderer = SDL_CreateRenderer(_window, -1, 0);
     SDL_SetRenderDrawColor(_renderer, 0, 50, 50, 50);
-    // SDL_Delay(10);
 }
 
 void arcade::SDLModule::destroy() {
@@ -38,8 +36,8 @@ void arcade::SDLModule::destroy() {
 void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position,
                              [[maybe_unused]]std::string name) {
 
-    if(drawable[0]->getType() == arcade::SPRITE) {
-        SDL_Texture* images = IMG_LoadTexture(_renderer,drawable[0]->getString().c_str());
+    SDL_Texture* images = IMG_LoadTexture(_renderer,drawable[0]->getString().c_str());
+    if(drawable[0]->getType() == arcade::SPRITE && images) {
         SDL_Rect Message_rect;
         Message_rect.x = position.second  * (drawable[0]->getSize());
         Message_rect.y = position.first * (drawable[0]->getSize());
@@ -100,8 +98,6 @@ arcade::events_e arcade::SDLModule::pollEvent() {
 
 void arcade::SDLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable,
                              [[maybe_unused]] std::string &name) {
-    /*   for (auto &&i : TEXTURES_TO_LOAD)
-           _textures[i].loadFromFile(i);*/
 }
 
 arcade::SDLModule::~SDLModule() {

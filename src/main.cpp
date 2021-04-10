@@ -27,6 +27,7 @@ int main([[maybe_unused]] int argc, char **argv) {
         std::cerr << e.what() << std::endl;
         return 84;
     }
+    core.clearLibs();
     ldb.destroyOpenFile();
     return 0;
 }

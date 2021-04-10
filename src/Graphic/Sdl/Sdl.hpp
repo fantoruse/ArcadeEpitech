@@ -31,9 +31,6 @@ namespace arcade {
         SDL_Renderer *_renderer;
         SDL_Window *_window;
         bool _status;
-        std::map<std::string, SDL_Texture *> _textures;
-        std::map<std::string, SDL_Rect> _sprites;
-        std::map<std::string, SDL_Rect> _shapes;
     };
 }
 

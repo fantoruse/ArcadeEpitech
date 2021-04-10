@@ -198,7 +198,7 @@ bool arcade::Pacman::isLost()
             _enemies[i].second = 10;
         }
     }
-    return (player_y < 1 || player_y > 17 || player_x < 1 || player_x > 17);
+    return false;
 }
 
 void arcade::Pacman::checkStats()
@@ -224,7 +224,8 @@ void arcade::Pacman::checkStats()
 
 void arcade::Pacman::eatPacgum()
 {
-    int n = 0;
+
+    std::size_t n = 0;
 
     while (n != _comsomable.size()) {
         if (_playerPosition.second == _comsomable[n]->getPosition().second
@@ -254,7 +255,7 @@ void arcade::Pacman::enemiesMoves()
     auto end1 = std::chrono::steady_clock::now();
     static auto start2 = std::chrono::steady_clock::now();
     auto end2 = std::chrono::steady_clock::now();
-    int n = 0;
+    std::size_t n = 0;
     bool notAWall = false;
     int dir = 0;
 
@@ -292,7 +293,7 @@ void arcade::Pacman::enemiesGetOut()
 {
     static auto start = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
-    int n = 1;
+    std::size_t n = 1;
 
     if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start) >= std::chrono::seconds(10)) {
         while (n != _enemies.size()) {
@@ -310,7 +311,7 @@ void arcade::Pacman::enemiesGetOut()
 
 void arcade::Pacman::checkTp()
 {
-    int n = 0;
+    std::size_t n = 0;
 
     if (_playerPosition.first == 9 && _playerPosition.second == 20)
         _playerPosition.second = 2;
