@@ -12,28 +12,35 @@
 
 IGame interface:
 
-    That's an interface for games. All games will heridate from this interface, they will need to override the next methodes : 
+   That's an interface for games. All games will heridate from this interface, they will need to override the next methodes : 
 
  - Play who will be the game loop, in the core we call it in a loop for make the game run. he take as paramter an arcade::events_e who is an enum of events like the input from the player. This methode return an vector of shared pointer on IObject (that's another interface who will be in charge of all object), in this vector we got all the object we need to diplay for draw our game.
  - getName is a getter for the private variable name of the sousclass. This methode return the name of the game currently running and take no arguments.
  - isLost is a methode that's return true if the player lost the game and false if the game is currently running. He take nothing in arguments.
 
+
+#
+
+
 IObject interface:
     
-    The Interface IObject is an interface dedicated to the object. 
+   The Interface IObject is an interface dedicated to the object. 
 This interface allows you to create games, it is in collaboration with the IGame interface. 
 It allows you to correctly get the position of each object, and to see if they can be drawable and what type is it. 
 
 For this there are three methods: 
 
-  -const std::pair<int,int> getPosition();  
+    -const std::pair<int,int> getPosition();  
 This method allows to retrieve the position of the object, an x and y position. 
 
-  -const std::vector<std::shared_ptr<IDrawable>> getDrawables() 
+    -const std::vector<std::shared_ptr<IDrawable>> getDrawables() 
 This method return a drawable vector which object's information will be displayed on the screen. 
 
-  -const std::string getName() 
+    -const std::string getName() 
 This method allows to get the name object.
+
+
+#
 
 IDisplayModule interface:
 
@@ -67,6 +74,10 @@ Takes a drawables's vector and load the appropriate texture from a .png or .jpg 
 
       -events_e pollEvent();
 Returns a event in association with the enum who's in the interface. You need to map it with the events of your graphical library.
+
+
+#
+
 
 IDrawable interface:
 
