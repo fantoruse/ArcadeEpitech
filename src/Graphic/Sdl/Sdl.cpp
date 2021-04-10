@@ -97,7 +97,7 @@ arcade::events_e arcade::SDLModule::pollEvent() {
 }
 
 void arcade::SDLModule::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable,
-                             [[maybe_unused]] std::string &name) {
+                             [[maybe_unused]] const std::string &name) {
 }
 
 arcade::SDLModule::~SDLModule() {
@@ -115,7 +115,7 @@ std::string arcade::SDLModule::getForm( [[maybe_unused]] std::string str) {
     return "toto";
 }
 
-void arcade::SDLModule::drawText([[maybe_unused]] const std::string &string, [[maybe_unused]] std::pair<float, float> position) {}
+void arcade::SDLModule::drawText([[maybe_unused]] const std::string &string, [[maybe_unused]] std::pair<int, int> position) {}
 
 extern "C" arcade::IDisplayModule *createGraphLib() {
     return (new arcade::SDLModule());

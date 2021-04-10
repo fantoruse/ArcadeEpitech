@@ -24,7 +24,7 @@ namespace arcade {
 
         void destroy() override;
 
-        void drawText(const std::string &string, std::pair<float, float> position) override;
+        void drawText(const std::string &string, std::pair<int, int> position) override;
 
         void refreshWin() override;
 
@@ -37,7 +37,7 @@ namespace arcade {
         events_e pollEvent() override;
 
         void load(std::vector<std::shared_ptr<IDrawable>> drawable,
-                  std::string &name
+                  const std::string &name
         ) override;
 
     private:

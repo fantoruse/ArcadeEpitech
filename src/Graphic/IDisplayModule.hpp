@@ -40,8 +40,8 @@ namespace arcade {
         virtual void clearWin() = 0;
         virtual void refreshWin() = 0;
         virtual void draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, const std::string &name) = 0;
-        virtual void drawText(const std::string &string, std::pair<float, float> position) = 0;
-        virtual void load(std::vector<std::shared_ptr<IDrawable>> drawable, std::string &name) = 0;
+        virtual void drawText(const std::string &string, std::pair<int, int> position) = 0;
+        virtual void load(std::vector<std::shared_ptr<IDrawable>> drawable, const std::string &name) = 0;
         virtual events_e pollEvent() = 0;
         virtual std::string getForm(std::string str) = 0;
     };
