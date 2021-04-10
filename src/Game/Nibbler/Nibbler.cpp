@@ -202,11 +202,23 @@ bool arcade::Nibbler::isLost()
 {
     float player_y = _enemies[0].first;
     float player_x = _enemies[0].second;
+    static auto start = std::chrono::steady_clock::now();
+    auto end = std::chrono::steady_clock::now();
 
-    for (std::size_t i = 1; i < _enemies.size(); ++i)
-        if (player_y == _enemies[i].first && player_x == _enemies[i].second)
+
+    for (std::size_t i = 1; i < _enemies.size(); ++i) {
+        if (player_y == _enemies[i].first && player_x == _enemies[i].second) {
             return true;
-    return (player_y < 1 || player_y > 17 || player_x < 1 || player_x > 17);
+        }
+    }
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start) >= std::chrono::milliseconds(1000)) {
+        start = std::chrono::steady_clock::now();
+        return (player_y + _playerMov.first < 1 ||
+            player_y + _playerMov.first > 17 ||
+            player_x + _playerMov.second < 1 ||
+            player_x + _playerMov.second > 17);
+    }
+    return false;
 }
 
 extern  "C" arcade::IGame *getGame() {
