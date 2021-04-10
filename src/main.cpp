@@ -15,15 +15,18 @@
 int main([[maybe_unused]] int argc, char **argv) {
     if (argc != 2)
         return 84;
+    std::string tmp = std::string(argv[1]);
     DynamicFile a;
-    arcade::Core oli;
+    arcade::Core core;
+    LoadLib ldb;
     try {
-        a.VerifyArg(argv[1]);
-        oli.OpenFirstLibs(argv[1]);
-        oli .gameLoop();
+        a.VerifyArg(tmp);
+        core.OpenFirstLibs(tmp, ldb);
+        core .gameLoop(ldb);
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 84;
     }
+    ldb.destroyOpenFile();
     return 0;
 }

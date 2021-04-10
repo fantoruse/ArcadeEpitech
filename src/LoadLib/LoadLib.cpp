@@ -11,9 +11,14 @@
 #include <iostream>
 
 void LoadLib::initHandler(const std::string &libName) {
-    _openFile = dlopen(libName.c_str(), RTLD_LAZY);
-    std::cout << "OPEN == "<<_openFile << std::endl;
-    if (!_openFile)
+    void *tmp = dlopen(libName.c_str(), RTLD_NOW);
+    if (!tmp)
         throw std::runtime_error(dlerror());
+    _openFile.push_back(tmp);
 }
 
+void LoadLib::destroyOpenFile() {
+    for (auto file: _openFile) {
+        dlclose(file);
+    }
+}

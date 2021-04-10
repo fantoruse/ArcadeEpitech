@@ -13,5 +13,5 @@ class DynamicFile {
 public:
     DynamicFile();
     ~DynamicFile();
-    void VerifyArg(char *argv) const;
+    void VerifyArg(std::string &s) const;
 };

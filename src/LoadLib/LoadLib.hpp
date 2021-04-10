@@ -13,6 +13,7 @@
 #include <exception>
 #include <functional>
 #include <type_traits>
+#include <iterator>
 #include "InterfaceGame/Iinterface.hpp"
 
 class LoadLib
@@ -23,16 +24,17 @@ public:
     ~LoadLib() = default;/*{dlclose(_openFile);}*/
    // ~LoadLib() {dlclose(_openFile);}
     void initHandler(const std::string &libName);
-
+    void destroyOpenFile();
     template <typename T>
     std::function<T> loadingLib(const std::string &functionName) const
     {
-        T *p = (T*)(dlsym(_openFile, functionName.c_str()));
+
+        T *p = (T*)(dlsym(_openFile[(_openFile.size() - 1)], functionName.c_str()));
         if (!p)
             throw std::runtime_error(dlerror());
         return std::function<T>(p);
     }
 
 private:
-        void *_openFile = nullptr;
+        std::vector<void *> _openFile;
 };

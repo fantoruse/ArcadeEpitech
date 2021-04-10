@@ -13,7 +13,7 @@ DynamicFile::DynamicFile() {}
 
 DynamicFile::~DynamicFile() {}
 
-void DynamicFile::VerifyArg(char *argv) const {
+void DynamicFile::VerifyArg(std::string &argv) const {
     std::string arguments;
 
     arguments.assign(argv);

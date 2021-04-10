@@ -4,34 +4,27 @@
 ** File description:
 ** Created by antoine,
 */
-#include <fstream>
+
 #include <iostream>
 #include <filesystem>
 #include "Core/Core.hpp"
 #include "LoadLib/LoadLib.hpp"
 #include "Error/Error.hpp"
-#include <chrono>
-#include "Game/Object/IObject.hpp"
 
 namespace arcade {
-
-    Core::Core() {
-    }
 
     void Core::getTypes(const std::string &arg, LoadLib &ldb) {
         std::string tmp;
         for (auto &p: std::filesystem::directory_iterator("./lib")) {
             try {
                 tmp = p.path();
-                if (tmp.erase(0,6) == arg)
+                if (tmp == arg)
                     continue;
                 ldb.initHandler(p.path());
                 auto libs = ldb.loadingLib<std::string()>("getType")();
                 if (libs == "graph") {
-                    std::cout << p.path() << "\n";
                     OpenLibsInLibs(ldb, p.path());
                 } else if (libs == "game") {
-                    std::cout << p.path() << "\n";
                     OpenGame(ldb, p.path());
                 }
             } catch (const std::runtime_error &e) {
@@ -43,23 +36,17 @@ namespace arcade {
 
     void Core::OpenGame(const LoadLib &ldb, const std::string &name) {
         try {
-            std::string tmp;
             auto libs = ldb.loadingLib<IGame *(void)>("getGame")();
-            tmp = name;
-            tmp.erase(0, 6);
-            _loadGames.push_back(std::pair<std::string, IGame *>(tmp, libs));
+            _loadGames.push_back(std::pair<std::string, IGame *>(name, libs));
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
         }
     }
 
-    void Core::OpenFirstLibs(std::string arg) {
-        LoadLib ldb;
+    void Core::OpenFirstLibs(std::string &arg, LoadLib &ldb) {
         try {
             ldb.initHandler(arg);
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
-            arg.erase(0, 6);
-            _actualLibs = arg;
             _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(arg, libs));
             getTypes(arg, ldb);
         } catch (const std::runtime_error &e) {
@@ -72,32 +59,29 @@ namespace arcade {
 
     void Core::OpenLibsInLibs(const LoadLib &ldb, const std::string &name) {
         try {
-            std::string tmp;
             auto libs = ldb.loadingLib<IDisplayModule *(void)>("createGraphLib")();
-            tmp = name;
-            tmp.erase(0, 6);
-            _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(tmp, libs));
+            _loadLibs.push_back(std::pair<std::string, IDisplayModule *>(name, libs));
         } catch (const std::runtime_error &e) {
             std::cerr << e.what() << std::endl;
         }
     }
 
-    void Core::game(IGame *gaming,  events_e event, IDisplayModule *libs) {
+    void Core::game(IGame *gaming, events_e event, IDisplayModule *libs) {
         auto k = gaming->play(event);
         libs->clearWin();
         libs->getName();
-        std::string s = "bite";
+        std::string s = "tmp";
         for (auto n : k)
-            libs->draw(n.get()->getDrawables(), n.get()->getPosition(),s);
+            libs->draw(n.get()->getDrawables(), n.get()->getPosition(), s);
         if (gaming->isLost())
             std::cout << "LOOOSE" << std::endl;
         libs->refreshWin();
     }
 
-    void Core::gameLoop() {
+    void Core::gameLoop(LoadLib &ldb) {
         int a = 0;
+        int y = 0;
 
-        auto gaming = _loadGames[0].second;
         _loadLibs[0].second->init();
         arcade::events_e event = arcade::NOTHING;
         while (1) {
@@ -107,7 +91,7 @@ namespace arcade {
                 _loadLibs[a % _loadLibs.size()].second->destroy();
                 break;
             }
-            this->game(gaming, event, _loadLibs[a % _loadLibs.size()].second);
+            this->game(_loadGames[y % _loadGames.size()].second, event, _loadLibs[a % _loadLibs.size()].second);
 
             if (event == arcade::PREV) {
                 _loadLibs[a % _loadLibs.size()].second->destroy();
@@ -119,7 +103,15 @@ namespace arcade {
                 a += 1;
                 _loadLibs[a % _loadLibs.size()].second->init();
             }
+            if (event == arcade::NEXT_GAME)
+                y += 1;
+            if (event == arcade::PREV_GAME)
+                y -=1;
         }
     }
-
+    Core::~Core() {
+        _loadGames.clear();
+        _loadLibs.clear();
+    }
 }
+

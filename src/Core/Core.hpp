@@ -9,6 +9,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include <iostream>
 #include <map>
 #include "Graphic/IDisplayModule.hpp"
@@ -18,20 +19,18 @@
 namespace arcade {
     class Core {
     public:
-        Core();
-        ~Core() = default;
+        Core() = default;
+        ~Core();
 
         void OpenGame(const LoadLib &ldb,const std::string &s);
-        void OpenFirstLibs(std::string);
+        void OpenFirstLibs(std::string &s, LoadLib &ldb);
         void OpenLibsInLibs(const LoadLib &ldb, const std::string &name);
-        void gameLoop();
+        void gameLoop(LoadLib &ldb);
         void getTypes(const std::string &s, LoadLib &b);
-        void game(IGame *gaming,  events_e event, IDisplayModule *libs);
+        void game(IGame *gaming, events_e event, IDisplayModule *libs);
 
     protected:
-        std::vector<std::pair<std::string, IGame*>> _loadGames;
-            std::vector<std::pair<std::string, IDisplayModule*>> _loadLibs;
-        std::string _actualLibs;
-        std::string _actualGames;
+        std::vector<std::pair<std::string, IGame *>> _loadGames;
+        std::vector<std::pair<std::string, IDisplayModule *>> _loadLibs;
     };
 }
