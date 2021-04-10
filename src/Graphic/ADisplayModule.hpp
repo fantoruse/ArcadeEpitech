@@ -14,7 +14,7 @@ namespace arcade {
 class ADisplayModule : public arcade::IDisplayModule {
 public:
     ADisplayModule(const std::string &name);
-    virtual std::string getName() const;
+    virtual const std::string &getName() const;
 
 protected:
     std::string _name;

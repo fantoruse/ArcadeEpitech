@@ -24,13 +24,15 @@ namespace arcade {
 
         void destroy() override;
 
+        void drawText(const std::string &string, std::pair<float, float> position) override;
+
         void refreshWin() override;
 
         void clearWin() override;
 
-        void draw(std::vector<std::shared_ptr<IDrawable>> drawable,
-                  std::pair<int, int> position, std::string name
-        ) override;
+        std::string getForm(std::string str) override;
+
+        void draw(std::vector<std::shared_ptr<IDrawable>> drawable,std::pair<int, int> position, const std::string &name) override;
 
         events_e pollEvent() override;
 

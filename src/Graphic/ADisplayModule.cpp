@@ -11,7 +11,7 @@ arcade::ADisplayModule::ADisplayModule(const std::string &name): _name(name)
 {
 }
 
-std::string arcade::ADisplayModule::getName() const
+std::string const &arcade::ADisplayModule::getName() const
 {
     return _name;
 }

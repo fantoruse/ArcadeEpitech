@@ -51,7 +51,7 @@ void arcade::Ncurses::refreshWin()
     wrefresh(stdscr);
 }
 
-void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string name)
+void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] const std::string &name)
 {
     arcade::colors_e color = drawable[2]->getColor();
 
@@ -80,6 +80,12 @@ arcade::Ncurses::~Ncurses()
     endwin();
     wclear(stdscr);
 }
+
+std::string arcade::Ncurses::getForm([[maybe_unused]] std::string str) {
+    return "toto";
+}
+
+void arcade::Ncurses::drawText([[maybe_unused]]const std::string &string, [[maybe_unused]] std::pair<float, float> position) {}
 
 extern "C" arcade::IDisplayModule *createGraphLib()
 {

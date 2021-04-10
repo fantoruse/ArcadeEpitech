@@ -34,7 +34,7 @@ void arcade::SDLModule::destroy() {
 }
 
 void arcade::SDLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position,
-                             [[maybe_unused]]std::string name) {
+                             [[maybe_unused]] const std::string &name) {
 
     SDL_Texture* images = IMG_LoadTexture(_renderer,drawable[0]->getString().c_str());
     if(drawable[0]->getType() == arcade::SPRITE && images) {
@@ -110,6 +110,12 @@ void arcade::SDLModule::refreshWin() {
 void arcade::SDLModule::clearWin() {
     SDL_RenderClear(_renderer);
 }
+
+std::string arcade::SDLModule::getForm( [[maybe_unused]] std::string str) {
+    return "toto";
+}
+
+void arcade::SDLModule::drawText([[maybe_unused]] const std::string &string, [[maybe_unused]] std::pair<float, float> position) {}
 
 extern "C" arcade::IDisplayModule *createGraphLib() {
     return (new arcade::SDLModule());

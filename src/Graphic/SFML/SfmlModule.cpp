@@ -20,7 +20,7 @@ void arcade::SFMLModule::destroy()
 {
     _window.close();
 }
-void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] std::string name)
+void arcade::SFMLModule::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] const std::string &name)
 {
     sf::Sprite sprite;
     sf::RectangleShape rectangle;
@@ -94,6 +94,12 @@ arcade::SFMLModule::~SFMLModule()
 {
    // _window.close();
 }
+
+std::string arcade::SFMLModule::getForm( [[maybe_unused]] std::string str) {
+    return "toto";
+}
+
+void arcade::SFMLModule::drawText([[maybe_unused]] const std::string &string, [[maybe_unused]] std::pair<float, float> position) {}
 
 extern "C" arcade::IDisplayModule *createGraphLib()
 {
