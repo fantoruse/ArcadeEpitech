@@ -14,7 +14,6 @@
 #include <functional>
 #include <type_traits>
 #include <iterator>
-#include "InterfaceGame/Iinterface.hpp"
 
 class LoadLib
 {

@@ -10,7 +10,6 @@ SRC	=\
 		src/dynamicFile.cpp					\
 		src/Error/Error.cpp					\
 		src/LoadLib/LoadLib.cpp				\
-		src/InterfaceGame/Iinterface.cpp	\
 		src/Core/Core.cpp					\
 		src/Graphic/ADisplayModule.cpp		\
 

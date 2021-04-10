@@ -9,7 +9,6 @@
 #include "dynamicFile.hpp"
 #include "Error/Error.hpp"
 #include "LoadLib/LoadLib.hpp"
-#include "InterfaceGame/Iinterface.hpp"
 #include "Core/Core.hpp"
 
 int main([[maybe_unused]] int argc, char **argv) {
