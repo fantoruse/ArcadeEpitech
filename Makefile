@@ -27,7 +27,7 @@ CPPFLAGS	=	-iquote./src/
 CXX	=	g++
 
 #MAIN RULES
-all: core games graphical
+all: core games graphicals
 
 .PHONY: core
 core:	$(OBJ)
