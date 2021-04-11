@@ -38,10 +38,12 @@ core:	$(OBJ)
 
 .PHONY: games
 games:
+	mkdir -p lib 
 	make -C ./src/Game
 
 .PHONY: graphicals
 graphicals:
+	mkdir -p lib
 	make -C ./src/Graphic
 
 ################################################################################
