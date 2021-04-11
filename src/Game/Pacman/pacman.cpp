@@ -212,6 +212,7 @@ bool arcade::Pacman::isLost()
             return true;
         if (_stats && player_y == _enemies[i].first &&
             player_x == _enemies[i].second) {
+            _score += 500;
             _enemies[i].first = 9;
             _enemies[i].second = 10;
         }
@@ -314,7 +315,7 @@ void arcade::Pacman::enemiesGetOut()
 {
     static auto start = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
-    std::size_t n = 1;
+    std::size_t n = 0;
 
     if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start) >=
         std::chrono::seconds(10)) {
