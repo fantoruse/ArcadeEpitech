@@ -11,9 +11,10 @@
 #include "LoadLib/LoadLib.hpp"
 #include "Core/Core.hpp"
 
-int main([[maybe_unused]] int argc, char **argv) {
+int main([[maybe_unused]] int argc, char **argv)
+{
     if (argc != 2) {
-        std::cerr << "Arguments it's must be two" << std::endl;
+        std::cerr << "Arguments must be only two" << std::endl;
         return 84;
     }
     std::string tmp = std::string(argv[1]);
@@ -23,7 +24,7 @@ int main([[maybe_unused]] int argc, char **argv) {
     try {
         a.VerifyArg(tmp);
         core.OpenFirstLibs(tmp, ldb);
-        core .gameLoop();
+        core.gameLoop();
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 84;

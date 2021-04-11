@@ -17,24 +17,25 @@
 #include "LoadLib/LoadLib.hpp"
 
 namespace arcade {
-    class Core {
-    public:
-        Core() = default;
-        ~Core() = default;
+class Core {
+public:
+    Core() = default;
+    ~Core() = default;
 
-        void OpenGame(const LoadLib &ldb,const std::string &s);
-        void OpenFirstLibs(std::string &s, LoadLib &ldb);
-        void OpenLibsInLibs(const LoadLib &ldb, const std::string &name);
-        void gameLoop();
-        void getTypes(const std::string &s, LoadLib &b);
-        void game(IGame  *gaming, events_e event, IDisplayModule *libs);
-        void clearLibs() {
-            _loadGames.clear();
-            _loadLibs.clear();
-        }
+    void OpenGame(const LoadLib &ldb, const std::string &s);
+    void OpenFirstLibs(std::string &s, LoadLib &ldb);
+    void OpenLibsInLibs(const LoadLib &ldb, const std::string &name);
+    void gameLoop();
+    void getTypes(const std::string &s, LoadLib &b);
+    void game(IGame *gaming, events_e event, IDisplayModule *libs);
+    void clearLibs()
+    {
+        _loadGames.clear();
+        _loadLibs.clear();
+    }
 
-    protected:
-        std::vector<std::pair<std::string, IGame *>> _loadGames;
-        std::vector<std::pair<std::string, IDisplayModule *>> _loadLibs;
-    };
+protected:
+    std::vector<std::pair<std::string, IGame *>> _loadGames;
+    std::vector<std::pair<std::string, IDisplayModule *>> _loadLibs;
+};
 }

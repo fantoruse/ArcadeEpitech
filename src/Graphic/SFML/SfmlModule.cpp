@@ -94,7 +94,6 @@ void arcade::SFMLModule::refreshWin()
 }
 arcade::SFMLModule::~SFMLModule()
 {
-   // _window.close();
 }
 
 std::string arcade::SFMLModule::getForm( [[maybe_unused]] std::string str) {

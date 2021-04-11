@@ -9,14 +9,19 @@
 #include "Error/Error.hpp"
 #include <iostream>
 
-DynamicFile::DynamicFile() {}
+DynamicFile::DynamicFile()
+{
+}
 
-DynamicFile::~DynamicFile() {}
+DynamicFile::~DynamicFile()
+{
+}
 
-void DynamicFile::VerifyArg(std::string &argv) const {
+void DynamicFile::VerifyArg(std::string &argv) const
+{
     std::string arguments;
 
     arguments.assign(argv);
     if (arguments.find("./lib") == std::string::npos)
-        throw Error("Il n'y a pas de dossier : ./lib/");
+        throw Error("No such directory: ./lib/");
 }

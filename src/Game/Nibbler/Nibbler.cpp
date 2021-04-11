@@ -5,6 +5,7 @@
 ** nibbler.cpp.c
 */
 
+#include <exception>
 #include "Nibbler.hpp"
 
 arcade::Nibbler::Nibbler(): arcade::AGame("nibbler") , _applePosition(0, 0), _score(0), _name("Nibbler"), _map(), _enemies(), _objects(), _isApple(false), _started(false)
@@ -36,9 +37,6 @@ const std::vector<std::shared_ptr<arcade::IObject>> arcade::Nibbler::play(arcade
 {
     if (_objects.empty())
         init_all_object();
-    if (ev == arcade::RESTART) {
-        std::cout << "RESTART TA MERE" << std::endl;
-    }
     move(ev);
     headMov();
     eatApple();
@@ -90,7 +88,7 @@ void arcade::Nibbler::loadMap()
     std::string line;
 
     if (!file)
-        return;
+        throw std::runtime_error("No such file: .conf/Nibbler_map.txt");
     while (std::getline(file, line)) {
         _map.push_back(line);
     }

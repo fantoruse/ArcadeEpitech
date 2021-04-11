@@ -14,7 +14,7 @@ class Error : public std::exception {
 public:
     Error(const std::string txt) throw();
     virtual ~Error() throw();
-    const char * what() const throw();
+    const char *what() const throw();
 
 private:
     std::string _description;

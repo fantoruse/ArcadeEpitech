@@ -7,12 +7,16 @@
 
 #include "Error/Error.hpp"
 
-Error::Error(const std::string txt) throw() {
+Error::Error(const std::string txt) throw()
+{
     _description = txt;
 }
 
-Error::~Error() throw() {}
+Error::~Error() throw()
+{
+}
 
-const char * Error::what() const noexcept {
+const char *Error::what() const noexcept
+{
     return _description.c_str();
 }

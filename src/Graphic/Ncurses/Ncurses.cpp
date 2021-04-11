@@ -8,7 +8,7 @@
 #include "Ncurses.hpp"
 #include <iostream>
 
-arcade::Ncurses::Ncurses(): ADisplayModule("NCURSES")
+arcade::Ncurses::Ncurses() : ADisplayModule("NCURSES")
 {
 }
 
@@ -22,7 +22,7 @@ void arcade::Ncurses::init()
     noecho();
     curs_set(0);
     getmaxyx(stdscr, _screen_y, _screen_x);
-    keypad(stdscr ,TRUE);
+    keypad(stdscr, TRUE);
     start_color();
     init_pair(arcade::WHITE, COLOR_WHITE, COLOR_WHITE);
     init_pair(arcade::BLACK, COLOR_BLACK, COLOR_BLACK);
@@ -51,7 +51,9 @@ void arcade::Ncurses::refreshWin()
     wrefresh(stdscr);
 }
 
-void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable, std::pair<int, int> position, [[maybe_unused]] const std::string &name)
+void arcade::Ncurses::draw(std::vector<std::shared_ptr<IDrawable>> drawable,
+    std::pair<int, int> position, [[maybe_unused]] const std::string &name
+)
 {
     arcade::colors_e color = drawable[2]->getColor();
 
@@ -72,7 +74,10 @@ arcade::events_e arcade::Ncurses::pollEvent()
     return arcade::NOTHING;
 }
 
-void arcade::Ncurses::load([[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable, [[maybe_unused]] const std::string &name)
+void arcade::Ncurses::load(
+    [[maybe_unused]] std::vector<std::shared_ptr<IDrawable>> drawable,
+    [[maybe_unused]] const std::string &name
+)
 {
 }
 arcade::Ncurses::~Ncurses()
@@ -81,17 +86,23 @@ arcade::Ncurses::~Ncurses()
     wclear(stdscr);
 }
 
-std::string arcade::Ncurses::getForm([[maybe_unused]] std::string str) {
+std::string arcade::Ncurses::getForm([[maybe_unused]] std::string str)
+{
     return "toto";
 }
 
-void arcade::Ncurses::drawText([[maybe_unused]]const std::string &string, [[maybe_unused]] std::pair<int, int> position) {}
+void arcade::Ncurses::drawText([[maybe_unused]]const std::string &string,
+    [[maybe_unused]] std::pair<int, int> position
+)
+{
+}
 
 extern "C" arcade::IDisplayModule *createGraphLib()
 {
-        return (new arcade::Ncurses());
+    return (new arcade::Ncurses());
 }
 
-extern "C" std::string getType() {
+extern "C" std::string getType()
+{
     return "graph";
 }

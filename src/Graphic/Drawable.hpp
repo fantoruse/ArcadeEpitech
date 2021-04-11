@@ -14,14 +14,19 @@
 namespace arcade {
 class Drawable : public arcade::IDrawable {
 public:
-    Drawable(const std::string &obj = "NONE", std::size_t size = 0, arcade::type_e type = arcade::NO_TYPE, colors_e color = arcade::NONE);
+    Drawable(const std::string &obj = "NONE", std::size_t size = 0,
+        arcade::type_e type = arcade::NO_TYPE, colors_e color = arcade::NONE
+    );
     ~Drawable() override = default;
 
     const std::string &getString() const override;
     std::size_t getSize() const override;
     type_e getType() const override;
     colors_e getColor() const override;
-    void setString(const std::string &name) {_infos = name;};
+    void setString(const std::string &name)
+    {
+        _infos = name;
+    };
 
 protected:
     std::string _infos;

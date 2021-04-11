@@ -28,7 +28,6 @@ void arcade::SDLModule::init() {
 
 void arcade::SDLModule::destroy() {
     SDL_DestroyWindow(_window);
-    //SDL_DestroyRenderer(_renderer);
     TTF_Quit();
     SDL_Quit();
 }
