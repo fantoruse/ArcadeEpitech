@@ -14,6 +14,7 @@
 #include <functional>
 #include <type_traits>
 #include <iterator>
+#include <vector>
 
 class LoadLib {
 public:
